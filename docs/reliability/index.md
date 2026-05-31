@@ -240,6 +240,7 @@ how staff find appointments that need manual follow-up.
 Current related pages:
 
 - [Failure-mode analysis](failure-mode-analysis.md)
+- [Timeouts](timeouts.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)
 - [Synchronous vs asynchronous communication](../communication/sync-vs-async.md)
@@ -250,7 +251,6 @@ Current related pages:
 
 Planned pages in this section:
 
-- `docs/reliability/timeouts.md`
 - `docs/reliability/retries.md`
 - `docs/reliability/circuit-breakers.md`
 - `docs/reliability/graceful-degradation.md`
