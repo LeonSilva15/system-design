@@ -90,7 +90,8 @@ Good fits:
 - generating reports, thumbnails, or exports;
 - processing imports;
 - updating search or analytical views;
-- retrying calls to unreliable providers;
+- retrying calls to unreliable providers when the provider result is not needed
+  before user-visible success, or when the UI exposes a pending state;
 - running moderation or review tasks that need a pending state.
 
 Design pressure:
@@ -200,7 +201,9 @@ Operational questions:
 - How is old work expired or archived?
 
 Sync is not free either. Synchronous chains need timeouts, circuit breakers,
-bulkheads, and clear degradation behavior when downstream systems fail.
+bulkheads, dependency latency metrics, timeout and error-rate alerts,
+saturation or concurrency limits, and clear degradation behavior when downstream
+systems fail.
 
 ## Decision Flow
 
@@ -267,8 +270,11 @@ Asynchronous path:
 
 Design choices:
 
-- The user should not see "order accepted" until the order and payment decision
-  are durable.
+- The user can see "order request received" after the order record and payment
+  authorization are durable.
+- The user should not see "print job approved" until file scanning and any
+  required review have passed, unless the product has an explicit refund or void
+  path for later rejection.
 - Preview generation can be asynchronous because the user can see `processing`
   and refresh later.
 - Email delivery can retry in the background and should not block order
