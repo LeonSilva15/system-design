@@ -323,6 +323,7 @@ Before adding retries, confirm:
 
 - [Communication overview](./)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
+- [Idempotency](idempotency.md)
 - [Pub/sub](pub-sub.md)
 - [Transactions](../data/transactions.md)
 - [Identifying entities](../data/identifying-entities.md)

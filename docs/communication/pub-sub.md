@@ -255,6 +255,7 @@ Before using pub/sub, confirm:
 
 - [Communication overview](./)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
+- [Idempotency](idempotency.md)
 - [Transactions](../data/transactions.md)
 - [Schema evolution](../data/schema-evolution.md)
 - [Operational vs analytical data](../data/operational-vs-analytical-data.md)
