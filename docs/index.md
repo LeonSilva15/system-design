@@ -19,6 +19,7 @@ It is separate from runnable labs, templates, and project automation.
 - [Labs Guide](labs/)
 - [Visuals](visuals/)
 - [Practice](practice/)
+- [Glossary](glossary.md)
 
 Each section starts with a placeholder index so MkDocs can render a stable
 navigation target while the detailed pages are added by later tickets.
