@@ -7,8 +7,8 @@ also covers identity, validation, quotas, friction, auditability, recovery, and
 what happens to legitimate users during attacks or mistakes.
 
 Use this page to reason from abuse cases to controls. Use the
-[scalability rate-limiting guide](../scalability/) when you need to choose
-specific algorithms, counters, and distributed limit storage.
+[scalability rate-limiting guide](../scalability/rate-limiting.md) when you
+need to choose specific algorithms, counters, and distributed limit storage.
 
 ## Purpose
 
@@ -426,7 +426,7 @@ Before accepting an abuse-resistance design, confirm:
 - [Authentication](authentication.md)
 - [Authorization](authorization.md)
 - [Audit logs](audit-logs.md)
-- [Scalability rate-limiting guide](../scalability/)
+- [Scalability rate-limiting guide](../scalability/rate-limiting.md)
 - [Capacity estimation](../scalability/capacity-estimation.md)
 - [Idempotency](../communication/idempotency.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
