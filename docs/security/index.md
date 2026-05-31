@@ -277,11 +277,10 @@ Current pages:
 - [Security design overview](./)
 - [Authentication](authentication.md)
 - [Authorization](authorization.md)
+- [Access-control models](access-control-models.md)
 
 Planned pages:
 
-- `docs/security/access-control-models.md`: role-based, attribute-based, and
-  relationship-based access-control trade-offs.
 - `docs/security/secrets-management.md`: API keys, credentials, rotation,
   storage, environment variables, and leak response.
 - `docs/security/encryption.md`: encryption in transit, encryption at rest, key
