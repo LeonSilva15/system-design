@@ -146,6 +146,7 @@ Current pages:
 - [Identifying entities](identifying-entities.md)
 - [Read and write patterns](read-write-patterns.md)
 - [Relational vs document vs key-value](relational-vs-document-vs-key-value.md)
+- [Indexes](indexes.md)
 
 Planned pages:
 
