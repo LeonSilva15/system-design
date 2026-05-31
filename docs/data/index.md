@@ -149,6 +149,7 @@ Current pages:
 - [Indexes](indexes.md)
 - [Transactions](transactions.md)
 - [Schema evolution](schema-evolution.md)
+- [Operational vs analytical data](operational-vs-analytical-data.md)
 
 Planned pages:
 
