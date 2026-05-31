@@ -129,6 +129,10 @@ lockout, and brute-force protections. Passwordless links or codes need expiry,
 single-use behavior, and delivery failure handling. SSO reduces local password
 handling but adds dependency behavior when the provider is unavailable.
 
+If the system stores local passwords, decide how password verifiers are stored,
+where raw passwords are forbidden, which events force credential reset, and how
+operators confirm that password values never appear in logs or analytics.
+
 Version 1 should choose the fewest flows that match the product. More login
 options can help adoption, but they also multiply support cases, edge cases,
 and abuse paths.
@@ -145,6 +149,8 @@ Decide:
 - whether idle sessions expire;
 - whether logout invalidates one session or all sessions;
 - how session IDs are stored by clients;
+- what browser storage risks apply, such as cookie attributes, CSRF exposure,
+  and avoiding token storage where scripts can read it;
 - whether admins can revoke sessions;
 - whether session changes are visible to users and operators.
 
@@ -221,6 +227,11 @@ Common service-auth design questions:
 Avoid sharing one global secret across many services. It makes rotation and
 incident response harder because the blast radius is unclear.
 
+When a service acts on behalf of a user, carry both contexts: the service
+identity proves which machine is calling, and the user context explains whose
+workflow or permission is being exercised. The receiving service should
+authenticate the machine and still authorize the delegated user action.
+
 ### Handle Recovery And Lifecycle
 
 Authentication designs often fail at lifecycle edges:
@@ -261,6 +272,15 @@ Useful events:
 Logs should include actor ID, session ID or credential ID, client ID, request
 ID, decision outcome, and reason class. They should not include passwords,
 reset tokens, raw session tokens, private keys, or full one-time codes.
+
+Common authentication failure modes:
+
+| Failure Mode | Design Response |
+| --- | --- |
+| Identity provider unavailable | Return a clear sign-in unavailable state for new sessions; keep already-valid sessions only if policy allows it. |
+| Session store unavailable | Fail closed for privileged actions; consider degraded read-only behavior only when identity and permissions are already known. |
+| Token replay detected | Reject the request, revoke related tokens when appropriate, and record an investigation event. |
+| Credential rotation fails | Keep the old credential only inside a short rollback window, alert the owner, and block promotion until rotation is confirmed. |
 
 ### Keep Version 1 Practical
 
