@@ -46,18 +46,22 @@ Decision-tree pages should use this structure:
 
 ## Purpose
 ## When This Matters
+## Questions To Ask
 ## Decision Tree
+## Decision Guidance
 ## How To Use The Result
 ## Trade-Offs
+## Common Mistakes
 ## Example
 ## Checklist
 ## Related Pages
 ```
 
-Walkthroughs should follow the walkthrough standards in `AGENTS.md`: problem
-statement, requirements, core entities, API sketch, read path, write path, data
-model, component choices, diagram, consistency, scaling, failure modes,
-security, observability, cost, version 1 simplification, and 10x scale changes.
+Walkthroughs should follow the walkthrough standards in
+`PROJECT_SOURCE_OF_TRUTH.md` and `AGENTS.md`: problem statement, requirements,
+core entities, API sketch, read path, write path, data model, component choices,
+diagram, consistency, scaling, failure modes, security, observability, cost,
+version 1 simplification, and 10x scale changes.
 
 Labs should keep runnable code in `labs/` and explain what to observe, not just
 how to run commands.
@@ -81,6 +85,7 @@ Prefer these diagram types:
 - flowcharts for decision paths and architecture overviews;
 - sequence diagrams for request or event flows;
 - state diagrams for lifecycle and consistency behavior;
+- architecture/data-flow diagrams for component relationships;
 - failure-mode diagrams for degraded behavior and recovery.
 
 ## Examples
@@ -160,7 +165,8 @@ Avoid:
 
 Use Markdown with clear headings and short sections.
 
-- Use sentence case for headings unless a term requires capitalization.
+- Use title case for standard template headings and sentence case for long
+  explanatory headings.
 - Use bullet lists for scan-friendly prompts and checklists.
 - Use tables only when comparison is clearer than prose.
 - Use fenced code blocks for APIs, schemas, commands, Mermaid, and examples.
