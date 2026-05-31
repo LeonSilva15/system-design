@@ -278,11 +278,10 @@ Current pages:
 - [Authentication](authentication.md)
 - [Authorization](authorization.md)
 - [Access-control models](access-control-models.md)
+- [Secrets management](secrets-management.md)
 
 Planned pages:
 
-- `docs/security/secrets-management.md`: API keys, credentials, rotation,
-  storage, environment variables, and leak response.
 - `docs/security/encryption.md`: encryption in transit, encryption at rest, key
   management, and practical limits.
 - `docs/security/audit-logs.md`: accountable records for risky, administrative,
