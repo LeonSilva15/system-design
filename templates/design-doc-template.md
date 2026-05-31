@@ -55,7 +55,7 @@ Example shape:
 `[Sketch the smallest useful API surface or commands.]`
 
 ```text
-POST /example
+[METHOD] /[resource]
 Request: [fields]
 Response: [fields]
 Errors: [important errors]
@@ -112,6 +112,7 @@ Guidance:
 
 - Start with the simplest component that satisfies the requirement.
 - Do not add a cache, queue, replica, or separate service without a reason.
+- Explain rejected alternatives and why they are not the version 1 choice.
 
 ## Architecture Diagram
 
