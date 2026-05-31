@@ -300,6 +300,7 @@ Before approving backup and restore design, confirm:
 - [Schema evolution](schema-evolution.md)
 - [Transactions](transactions.md)
 - [RPO and RTO](../reliability/rpo-rto.md)
+- [Backup and restore recovery](../reliability/backup-and-restore-recovery.md)
 - [Failure-mode analysis](../reliability/failure-mode-analysis.md)
 - [Failover](../reliability/failover.md)
 - [Design review checklist](../method/design-review-checklist.md)
