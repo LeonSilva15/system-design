@@ -310,6 +310,7 @@ Before finalizing a data model, confirm:
 
 - [Data overview](./)
 - [Identifying entities](identifying-entities.md)
+- [Database read scaling](../scalability/database-read-scaling.md)
 - [System design process](../method/system-design-process.md)
 - [Requirement discovery](../method/requirement-discovery.md)
 - [Scale estimation](../method/scale-estimation.md)
