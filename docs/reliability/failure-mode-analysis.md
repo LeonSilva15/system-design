@@ -221,6 +221,31 @@ but can be delayed.
 This table makes the design easier to review because it names who is affected,
 what signal detects the problem, and which recovery path exists.
 
+## Trade-Offs
+
+Failure-mode analysis should lead to proportional responses. Not every failure
+needs the most automated or expensive mitigation.
+
+- Retry vs shed load: retries help transient dependency failures, but they can
+  worsen overload. Shed, queue, or reject low-priority work when the limiting
+  resource is already saturated.
+- Automate repair vs manual runbook: automation is useful for frequent,
+  well-understood recovery. Manual runbooks are acceptable for rare or risky
+  repair paths if ownership, audit logs, and rollback steps are clear.
+- Fail closed vs degrade: fail closed when continuing could corrupt data,
+  violate authorization, or create unsafe side effects. Degrade when the system
+  can preserve the core workflow with honest stale, partial, or delayed
+  behavior.
+- Detect deeply vs reduce alert noise: more metrics and alerts can improve
+  diagnosis, but noisy alerts train operators to ignore them. Alert on
+  user-impacting symptoms and keep detailed signals available for investigation.
+- Prevent vs reconcile: prevention is better for irreversible harm such as
+  double spending or destructive deletion. Reconciliation is often simpler for
+  derived views, notifications, analytics, and other rebuildable state.
+
+Choose the response that matches the user impact, data risk, frequency, and
+operational cost of the failure mode.
+
 ## Checklist
 
 Before finishing a failure-mode analysis, confirm:
