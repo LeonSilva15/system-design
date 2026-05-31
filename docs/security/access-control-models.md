@@ -56,21 +56,22 @@ Start with the shape of the permissions:
 
 ```mermaid
 flowchart TD
-    A[Name protected action and resource] --> B{Few stable job functions?}
-    B -->|Yes| C[Start with RBAC]
-    B -->|No| D{Resource has clear owner or membership?}
-    D -->|Yes| E[Use ownership or relationship checks]
-    D -->|No| F{Tenant or organization boundary?}
-    F -->|Yes| G[Make tenant isolation a query and policy constraint]
-    F -->|No| H{Decision depends on attributes or state?}
-    H -->|Yes| I[Use policy rules or ABAC carefully]
-    H -->|No| J[Use explicit grants or manual approval]
-    C --> K[Add ownership, tenant, or policy rules only when needed]
-    E --> K
-    G --> K
-    I --> K
-    J --> K
-    K --> L[Test allow, deny, stale permission, and admin paths]
+    A[Name protected action and resource] --> B{Tenant or organization boundary?}
+    B -->|Yes| C[Carry tenant scope through every model and data path]
+    B -->|No| D[Use single-scope baseline]
+    C --> E{Few stable job functions?}
+    D --> E
+    E -->|Yes| F[Start with RBAC]
+    E -->|No| G{Resource has clear owner or membership?}
+    G -->|Yes| H[Use ownership or relationship checks]
+    G -->|No| I{Decision depends on attributes or state?}
+    I -->|Yes| J[Use policy rules or ABAC carefully]
+    I -->|No| K[Use explicit grants or manual approval]
+    F --> L[Add ownership, tenant, or policy rules only when needed]
+    H --> L
+    J --> L
+    K --> L
+    L --> M[Test allow, deny, stale permission, and admin paths]
 ```
 
 ## Decision Guidance
