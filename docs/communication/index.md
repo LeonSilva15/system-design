@@ -72,7 +72,9 @@ Then choose the communication shape:
 flowchart TD
     A[Name the caller workflow] --> B{Need an answer before returning?}
     B -->|Yes| C[Synchronous API]
-    B -->|No| D{One worker owns the task?}
+    B -->|No| W{Multi-step business process?}
+    W -->|Yes| M[Workflow pattern]
+    W -->|No| D{One worker owns the task?}
     D -->|Yes| E[Queue]
     D -->|No| F{Need durable replayed history?}
     F -->|Yes| G[Stream]
@@ -81,7 +83,6 @@ flowchart TD
     H -->|No| J{Need client status updates?}
     J -->|Simple or low frequency| K[Polling]
     J -->|Low latency or bidirectional| L[WebSocket]
-    J -->|Multiple business steps| M[Workflow pattern]
 ```
 
 ## Decision Guidance
