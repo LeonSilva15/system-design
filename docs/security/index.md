@@ -275,11 +275,10 @@ Before accepting a design, confirm:
 Current pages:
 
 - [Security design overview](./)
+- [Authentication](authentication.md)
 
 Planned pages:
 
-- `docs/security/authentication.md`: identity, sessions, tokens, service auth,
-  MFA, and authentication design questions.
 - `docs/security/authorization.md`: permissions, ownership, roles, policies,
   admin actions, and authorization checks.
 - `docs/security/access-control-models.md`: role-based, attribute-based, and
