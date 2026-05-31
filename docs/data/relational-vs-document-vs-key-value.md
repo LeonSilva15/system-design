@@ -133,8 +133,8 @@ Use key-value storage when:
 - the value is small or bounded enough to replace safely;
 - query needs are limited to direct lookup, simple prefixes, or known buckets;
 - data can expire, be recomputed, or tolerate limited query flexibility;
-- the model supports a cache, session store, rate limit counter, feature flag,
-  or materialized lookup.
+- the model supports a cache, session store, rate limit counter, simple
+  read-optimized feature flag, or materialized lookup.
 
 Trade-offs:
 
@@ -215,7 +215,9 @@ backfills, and readers of multiple versions still need deliberate handling.
 Version 1 should usually start with one authoritative model and derive other
 views only when the access pattern justifies them. A relational source of truth
 plus later key-value cache or search index is often simpler than making every
-read path authoritative.
+read path authoritative. The same principle applies when a document model is
+the justified source of truth: keep derived copies rebuildable and clearly
+secondary.
 
 ## Common Mistakes
 
