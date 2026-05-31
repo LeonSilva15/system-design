@@ -246,6 +246,7 @@ Current related pages:
 - [Graceful degradation](graceful-degradation.md)
 - [Bulkheads](bulkheads.md)
 - [Failover](failover.md)
+- [RPO and RTO](rpo-rto.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)
 - [Synchronous vs asynchronous communication](../communication/sync-vs-async.md)
@@ -259,7 +260,6 @@ Planned pages in this section:
 - `docs/reliability/health-checks.md`
 - `docs/reliability/backup-and-restore-recovery.md`
 - `docs/reliability/disaster-recovery.md`
-- `docs/reliability/rpo-rto.md`
 - `docs/reliability/data-loss-scenarios.md`
 
 ## Checklist
