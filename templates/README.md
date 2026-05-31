@@ -9,3 +9,4 @@ reasoning behind a design.
 
 - [Design doc template](design-doc-template.md)
 - [Decision record template](decision-record-template.md)
+- [Capacity estimation worksheet](capacity-estimation-template.md)
