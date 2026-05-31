@@ -33,7 +33,14 @@ reader:
 - use rubrics and checklists for self-review.
 
 The MVP is represented by tickets with `mvp = TRUE` in the backlog. The current
-CSV marks 43 tickets as MVP work across M0, M1, M2, and M3.
+CSV marks 43 tickets as MVP work across M0, M1, M2, and M3; update this count
+when the CSV changes.
+
+Release language maps to milestones this way:
+
+- **MVP:** M0-M3 tickets marked `mvp = TRUE`.
+- **v1:** M4 production-depth material after the MVP learning path works.
+- **v2 and long-term:** M5 expansion, polish, and automation.
 
 ## Recommended Milestones
 
@@ -56,7 +63,8 @@ scope, how to contribute, and how to avoid unsafe copied content.
 
 ### M1 - Cookbook MVP
 
-Purpose: create the core learning content for requirement-first system design.
+Purpose: create the core method and decision-tree content for the MVP learning
+path. The full MVP cut still spans M0-M3 through tickets marked `mvp = TRUE`.
 
 Includes:
 
