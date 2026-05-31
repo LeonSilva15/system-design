@@ -295,6 +295,7 @@ Before approving RPO/RTO design, confirm:
 - [Graceful degradation](graceful-degradation.md)
 - [Timeouts](timeouts.md)
 - [Retries](retries.md)
+- [Backups and restore](../data/backups-and-restore.md)
 - [Backup and restore recovery](backup-and-restore-recovery.md)
 - [Disaster recovery](disaster-recovery.md)
 - [Data overview](../data/)
