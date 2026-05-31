@@ -148,8 +148,8 @@ risk and the damage of getting it wrong.
 
 ### Name Abuse Cases
 
-Abuse cases are ways the system can be misused while still sending technically
-valid requests.
+Abuse cases are ways the system can be misused through technically valid
+requests, hostile traffic, malformed input, or repeated automation.
 
 Look for:
 
