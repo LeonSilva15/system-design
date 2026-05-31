@@ -145,10 +145,10 @@ Current pages:
 - [Data overview](./)
 - [Identifying entities](identifying-entities.md)
 - [Read and write patterns](read-write-patterns.md)
+- [Relational vs document vs key-value](relational-vs-document-vs-key-value.md)
 
 Planned pages:
 
-- `docs/data/relational-vs-document-vs-key-value.md`
 - `docs/data/consistency-models.md`
 
 These paths become linked pages as their tickets are completed.
