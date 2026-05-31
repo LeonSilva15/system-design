@@ -102,9 +102,10 @@ A campus shuttle app receives vehicle position updates every few seconds while
 students mostly read the latest location for routes near them.
 ```
 
-The current position can be stored separately from durable position history.
-The latest-location write path should avoid expensive secondary indexes. History
-can be appended asynchronously for replay, debugging, and later analytics.
+This describes the vehicle-position ingest path, not the whole product. The
+current position can be stored separately from durable position history. The
+latest-location write path should avoid expensive secondary indexes. History can
+be appended asynchronously for replay, debugging, and later analytics.
 
 ### Append-Only Workloads
 
@@ -214,7 +215,9 @@ analytical scans.
 
 ## Pattern Map
 
-Use the workload shape to choose the first modeling move:
+Use the workload shape to choose the first modeling move. One product often has
+several workload shapes, so map each important read and write path separately
+before deciding which pressure dominates a specific model or component.
 
 | Workload Shape | Main Risk | First Modeling Move |
 | --- | --- | --- |
