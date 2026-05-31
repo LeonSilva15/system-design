@@ -283,6 +283,7 @@ Current pages:
 - [Audit logs](audit-logs.md)
 - [Rate limiting and abuse resistance](rate-limiting-and-abuse.md)
 - [Admin tools](admin-tools.md)
+- [Third-party integrations](third-party-integrations.md)
 
 Planned pages:
 
@@ -290,9 +291,6 @@ Planned pages:
   and privacy-focused design questions.
 - `docs/security/data-retention-and-deletion.md`: retention periods, deletion
   workflows, backups, and user-visible expectations.
-- `docs/security/third-party-integrations.md`: webhooks, API keys, vendor
-  failure, trust boundaries, rate limits, and data sharing.
-
 These paths become linked pages as their tickets are completed.
 
 ## Related Pages
