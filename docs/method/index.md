@@ -6,5 +6,6 @@ design prompt to justified architecture decisions.
 - [System design process](system-design-process.md)
 - [Requirement discovery](requirement-discovery.md)
 - [Functional vs non-functional requirements](functional-vs-nonfunctional-requirements.md)
+- [Scale estimation](scale-estimation.md)
 
 Return to the [documentation index](../).
