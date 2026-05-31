@@ -361,6 +361,7 @@ Before using the outbox pattern, confirm:
 - [Idempotency](idempotency.md)
 - [Retries and backoff](retries-and-backoff.md)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
+- [Saga pattern](saga-pattern.md)
 - [Transactions](../data/transactions.md)
 - [Read and write patterns](../data/read-write-patterns.md)
 - [Operational vs analytical data](../data/operational-vs-analytical-data.md)

@@ -348,6 +348,7 @@ Before relying on idempotency, confirm:
 - [Retries and backoff](retries-and-backoff.md)
 - [Pub/sub](pub-sub.md)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
+- [Saga pattern](saga-pattern.md)
 - [Transactions](../data/transactions.md)
 - [Identifying entities](../data/identifying-entities.md)
 - [Read and write patterns](../data/read-write-patterns.md)
