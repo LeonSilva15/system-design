@@ -53,6 +53,8 @@ Start with questions that change the design:
 - What can a malicious or careless client do repeatedly, cheaply, or at scale?
 - Which actions need audit records so operators can answer who did what and
   why?
+- What should happen if a security control, such as an authorization check,
+  rate-limit store, or audit sink, is unavailable?
 - What is the smallest version 1 control set that protects the riskiest
   workflow?
 
