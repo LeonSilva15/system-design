@@ -159,8 +159,10 @@ Useful scale dimensions include:
 - geographic distance between users and data;
 - acceptable recovery time after failure.
 
-State assumptions plainly. A design for ten writes per second can be simpler
-than a design for ten thousand writes per second.
+State assumptions plainly. Rough capacity math is useful when it changes a
+decision: estimate peak writes, storage growth, object size, or fanout before
+adding infrastructure for scale. A design for ten writes per second can be
+simpler than a design for ten thousand writes per second.
 
 ### 6. Sketch Read And Write Paths
 
@@ -304,6 +306,8 @@ Likely version 1:
 - background reminders through a queue;
 - dashboard metrics for failed reminder jobs, overdue count, and reservation
   approval latency.
+- structured logs with reservation ID and tool ID when staff need to debug why
+  a pickup was denied or delayed.
 
 Rejected for version 1:
 
