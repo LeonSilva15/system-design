@@ -73,6 +73,10 @@ Use a peak multiplier when traffic is bursty. A classroom signup system, ticket
 sale, payroll export, or morning commute app can have a much higher peak than a
 steady average.
 
+Name the peak window when you use a multiplier. "Busiest hour is 8x average"
+and "busiest minute is 8x average" imply different burst behavior and different
+buffering needs.
+
 ### Separate Reads From Writes
 
 Read/write ratio shapes the architecture.
@@ -192,16 +196,16 @@ Read requests per day:
 
 ```text
 4,000 active members * 5 availability views = 20,000 read requests/day
-average read RPS = 20,000 / 86,400 ~= 0.25 RPS
-peak read RPS = 0.25 * 8 ~= 2 RPS
+average read RPS = 20,000 / 86,400 ~= 0.2-0.3 RPS
+busiest-hour read RPS = 0.2-0.3 * 8 ~= a few RPS
 ```
 
 Write requests per day:
 
 ```text
 4,000 active members * 0.2 reservation changes = 800 writes/day
-average write RPS = 800 / 86,400 ~= 0.01 RPS
-peak write RPS = 0.01 * 8 ~= 0.08 RPS
+average write RPS = 800 / 86,400 ~= about 0.01 RPS
+busiest-hour write RPS = 0.01 * 8 ~= still below 1 RPS
 ```
 
 The exact decimals are not important. The useful conclusion is that version 1 is
@@ -233,7 +237,7 @@ matter more than partitioning.
 Peak read bandwidth:
 
 ```text
-2 read responses/second * 8 KB = 16 KB/second
+a few read responses/second * 8 KB = tens of KB/second
 ```
 
 This does not require special delivery infrastructure. If the tool catalog later
