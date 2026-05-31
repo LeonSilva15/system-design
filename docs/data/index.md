@@ -148,6 +148,7 @@ Current pages:
 - [Relational vs document vs key-value](relational-vs-document-vs-key-value.md)
 - [Indexes](indexes.md)
 - [Transactions](transactions.md)
+- [Schema evolution](schema-evolution.md)
 
 Planned pages:
 
