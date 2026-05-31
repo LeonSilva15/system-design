@@ -1,4 +1,4 @@
-# Definition Of Done
+# Definition of Done
 
 Use this checklist before merging cookbook content. It applies to documentation,
 decision trees, walkthroughs, labs, diagrams, and templates.
@@ -91,6 +91,9 @@ It should include:
 The lab should demonstrate behavior the learner can observe. It should not grow
 into a production framework.
 
+The expected output should make success, failure, and the relevant design
+behavior visible without requiring hidden setup or production services.
+
 ## Diagrams
 
 A diagram is done when it:
@@ -138,6 +141,8 @@ Reviewers should check:
 - acceptance criteria are satisfied;
 - content is original;
 - requirements and trade-offs are explicit;
+- rejected alternatives are explained enough for the reader to understand why
+  they were not chosen;
 - failure modes, observability, security, cost, or simplification are included
   when relevant;
 - links and navigation targets exist;
