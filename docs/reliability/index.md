@@ -242,6 +242,7 @@ Current related pages:
 - [Failure-mode analysis](failure-mode-analysis.md)
 - [Timeouts](timeouts.md)
 - [Retries](retries.md)
+- [Circuit breakers](circuit-breakers.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)
 - [Synchronous vs asynchronous communication](../communication/sync-vs-async.md)
@@ -252,7 +253,6 @@ Current related pages:
 
 Planned pages in this section:
 
-- `docs/reliability/circuit-breakers.md`
 - `docs/reliability/graceful-degradation.md`
 - `docs/reliability/bulkheads.md`
 - `docs/reliability/health-checks.md`
