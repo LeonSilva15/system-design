@@ -36,8 +36,8 @@ Do not add:
   a copyrighted book or course;
 - logos, cover art, publisher branding, product screenshots, or proprietary
   visuals unless the rights and usage are explicit;
-- content that lets readers avoid buying, reading, or attending the original
-  source it was derived from.
+- content that functions as a substitute for the original source it was derived
+  from.
 
 ## Required Originality
 
