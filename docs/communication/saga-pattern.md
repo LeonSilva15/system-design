@@ -266,7 +266,7 @@ a small permit fee. The approval workflow spans several steps:
 3. verify insurance;
 4. authorize the permit fee;
 5. mark the permit approved;
-6. notify the organizer and update the public calendar.
+6. publish post-approval work for notification and calendar updates.
 
 Saga steps:
 
@@ -277,7 +277,12 @@ Saga steps:
 | Verify insurance | Insurance status is `verified` | Move to `needs_review` if ambiguous |
 | Authorize fee | Payment attempt is `authorized` | Retry with same attempt key or mark review |
 | Approve permit | Permit status becomes `approved` | Use local transaction with status version |
-| Publish side effects | Outbox event is recorded | Relay retries; consumers handle duplicates |
+| Publish post-approval work | Outbox event is recorded | Relay retries; consumers handle duplicates |
+
+The saga's terminal business success is the approved permit. Notification and
+public-calendar updates are required downstream work, but they do not roll back
+approval. They are tracked from the outbox with their own retry, failure, and
+repair states.
 
 Compensations:
 
@@ -293,7 +298,10 @@ Orchestrated version:
   and compensation state;
 - the orchestrator sends commands such as `hold_slot`, `verify_insurance`, and
   `authorize_fee`;
-- operators can inspect and retry stuck workflows from one place.
+- after approval, the orchestrator records post-approval outbox work and can
+  show notification or calendar repair status without reopening the approval
+  decision;
+- operators can inspect and retry stuck approval workflows from one place.
 
 Choreographed version:
 
@@ -301,12 +309,16 @@ Choreographed version:
 - `slot.held` starts insurance verification;
 - `insurance.verified` starts fee authorization;
 - `fee.authorized` lets the permit service approve the permit;
+- `permit.approved` starts notification and calendar subscribers with their own
+  retry and repair policies;
 - every event carries a correlation ID and each required handler has an owner.
 
 The orchestrated version is easier to inspect and repair. The choreographed
 version can reduce direct coupling, but only if required event reactions are
 documented and observable. In either version, the design must say what happens
-when a step is retried, compensated, or left for manual review.
+when an approval step is retried, compensated, or left for manual review, and
+what happens when post-approval side effects fail after approval is already
+durable.
 
 ## Checklist
 
