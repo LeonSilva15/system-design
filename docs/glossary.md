@@ -101,9 +101,10 @@ fix when the system explains itself. Related: [Operations](operations/).
 
 ### Partition
 
-A slice of data or traffic assigned to part of a system. Partitioning can spread
-load, but it introduces routing, rebalancing, and hot-key problems. Related:
-[Data](data/), [Scalability](scalability/).
+A slice of data or traffic assigned to part of a system. This is different from
+a network partition, where parts of a system cannot talk to each other.
+Partitioning can spread load, but it introduces routing, rebalancing, and
+hot-key problems. Related: [Data](data/), [Scalability](scalability/).
 
 ### Rate limit
 
@@ -133,9 +134,10 @@ transactions, and rebalancing. Related: [Data](data/),
 
 ### SLO
 
-A target for service behavior, such as request success rate or latency over a
-time window. SLOs help teams decide how reliable a system needs to be and when
-to prioritize reliability work. Related: [Operations](operations/).
+A Service Level Objective. It is a target for service behavior, such as request
+success rate or latency over a time window. SLOs help teams decide how reliable
+a system needs to be and when to prioritize reliability work. Related:
+[Operations](operations/).
 
 ### Throughput
 
