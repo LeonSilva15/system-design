@@ -144,10 +144,10 @@ Current pages:
 
 - [Data overview](./)
 - [Identifying entities](identifying-entities.md)
+- [Read and write patterns](read-write-patterns.md)
 
 Planned pages:
 
-- `docs/data/read-write-patterns.md`
 - `docs/data/relational-vs-document-vs-key-value.md`
 - `docs/data/consistency-models.md`
 
