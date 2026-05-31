@@ -1,8 +1,8 @@
 # Templates
 
 Reusable cookbook templates live here. This directory includes templates for
-design documents and decision records. Later tickets will add templates for
-decision trees, diagrams, labs, and design reviews.
+design documents, decision records, and capacity estimation. Later tickets will
+add templates for decision trees, diagrams, labs, and design reviews.
 
 Templates should be practical starting points, not rigid forms that hide the
 reasoning behind a design.

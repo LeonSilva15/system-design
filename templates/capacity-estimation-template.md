@@ -20,11 +20,11 @@ Related guide: [Scale estimation](../docs/method/scale-estimation.md)
 
 | Input | Estimate | Notes |
 | --- | --- | --- |
-| Total users or actors | `[count or range]` | `[source or assumption]` |
-| Daily active users | `[count or range]` | `[source or assumption]` |
-| Busiest-hour active users | `[count or range]` | `[source or assumption]` |
-| Concurrent users | `[count or range]` | `[if relevant]` |
-| Automated actors | `[workers, devices, partners]` | `[if relevant]` |
+| Total users or actors | `[count or range]` | `[known / estimated / needs validation]` |
+| Daily active users | `[count or range]` | `[known / estimated / needs validation]` |
+| Busiest-hour active users | `[count or range]` | `[known / estimated / needs validation]` |
+| Concurrent users | `[count or range]` | `[known / estimated / needs validation]` |
+| Automated actors | `[workers, devices, partners]` | `[known / estimated / needs validation]` |
 
 ## 3. Traffic Estimate
 
@@ -120,10 +120,10 @@ Fill in:
 
 | Flow | Peak RPS Or Events/Sec | Average Size | Bandwidth |
 | --- | --- | --- | --- |
-| Read responses | `[number]` | `[KB, MB]` | `[rounded total]` |
-| Uploads | `[number]` | `[KB, MB]` | `[rounded total]` |
-| Downloads or exports | `[number]` | `[KB, MB]` | `[rounded total]` |
-| Event fanout | `[events/sec * recipients]` | `[KB]` | `[rounded total]` |
+| Read responses | `[number]` | `[KB, MB]` | `[KB/sec, MB/sec, or Mbps]` |
+| Uploads | `[number]` | `[KB, MB]` | `[KB/sec, MB/sec, or Mbps]` |
+| Downloads or exports | `[number]` | `[KB, MB]` | `[KB/sec, MB/sec, or Mbps]` |
+| Event fanout | `[events/sec * recipients]` | `[KB]` | `[KB/sec, MB/sec, or Mbps]` |
 
 Design impact:
 
@@ -153,13 +153,13 @@ Use the estimates to decide what version 1 needs.
 
 ## Worked Example
 
-A neighborhood tool library lets members reserve tools for pickup.
+A neighborhood seed library lets members reserve seed packets for pickup.
 
 Assumptions:
 
 - 10,000 registered members.
-- 2,000 daily active members during the busy season.
-- Each active member checks availability 4 times per day.
+- 2,000 daily active members during spring planting season.
+- Each active member checks seed availability 4 times per day.
 - Each active member creates or changes 0.1 reservations per day.
 - Average availability response is 6 KB.
 - Average reservation plus audit data is 2 KB.
@@ -205,8 +205,8 @@ Design consequence:
 
 ```text
 The system is read-heavy but small. Version 1 can use one relational database
-with indexes for availability lookup and transactional reservation writes. A
-cache, sharding, or separate search service is not justified yet. Revisit if
+with indexes for seed availability lookup and transactional reservation writes.
+A cache, sharding, or separate search service is not justified yet. Revisit if
 peak reads reach hundreds of RPS, if write conflicts create visible delays, or
-if tool photos change bandwidth by orders of magnitude.
+if catalog images change bandwidth by orders of magnitude.
 ```
