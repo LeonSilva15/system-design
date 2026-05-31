@@ -7,5 +7,6 @@ design prompt to justified architecture decisions.
 - [Requirement discovery](requirement-discovery.md)
 - [Functional vs non-functional requirements](functional-vs-nonfunctional-requirements.md)
 - [Scale estimation](scale-estimation.md)
+- [Trade-off vocabulary](tradeoff-vocabulary.md)
 
 Return to the [documentation index](../).
