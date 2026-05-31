@@ -143,10 +143,10 @@ often lag.
 Current pages:
 
 - [Data overview](./)
+- [Identifying entities](identifying-entities.md)
 
 Planned pages:
 
-- `docs/data/identifying-entities.md`
 - `docs/data/read-write-patterns.md`
 - `docs/data/relational-vs-document-vs-key-value.md`
 - `docs/data/consistency-models.md`
