@@ -264,10 +264,10 @@ requirements.
 Current pages:
 
 - [Communication overview](./)
+- [Synchronous vs asynchronous processing](sync-vs-async.md)
 
 Planned pages:
 
-- `docs/communication/sync-vs-async.md`
 - `docs/communication/rest-vs-grpc.md`
 - `docs/communication/polling-vs-websockets-vs-sse.md`
 - `docs/communication/queues.md`
