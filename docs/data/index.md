@@ -205,8 +205,8 @@ Storage guidance:
   database for version 1.
 - Use a uniqueness rule or transaction to prevent two approved reservations for
   the same tool and pickup window.
-- Store reminder jobs as durable rows or queue messages because delayed delivery
-  is acceptable.
+- Store reminder jobs as durable rows or in a persisted queue because delayed
+  delivery is acceptable but silent loss is not.
 - Avoid a separate search service until tool catalog search needs ranking, typo
   tolerance, or measured read load relief.
 
