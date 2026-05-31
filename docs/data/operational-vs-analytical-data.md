@@ -60,7 +60,8 @@ Then map analytical needs:
 ### Operational Data
 
 Operational data serves live workflows. It is usually the source of truth for
-current product state.
+current product state. In interview and architecture discussions, this is often
+called OLTP-style data: optimized for transaction-oriented reads and writes.
 
 Examples:
 
@@ -85,7 +86,9 @@ should not be reshaped primarily for reporting at the cost of correctness.
 ### Analytical Data
 
 Analytical data answers questions across many records or longer time windows.
-It is usually derived from operational data, events, imports, or snapshots.
+It is usually derived from operational data, events, imports, or snapshots. In
+interview and architecture discussions, this is often called OLAP-style data:
+optimized for scans, aggregations, and historical analysis.
 
 Examples:
 
@@ -118,7 +121,11 @@ Pipeline decisions:
 - shape: raw facts, cleaned events, aggregates, or dashboard-ready tables;
 - cadence: continuous, every few minutes, hourly, daily, or manual;
 - failure behavior: retry, quarantine bad records, alert, or pause;
-- replay behavior: rebuild from source, replay events, or re-run batch windows.
+- replay behavior: rebuild from source, replay events, or re-run batch windows;
+- reconciliation: compare source counts, totals, samples, or freshness against
+  the operational source of truth;
+- data quality: detect missing partitions, duplicate events, unexpected nulls,
+  and values outside expected ranges.
 
 Pipelines need ownership. A dashboard is only useful if someone knows what data
 feeds it, how late it can be, and how to repair it.
@@ -166,6 +173,9 @@ Dashboard categories:
 A dashboard used during an incident may need fresher data and clear missing-data
 indicators. A planning dashboard can often lag if it is complete, stable, and
 explainable.
+Incident dashboards usually need telemetry, health checks, or bounded
+operational reads. Delayed warehouse data is usually better for later analysis
+than live incident response unless its lag is acceptable and visible.
 
 ### Freshness Trade-Offs
 
@@ -182,6 +192,9 @@ Trade-offs:
 
 - Fresher data usually costs more operational complexity.
 - Lower freshness can protect user-facing systems from reporting load.
+- Real-time derived views can support monitoring, but live user confirmations
+  should use the authoritative operational path unless the derived view is
+  explicitly designed as authoritative.
 - Batch reports can be easier to reconcile but less useful during incidents.
 - Near-real-time pipelines need duplicate handling, ordering decisions, and
   lag monitoring.
