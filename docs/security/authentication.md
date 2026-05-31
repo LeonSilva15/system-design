@@ -129,9 +129,10 @@ lockout, and brute-force protections. Passwordless links or codes need expiry,
 single-use behavior, and delivery failure handling. SSO reduces local password
 handling but adds dependency behavior when the provider is unavailable.
 
-If the system stores local passwords, decide how password verifiers are stored,
-where raw passwords are forbidden, which events force credential reset, and how
-operators confirm that password values never appear in logs or analytics.
+If the system stores local passwords, decide how password verifiers are stored
+with purpose-built password hashing, where raw or reversible passwords are
+forbidden, which events force credential reset, and how operators confirm that
+password values never appear in logs or analytics.
 
 Version 1 should choose the fewest flows that match the product. More login
 options can help adoption, but they also multiply support cases, edge cases,
@@ -269,9 +270,10 @@ Useful events:
 - suspicious patterns such as repeated failures, impossible travel, or many
   password resets for one account.
 
-Logs should include actor ID, session ID or credential ID, client ID, request
-ID, decision outcome, and reason class. They should not include passwords,
-reset tokens, raw session tokens, private keys, or full one-time codes.
+Logs should include actor ID, non-secret session record ID or token fingerprint,
+credential ID, client ID, request ID, decision outcome, and reason class. They
+should not include passwords, reset tokens, raw bearer session IDs, raw session
+tokens, private keys, or full one-time codes.
 
 Common authentication failure modes:
 
