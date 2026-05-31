@@ -59,31 +59,82 @@ Each page should help you answer:
 
 ## Major Sections
 
-- [Start here](docs/start-here/) - project guardrails, definition of done, and
-  learning paths.
-- [Method](docs/method/) - the repeatable process for moving from prompt to
-  design.
-- [Requirements](docs/requirements/) - decision trees for latency, throughput,
-  availability, consistency, security, cost, and operability.
-- [Components](docs/components/) - guidance for choosing APIs, databases,
-  caches, queues, streams, workers, CDNs, and load balancers.
-- [Data](docs/data/) - entity discovery, access patterns, consistency,
-  replication, sharding, indexing, and schema evolution.
-- [Communication](docs/communication/) - synchronous APIs, asynchronous
-  messaging, events, retries, idempotency, and backpressure.
-- [Scalability](docs/scalability/) - capacity planning, bottlenecks,
-  horizontal scaling, partitioning, caching, and traffic shaping.
-- [Reliability](docs/reliability/) - failure modes, timeouts, retries,
-  circuit breakers, failover, recovery, and data loss scenarios.
-- [Security](docs/security/) - authentication, authorization, sensitive data,
-  audit logs, abuse resistance, and privacy.
-- [Operations](docs/operations/) - metrics, logs, traces, alerts, runbooks,
-  SLOs, dashboards, and cost awareness.
-- [Walkthroughs](docs/walkthroughs/) - worked designs that show reasoning,
-  alternatives, and trade-offs.
-- [Labs](labs/) - small runnable exercises for observing system behavior.
-- [Templates](templates/) - reusable design docs, decision records, decision
-  trees, and lab scaffolds.
+These are the major sections the cookbook will expose as the repository is
+built. The links below point to section descriptions in this README until the
+corresponding docs and lab directories are created.
+
+- [Start Here](#start-here)
+- [Method](#method)
+- [Requirements](#requirements)
+- [Components](#components)
+- [Data](#data)
+- [Communication](#communication)
+- [Scalability](#scalability)
+- [Reliability](#reliability)
+- [Security](#security)
+- [Operations](#operations)
+- [Walkthroughs](#walkthroughs)
+- [Labs](#labs)
+- [Templates](#templates)
+
+### Start Here
+
+Project guardrails, definition of done, and learning paths.
+
+### Method
+
+The repeatable process for moving from prompt to design.
+
+### Requirements
+
+Decision trees for latency, throughput, availability, consistency, security,
+cost, and operability.
+
+### Components
+
+Guidance for choosing APIs, databases, caches, queues, streams, workers, CDNs,
+and load balancers.
+
+### Data
+
+Entity discovery, access patterns, consistency, replication, sharding,
+indexing, and schema evolution.
+
+### Communication
+
+Synchronous APIs, asynchronous messaging, events, retries, idempotency, and
+backpressure.
+
+### Scalability
+
+Capacity planning, bottlenecks, horizontal scaling, partitioning, caching, and
+traffic shaping.
+
+### Reliability
+
+Failure modes, timeouts, retries, circuit breakers, failover, recovery, and
+data loss scenarios.
+
+### Security
+
+Authentication, authorization, sensitive data, audit logs, abuse resistance,
+and privacy.
+
+### Operations
+
+Metrics, logs, traces, alerts, runbooks, SLOs, dashboards, and cost awareness.
+
+### Walkthroughs
+
+Worked designs that show reasoning, alternatives, and trade-offs.
+
+### Labs
+
+Small runnable exercises for observing system behavior.
+
+### Templates
+
+Reusable design docs, decision records, decision trees, and lab scaffolds.
 
 ## How To Contribute
 
