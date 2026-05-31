@@ -243,6 +243,7 @@ Current related pages:
 - [Timeouts](timeouts.md)
 - [Retries](retries.md)
 - [Circuit breakers](circuit-breakers.md)
+- [Graceful degradation](graceful-degradation.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)
 - [Synchronous vs asynchronous communication](../communication/sync-vs-async.md)
@@ -253,7 +254,6 @@ Current related pages:
 
 Planned pages in this section:
 
-- `docs/reliability/graceful-degradation.md`
 - `docs/reliability/bulkheads.md`
 - `docs/reliability/health-checks.md`
 - `docs/reliability/failover.md`
