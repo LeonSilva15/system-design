@@ -276,11 +276,10 @@ Current pages:
 
 - [Security design overview](./)
 - [Authentication](authentication.md)
+- [Authorization](authorization.md)
 
 Planned pages:
 
-- `docs/security/authorization.md`: permissions, ownership, roles, policies,
-  admin actions, and authorization checks.
 - `docs/security/access-control-models.md`: role-based, attribute-based, and
   relationship-based access-control trade-offs.
 - `docs/security/secrets-management.md`: API keys, credentials, rotation,
