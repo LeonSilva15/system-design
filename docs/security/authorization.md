@@ -76,7 +76,8 @@ flowchart TD
     F --> G
     G -->|No| H[Deny with safe response and audit risky denial]
     G -->|Yes| I[Perform action using scoped data access]
-    I --> J[Record authorization decision and relevant IDs]
+    H --> J[Record decision for risky denials and audit-relevant actions]
+    I --> J
 ```
 
 ## Decision Guidance
@@ -244,6 +245,16 @@ Not every denial needs an alert. Repeated cross-tenant attempts, admin denials,
 export denials, or service credentials attempting unexpected actions are more
 useful signals than ordinary user mistakes.
 
+Example failure policy:
+
+- public catalog reads may continue if they do not require private policy data;
+- private reservation reads fail closed when the system cannot prove ownership
+  or tenant membership;
+- exports, role changes, impersonation, and destructive admin actions fail
+  closed when the policy store or fresh permission cache is unavailable;
+- already-started background jobs either re-check before the sensitive action or
+  use a recorded approval with a short validity window.
+
 ### Keep Version 1 Practical
 
 A reasonable version 1 might include:
@@ -277,6 +288,12 @@ roles.
 | Admin override | Helps repair urgent user problems | Needs strict scope, approval, expiry, and auditability |
 | Cached permissions | Lower latency and less policy-store load | Stale grants can overgrant after role or tenant changes |
 
+Use inline checks for a small monolith with a few actions. Move repeated checks
+into a shared function or library when the same rule appears in many handlers.
+Consider a dedicated policy service only when multiple services need consistent
+decisions and the added dependency is worth its latency, availability, and
+debugging cost.
+
 ## Common Mistakes
 
 - Treating authentication as permission to do everything.
@@ -300,14 +317,14 @@ inventory and roles.
 
 Authorization decisions:
 
-| Action | Allowed Caller | Resource And Condition | Decision |
-| --- | --- | --- | --- |
-| View reservation | Resident | Reservation belongs to the resident's household | Allow; otherwise deny without revealing the reservation exists |
-| Update pickup status | Volunteer | Reservation is assigned to the volunteer's branch and in `ready_for_pickup` state | Allow status update, not borrower profile edits |
-| Approve high-value loan | Staff | Staff belongs to the branch that owns the tool and loan value is within staff limit | Allow and audit approval |
-| Export borrower list | Admin | Admin has export permission, MFA is recent, and a reason is recorded | Queue export and audit requester, scope, and reason |
-| Send reminder | Reminder worker | Worker credential is valid and job references an active reservation | Send notification using the reservation service's scoped data |
-| Change user role | Admin | Admin cannot grant permissions outside their branch scope | Require step-up proof, write audit record, and notify affected user |
+| Action | Check Runs At | Allowed Caller | Resource And Condition | Decision |
+| --- | --- | --- | --- | --- |
+| View reservation | API query | Resident | Reservation belongs to the resident's household | Allow; otherwise deny without revealing the reservation exists |
+| Update pickup status | Service command | Volunteer | Reservation is assigned to the volunteer's branch and in `ready_for_pickup` state | Allow status update, not borrower profile edits |
+| Approve high-value loan | Approval API | Staff | Staff belongs to the branch that owns the tool and loan value is within staff limit | Allow and audit approval |
+| Export borrower list | Export job | Admin | Admin has export permission, MFA is recent, and a reason is recorded | Queue export and audit requester, scope, and reason |
+| Send reminder | Worker | Reminder worker | Worker credential is valid and job references an active reservation | Send notification using the reservation service's scoped data |
+| Change user role | Admin tool | Admin | Admin cannot grant permissions outside their branch scope | Require step-up proof, write audit record, and notify affected user |
 
 Rejected for version 1:
 
