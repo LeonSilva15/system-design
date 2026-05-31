@@ -279,11 +279,10 @@ Current pages:
 - [Authorization](authorization.md)
 - [Access-control models](access-control-models.md)
 - [Secrets management](secrets-management.md)
+- [Encryption](encryption.md)
 
 Planned pages:
 
-- `docs/security/encryption.md`: encryption in transit, encryption at rest, key
-  management, and practical limits.
 - `docs/security/audit-logs.md`: accountable records for risky, administrative,
   and support actions.
 - `docs/security/rate-limiting-and-abuse.md`: brute force, scraping, spam,
