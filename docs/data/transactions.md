@@ -129,7 +129,9 @@ Common protections:
 - conditional update such as "change only if status is still skipped";
 - a transaction that reads and writes the authoritative row;
 - a lock when conflicts are likely and retry UX is acceptable;
-- append commands to a queue when strict ordering is required.
+- append commands to a queue when same-entity commands are serialized by key or
+  by a single worker, and each command still commits safely to authoritative
+  state.
 
 ### Write Conflicts
 
@@ -233,6 +235,8 @@ Transaction boundary:
 
 - read the room and candidate time window;
 - check for an existing approved reservation that conflicts;
+- protect the overlapping range with a scoped constraint, authoritative slot
+  record, range-protecting isolation, or equivalent mechanism;
 - mark the request approved;
 - create a status change or approval decision record;
 - create a durable notification job or outbox record after the approval is
@@ -256,6 +260,9 @@ What stays outside the transaction:
 
 Those side effects can run from committed reservation and status-change data.
 If they fail, they should retry without changing the approval decision.
+When reliable side effects are required, persist the job or outbox record with
+the authoritative approval, then send the email, chat message, search update, or
+dashboard refresh after commit.
 
 ## Checklist
 
