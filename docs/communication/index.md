@@ -265,6 +265,7 @@ Current pages:
 
 - [Communication overview](./)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
+- [Pub/sub](pub-sub.md)
 
 Planned pages:
 
@@ -272,7 +273,6 @@ Planned pages:
 - `docs/communication/polling-vs-websockets-vs-sse.md`
 - `docs/communication/queues.md`
 - `docs/communication/streams.md`
-- `docs/communication/pub-sub.md`
 - `docs/communication/retries-and-backoff.md`
 - `docs/communication/idempotency.md`
 - `docs/communication/dead-letter-queues.md`
