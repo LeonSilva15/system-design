@@ -67,6 +67,13 @@ are still below one request per second. Revisit when write latency or lock
 contention becomes measured.
 ```
 
+For time-constrained interviews, shorten it:
+
+```text
+Because <requirement>, I would choose <option>.
+The trade-off is <cost>, and I would revisit it when <signal>.
+```
+
 ### Define The Common Trade-Offs
 
 | Trade-Off | What It Means | Concrete Example |
