@@ -89,10 +89,12 @@ a dedupe rule, change the operation boundary, or surface a manual repair path.
 
 Retry only errors that are likely to change with time.
 
-Usually retryable:
+Usually retryable when the operation is safe to repeat:
 
-- connection reset before the caller knows whether work happened;
-- timeout from a dependency that is normally reliable;
+- connection reset before the caller knows whether work happened, as long as
+  the request has idempotency or reconciliation;
+- timeout from a dependency that is normally reliable, as long as duplicate
+  completion is harmless;
 - temporary rate limit when the server asks the caller to slow down;
 - service unavailable or overloaded response;
 - optimistic concurrency conflict when the command can be rebuilt safely.
@@ -233,7 +235,9 @@ flowchart TD
     F -->|No| G[Mark retry exhausted]
     F -->|Yes| H[Wait with capped exponential backoff and jitter]
     H --> I[Retry with same idempotency context]
-    I --> A
+    I --> J{Succeeded?}
+    J -->|Yes| K[Return success]
+    J -->|No| A
 ```
 
 ## Trade-Offs
