@@ -158,29 +158,39 @@ Choreography coupling:
 The practical question is whether explicit command coupling or implicit event
 coupling is easier for the team to operate.
 
-### Required Vs Optional Work
+### Core, Required Downstream, And Optional Work
 
-Separate required workflow steps from optional reactions before choosing a
-style.
+Separate core required steps, required downstream work, and optional reactions
+before choosing a style.
 
-Required steps affect the user promise:
+Core required steps affect the user-visible success condition:
 
 - "the booking is confirmed";
 - "the payment is authorized";
 - "the workspace is ready";
 - "the permit is approved."
 
-Optional or downstream reactions happen after the core promise:
+Required downstream work happens after the core success is durable, but still
+needs ownership, retry, and repair:
 
 - send confirmation email;
 - update a search projection;
+- refresh a public calendar promised to staff;
+- notify a partner system with a contractual delivery expectation.
+
+Optional reactions can lag or fail without breaking a user or operator promise:
+
 - feed analytics;
-- refresh a public calendar.
+- update recommendations;
+- send a noncritical digest.
 
 Required steps often benefit from orchestration or at least explicit workflow
-state. Optional reactions often fit event choreography, pub/sub, or outbox-based
-delivery. A single product workflow can use both: orchestrate the core decision,
-then publish an event for downstream reactions.
+state. Required downstream work can still be choreographed, but it needs named
+owners, retry policy, failure state, and support visibility. Optional reactions
+often fit looser event choreography, pub/sub, or outbox-based delivery. A single
+product workflow can use both: orchestrate the core decision, then publish an
+event for required and optional downstream reactions with different failure
+policies.
 
 ### When To Mix Them
 
@@ -199,8 +209,8 @@ This keeps the user-visible decision inspectable while allowing downstream
 systems to react without direct command coupling.
 
 Mixing styles is reasonable when the boundary is explicit. It is risky when the
-team cannot tell which steps are required for success and which are downstream
-effects.
+team cannot tell which steps are required for core success, which downstream
+reactions are still required, and which reactions are optional.
 
 ## Decision Flow
 
@@ -292,7 +302,8 @@ from the approval service to every downstream consumer.
 Before choosing orchestration or choreography, confirm:
 
 - The user-visible success condition is written down.
-- Required steps are separated from optional or downstream reactions.
+- Core required steps, required downstream work, and optional reactions are
+  separated.
 - One component or team owns end-to-end progress.
 - Workflow state location is explicit.
 - Debugging path for a stuck workflow is clear.
