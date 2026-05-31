@@ -140,6 +140,8 @@ The storage choice should answer:
 - whether access is audited;
 - whether different environments are separated;
 - how a deployed process receives updates;
+- what happens if the secret store or deployment-secret system is unavailable at
+  startup, reload, or rotation time;
 - how old versions are retired;
 - how backups, debug dumps, and support exports avoid exposing the value.
 
@@ -193,6 +195,12 @@ Common rotation patterns:
 | Issue per-service credentials | Services rotate independently | More credential inventory and automation |
 | Short-lived credentials | Platform can issue fresh credentials automatically | Requires reliable issuance and clock handling |
 
+Database credential rotation usually changes how a service authenticates to a
+store and may require connection reloads, pool draining, or a short overlap
+between old and new users. Webhook or signing-secret rotation usually changes
+verification: the receiver may need to accept signatures from both values for a
+short window while the sender switches.
+
 Do not rotate by editing code and hoping every instance restarts. Rotation is a
 workflow with verification.
 
@@ -217,6 +225,10 @@ Use redaction rules that remove known secret fields and high-risk token shapes.
 Still design as if redaction can fail: avoid placing secrets in URLs, message
 payloads, or user-visible errors in the first place.
 
+Add focused tests for high-risk fields. For example, a request that includes
+`Authorization`, `api_key`, or webhook signature headers should produce logs and
+errors that contain only redacted placeholders, credential IDs, or fingerprints.
+
 ### Plan Leak Response
 
 Leak response is the runbook for "this secret may be exposed." It should be
@@ -230,7 +242,8 @@ Minimum leak response:
 4. Verify consumers use the new value.
 5. Search for where the value appeared and remove or restrict copies where
    possible.
-6. Review provider logs, application logs, and audit records for suspicious use.
+6. Review provider logs, application logs, and audit records for suspicious use,
+   using credential IDs or fingerprints instead of raw secret values.
 7. Record timeline, impact, follow-up fixes, and remaining uncertainty.
 
 When immediate revocation would break a critical path, use a short overlap only
