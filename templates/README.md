@@ -6,3 +6,5 @@ reviews.
 
 Templates should be practical starting points, not rigid forms that hide the
 reasoning behind a design.
+
+- [Design doc template](design-doc-template.md)
