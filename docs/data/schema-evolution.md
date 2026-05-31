@@ -83,7 +83,8 @@ or writers during the rollout window.
 
 Compatibility rules:
 
-- New readers should tolerate missing old data and default it deliberately.
+- New readers should tolerate missing new fields on old records and default them
+  deliberately.
 - Old readers should ignore new optional fields.
 - New writers should avoid producing data old readers cannot parse until old
   readers are gone.
@@ -105,10 +106,13 @@ Expand:
 - start writing the new shape while preserving the old shape if needed;
 - backfill historical data in small batches;
 - compare old and new reads where correctness matters.
+- name which shape remains authoritative until the switch, and record how
+  divergence between old and new shapes will be detected and repaired.
 
 Contract:
 
-- switch reads to the new shape after it is complete enough;
+- switch reads to the new shape after backfill is complete, dual-read comparison
+  is clean enough for the workflow, and known consumers are migrated;
 - stop writing the old shape;
 - monitor for consumers still using old data;
 - remove old fields, indexes, or compatibility code only after the rollback
@@ -143,6 +147,8 @@ Safe sequence:
 - clean existing bad data before enforcing a new constraint;
 - add an index before moving traffic to a query that depends on it;
 - build large indexes or backfills in a way that can be paused;
+- separate build, validation, and enforcement steps for large constraints or
+  uniqueness rules;
 - verify the query plan before relying on the new index;
 - remove old indexes after the old query path is no longer used.
 
@@ -210,6 +216,8 @@ Expand plan:
 - add nullable `first_name` and `last_initial` fields;
 - deploy readers that prefer the new fields but fall back to `display_name`;
 - update profile editing to write both old and new shapes;
+- keep `display_name` authoritative until the backfill and comparison checks
+  show the new fields match expected rendering;
 - backfill existing profiles in batches;
 - compare rendered tutor cards for old and new data during the rollout.
 
