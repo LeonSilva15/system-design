@@ -20,6 +20,10 @@ A design review should answer:
 Use the prompts below for walkthroughs, design docs, architecture proposals, and
 practice reviews.
 
+In a time-boxed interview, start with the highest-risk prompts: requirements,
+data ownership, write path correctness, failure behavior, and version 1
+simplicity. Mention the remaining areas as follow-up checks if time is short.
+
 ## When This Matters
 
 Use this checklist when:
