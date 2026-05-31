@@ -8,5 +8,6 @@ design prompt to justified architecture decisions.
 - [Functional vs non-functional requirements](functional-vs-nonfunctional-requirements.md)
 - [Scale estimation](scale-estimation.md)
 - [Trade-off vocabulary](tradeoff-vocabulary.md)
+- [Design review checklist](design-review-checklist.md)
 
 Return to the [documentation index](../).
