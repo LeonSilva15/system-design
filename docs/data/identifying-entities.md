@@ -48,6 +48,10 @@ Then identify resources:
 - What needs a stable ID?
 - What has a status, owner, timestamp, or audit trail?
 
+Do not promote every field into an entity. A pickup request may be an entity
+because it has ownership, lifecycle, and invariants. A pickup note may just be
+an attribute unless it needs its own author, history, permissions, or lifecycle.
+
 Then identify rules:
 
 - Who owns the resource?
@@ -125,6 +129,10 @@ For each state, ask:
 - Is the transition reversible?
 - Does the state affect retention or visibility?
 
+Lifecycle should map to enforcement. For example, if a pickup request is
+cancelled, the system should reject new reminder jobs for that request or make
+the reminder worker skip them safely.
+
 ### Identify Invariants
 
 An invariant is a rule that must remain true.
@@ -141,6 +149,8 @@ Invariants drive transaction boundaries, uniqueness rules, conditional writes,
 idempotency, and conflict handling.
 
 If violating a rule would harm users or operators, write it as an invariant.
+When an invariant protects user-visible correctness, add a test, metric, or
+operator-visible log so violations are caught quickly.
 
 ## Trade-Offs
 
