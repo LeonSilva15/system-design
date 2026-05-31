@@ -129,8 +129,9 @@ Watch for:
 - reports that should use analytical data instead of the operational store.
 
 For user-facing reads, measure the whole path: database time, rows scanned, rows
-returned, network payload, and application processing. An index can reduce one
-part while another part remains the real latency problem.
+returned, query plan shape, p95 or p99 latency, network payload, and application
+processing. An index can reduce one part while another part remains the real
+latency problem.
 
 ### Write Cost
 
@@ -162,8 +163,12 @@ Examples:
 - one current membership role per user and organization.
 
 When an index enforces an invariant, document the rule in product language.
-`unique(room_id, starts_at, status)` is less useful to reviewers than "a room
-cannot have two approved reservations starting at the same time."
+`unique(room_id, starts_at, status)` is also not the right shape for every
+stateful workflow because it may restrict pending or cancelled records that are
+allowed to coexist. Prefer wording such as "only one approved reservation may
+exist for this room and start time," then choose a scoped uniqueness rule,
+conditional constraint, or separate authoritative approved-slot record that
+matches that invariant.
 
 ## Index Decision Flow
 
@@ -224,7 +229,7 @@ Important queries:
 | Resident views their requests | `resident_id`, newest first | `resident_id, created_at, request_id` |
 | Staff triage queue | `status = pending`, oldest first | `status, created_at, request_id` |
 | Mechanic calendar | `mechanic_id`, time window | `mechanic_id, starts_at, request_id` |
-| Prevent duplicate booking | one approved request per slot | unique `slot_id, approved_state` or another explicit constraint |
+| Prevent duplicate booking | one approved request per slot | scoped uniqueness for approved requests on `slot_id`, or another explicit approved-slot constraint |
 
 Design notes:
 
