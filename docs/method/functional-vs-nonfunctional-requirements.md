@@ -142,6 +142,18 @@ Use the requirement type to test whether a component is justified:
 If the design includes a component without a matching requirement, remove it or
 write the missing requirement explicitly.
 
+For interviews and reviews, use this answer shape:
+
+```text
+Behavior: <what the user or service does>
+Quality constraint: <how correct, fast, durable, secure, or observable it must be>
+Design consequence: <the simplest architecture choice that satisfies both>
+```
+
+The design consequence does not always need new infrastructure. Sometimes the
+right version 1 answer is a database constraint, an index, an explicit limit, a
+manual review step, or a log field.
+
 ## Trade-Offs
 
 Functional requirements help keep the design anchored to user value. If you only
