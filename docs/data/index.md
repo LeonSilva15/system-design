@@ -150,6 +150,7 @@ Current pages:
 - [Transactions](transactions.md)
 - [Schema evolution](schema-evolution.md)
 - [Operational vs analytical data](operational-vs-analytical-data.md)
+- [Backups and restore](backups-and-restore.md)
 
 Planned pages:
 
