@@ -77,7 +77,7 @@ flowchart TD
     G --> H
     H --> I[Validate data, user paths, and operator tools]
     I --> J[Communicate status and continue business operations]
-    J --> K[Fail back, reconcile, and review]
+    J --> K[Reconcile, decide failback, and review]
 ```
 
 ## Decision Guidance
