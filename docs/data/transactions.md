@@ -288,6 +288,7 @@ Before finalizing a transaction design, confirm:
 - [Read and write patterns](read-write-patterns.md)
 - [Indexes](indexes.md)
 - [Relational vs document vs key-value](relational-vs-document-vs-key-value.md)
+- [Outbox pattern](../communication/outbox-pattern.md)
 - [Trade-off vocabulary](../method/tradeoff-vocabulary.md)
 - [Design review checklist](../method/design-review-checklist.md)
 - [Glossary](../glossary.md)

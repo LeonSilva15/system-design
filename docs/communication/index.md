@@ -268,6 +268,7 @@ Current pages:
 - [Pub/sub](pub-sub.md)
 - [Retries and backoff](retries-and-backoff.md)
 - [Idempotency](idempotency.md)
+- [Outbox pattern](outbox-pattern.md)
 
 Planned pages:
 
@@ -276,7 +277,6 @@ Planned pages:
 - `docs/communication/queues.md`
 - `docs/communication/streams.md`
 - `docs/communication/dead-letter-queues.md`
-- `docs/communication/outbox-pattern.md`
 - `docs/communication/saga-pattern.md`
 - `docs/communication/workflow-orchestration-vs-choreography.md`
 
