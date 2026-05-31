@@ -295,6 +295,7 @@ Before using a scale estimate to justify architecture, confirm:
 
 ## Related Pages
 
+- [Capacity estimation](../scalability/capacity-estimation.md)
 - [System design process](system-design-process.md)
 - [Requirement discovery](requirement-discovery.md)
 - [Functional vs non-functional requirements](functional-vs-nonfunctional-requirements.md)
