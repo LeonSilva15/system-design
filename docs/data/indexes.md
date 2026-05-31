@@ -263,6 +263,7 @@ Before adding an index, confirm:
 
 - [Data overview](./)
 - [Read and write patterns](read-write-patterns.md)
+- [Database read scaling](../scalability/database-read-scaling.md)
 - [Relational vs document vs key-value](relational-vs-document-vs-key-value.md)
 - [Identifying entities](identifying-entities.md)
 - [Scale estimation](../method/scale-estimation.md)

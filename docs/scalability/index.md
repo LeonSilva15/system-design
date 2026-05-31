@@ -8,6 +8,7 @@ pressure.
 ## Current Pages
 
 - [Capacity estimation](capacity-estimation.md)
+- [Database read scaling](database-read-scaling.md)
 
 ## Planned Pages
 
@@ -16,7 +17,6 @@ pressure.
 - `docs/scalability/stateless-services.md`
 - `docs/scalability/load-balancing.md`
 - `docs/scalability/caching-strategies.md`
-- `docs/scalability/database-read-scaling.md`
 - `docs/scalability/database-write-scaling.md`
 - `docs/scalability/sharding-strategies.md`
 - `docs/scalability/hot-key-mitigation.md`
