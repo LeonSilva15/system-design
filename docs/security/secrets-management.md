@@ -81,12 +81,12 @@ flowchart TD
 Start with a table. Secret design is hard to review when values are scattered
 across local files, deployment settings, CI variables, and provider dashboards.
 
-| Secret | Owner | Scope | Allows | Rotation Trigger |
+| Secret | Owner | Scope | Storage And Injection | Emergency Revoke |
 | --- | --- | --- | --- | --- |
-| Database password | API service team | Production API database | Read and write application data | Scheduled rotation or suspected leak |
-| Email provider API key | Notifications team | Production notification sender | Send email and create provider cost | Provider change, staff departure, or leak |
-| Webhook signing secret | Integrations team | One inbound webhook endpoint | Verify partner events | Partner rotation or replay incident |
-| Worker service credential | Platform team | Reminder worker to API | Submit reminder jobs | Scheduled rotation or worker compromise |
+| Database password | API service team | Production API database read/write | Deployment secret injected at API startup | Disable old database user after replacement connects |
+| Email provider API key | Notifications team | Production notification sending | Secret store value injected into worker | Disable key in provider console and pause suspicious sends |
+| Webhook signing secret | Integrations team | One inbound webhook endpoint | Versioned secret used by webhook receiver | Stop accepting old signature value |
+| Worker service credential | Platform team | Reminder worker to API | Per-worker deployment secret | Revoke credential and pause worker jobs |
 
 For each secret, name:
 
@@ -143,9 +143,10 @@ The storage choice should answer:
 - how old versions are retired;
 - how backups, debug dumps, and support exports avoid exposing the value.
 
-Encryption at rest helps, but access control and operational discipline matter
-more for day-to-day leaks. Most incidents come from broad access, logging,
-copying, screenshots, or stale credentials rather than broken cryptography.
+Encryption at rest helps, but access control and operational discipline still
+need design. Review broad access, logging, copying, screenshots, and stale
+credentials as ordinary exposure paths instead of focusing only on
+cryptography.
 
 ### Treat Environment Variables As Injection, Not Storage
 
