@@ -281,11 +281,10 @@ Current pages:
 - [Secrets management](secrets-management.md)
 - [Encryption](encryption.md)
 - [Audit logs](audit-logs.md)
+- [Rate limiting and abuse resistance](rate-limiting-and-abuse.md)
 
 Planned pages:
 
-- `docs/security/rate-limiting-and-abuse.md`: brute force, scraping, spam,
-  quota abuse, account takeover, and public API protection.
 - `docs/security/data-privacy.md`: data minimization, consent, masking, access,
   and privacy-focused design questions.
 - `docs/security/data-retention-and-deletion.md`: retention periods, deletion
