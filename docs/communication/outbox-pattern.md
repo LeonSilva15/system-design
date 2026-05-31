@@ -105,6 +105,7 @@ Typical fields:
 | `aggregate_type` | source entity type, such as `reservation` |
 | `aggregate_id` | source entity ID |
 | `aggregate_version` | ordering or stale-event detection within the entity |
+| `sequence_in_partition` | optional relay order when a real sequencer exists |
 | `event_type` | fact name, such as `reservation.approved` |
 | `payload` | event data derived from committed state |
 | `status` | pending, publishing, sent, failed, or needs review |
@@ -172,7 +173,8 @@ entities, partitions, services, and consumers.
 Usually reasonable:
 
 - order events for one entity by `aggregate_version`;
-- publish records from one partition in commit order;
+- publish records from one partition by an explicit sequence only when the
+  system has a real sequencer or lease discipline for that partition;
 - let consumers ignore stale versions;
 - rebuild derived views from source state when ordering was violated.
 
@@ -181,6 +183,8 @@ Usually risky:
 - relying on global order across unrelated entities;
 - assuming two relay workers will publish in exact commit order without
   coordination;
+- treating insert timestamps, generated IDs, or relay pickup time as reliable
+  commit order under concurrent transactions;
 - assuming broker partitions preserve order for keys that are not aligned with
   the source entity;
 - mixing manual replay with live events without version checks;
@@ -203,6 +207,10 @@ Common states:
 | `sent` | Publish call succeeded | Retain or archive |
 | `failed` | Temporary attempts exhausted | Inspect and retry |
 | `needs_review` | Payload, schema, or permissions issue | Repair data or mark skipped with reason |
+
+A relay that crashes after claiming a row but before publishing should not leave
+that row stuck forever. Use a lease, claim timeout, or heartbeat so another
+relay can return stale `publishing` records to `pending` and try again.
 
 Important metrics:
 
