@@ -247,6 +247,7 @@ Current related pages:
 - [Bulkheads](bulkheads.md)
 - [Failover](failover.md)
 - [RPO and RTO](rpo-rto.md)
+- [Backup and restore recovery](backup-and-restore-recovery.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)
 - [Synchronous vs asynchronous communication](../communication/sync-vs-async.md)
@@ -258,7 +259,6 @@ Current related pages:
 Planned pages in this section:
 
 - `docs/reliability/health-checks.md`
-- `docs/reliability/backup-and-restore-recovery.md`
 - `docs/reliability/disaster-recovery.md`
 - `docs/reliability/data-loss-scenarios.md`
 
