@@ -163,6 +163,15 @@ write path and conflict handling.
 
 Assumptions make it clear when the design should change.
 
+Use a compact format that can move directly into a design doc:
+
+```text
+Requirement: <what must be true>
+Assumption: <what we believe until measured or confirmed>
+Design choice: <component, workflow, or constraint this justifies>
+Revisit when: <signal that should change the design>
+```
+
 ### Keep Version 1 Honest
 
 Discovery should reduce scope as well as add clarity.
@@ -214,6 +223,18 @@ Discovery prompts and answers:
 | Who handles exceptions? | Clinic staff can cancel no-shows and unsafe requests. | Functional | Staff role, cancellation state, audit note |
 | What scale matters? | Signup opens Monday morning and may create a short write spike. | Non-functional | Index slots, protect writes, postpone sharding |
 | What should operators observe? | Failed reminders and duplicate-slot conflicts. | Non-functional | Metrics and logs with reservation ID and slot ID |
+
+One assumption to carry forward:
+
+```text
+Requirement: residents must not receive duplicate confirmations for the same slot.
+Assumption: peak signup traffic is small enough for one relational database to
+protect slot assignment.
+Design choice: use a transactional reservation write with a uniqueness rule on
+the mechanic and time slot.
+Revisit when: signup traffic or lock contention makes confirmation latency miss
+the target.
+```
 
 Version 1 design consequences:
 
