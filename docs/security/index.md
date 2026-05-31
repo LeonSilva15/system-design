@@ -282,6 +282,7 @@ Current pages:
 - [Encryption](encryption.md)
 - [Audit logs](audit-logs.md)
 - [Rate limiting and abuse resistance](rate-limiting-and-abuse.md)
+- [Admin tools](admin-tools.md)
 
 Planned pages:
 
@@ -289,8 +290,6 @@ Planned pages:
   and privacy-focused design questions.
 - `docs/security/data-retention-and-deletion.md`: retention periods, deletion
   workflows, backups, and user-visible expectations.
-- `docs/security/admin-tools.md`: safe internal tools, support workflows,
-  impersonation, approvals, and auditability.
 - `docs/security/third-party-integrations.md`: webhooks, API keys, vendor
   failure, trust boundaries, rate limits, and data sharing.
 
