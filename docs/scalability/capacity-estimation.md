@@ -8,6 +8,12 @@ and which scaling components are not justified yet.
 Use the [capacity estimation worksheet](../../templates/capacity-estimation-template.md)
 when you need a fill-in-the-blank version of this guide.
 
+Use [Scale estimation](../method/scale-estimation.md) for the first-pass method:
+turning users, requests, storage, bandwidth, and peaks into rough assumptions.
+Use this page when those assumptions need scalability consequences: which path
+will saturate first, what headroom to keep, and what metric should trigger the
+next scaling move.
+
 ## Purpose
 
 Use this guide to answer:
@@ -258,8 +264,8 @@ Writes:
 ```text
 write requests per day = 12,000 * 0.15 = 1,800
 average write RPS = 1,800 / 86,400 ~= about 0.02 RPS
-busiest-hour write RPS = 0.02 * 10 ~= still below 1 RPS
-launch-window write RPS = 0.02 * 25 ~= still around 1 RPS
+busiest-hour write RPS = 0.02 * 10 ~= about 0.2 RPS
+launch-window write RPS = 0.02 * 25 ~= about 0.5 RPS
 ```
 
 ### Read/Write Ratio
