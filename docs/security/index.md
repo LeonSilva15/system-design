@@ -280,11 +280,10 @@ Current pages:
 - [Access-control models](access-control-models.md)
 - [Secrets management](secrets-management.md)
 - [Encryption](encryption.md)
+- [Audit logs](audit-logs.md)
 
 Planned pages:
 
-- `docs/security/audit-logs.md`: accountable records for risky, administrative,
-  and support actions.
 - `docs/security/rate-limiting-and-abuse.md`: brute force, scraping, spam,
   quota abuse, account takeover, and public API protection.
 - `docs/security/data-privacy.md`: data minimization, consent, masking, access,
