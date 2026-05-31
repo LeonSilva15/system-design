@@ -249,6 +249,7 @@ Current related pages:
 - [RPO and RTO](rpo-rto.md)
 - [Backup and restore recovery](backup-and-restore-recovery.md)
 - [Disaster recovery](disaster-recovery.md)
+- [Data loss scenarios](data-loss-scenarios.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)
 - [Synchronous vs asynchronous communication](../communication/sync-vs-async.md)
@@ -260,7 +261,6 @@ Current related pages:
 Planned pages in this section:
 
 - `docs/reliability/health-checks.md`
-- `docs/reliability/data-loss-scenarios.md`
 
 ## Checklist
 
