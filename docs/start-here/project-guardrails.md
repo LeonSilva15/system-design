@@ -31,6 +31,8 @@ It does not apply to:
 - standards, specifications, or documentation owned by another organization;
 - any third-party file that carries its own license notice.
 
+Any included third-party file must carry its own source and license notice.
+
 If a page links to or cites an external source, that source remains under its
 own terms. A citation is not permission to copy, relicense, or closely
 paraphrase the source.

@@ -6,6 +6,8 @@ This repository uses a dual-license model by material type.
 
 1. Original documentation and educational content
 
+SPDX-License-Identifier: CC-BY-4.0
+
 Original prose, diagrams, templates, checklists, walkthroughs, and other
 non-code educational content in this repository are licensed under the Creative
 Commons Attribution 4.0 International License (CC BY 4.0):
@@ -13,6 +15,8 @@ Commons Attribution 4.0 International License (CC BY 4.0):
 https://creativecommons.org/licenses/by/4.0/
 
 2. Original code and configuration
+
+SPDX-License-Identifier: MIT
 
 Original source code, lab implementations, scripts, tests, examples intended to
 run as software, configuration files, and automation files in this repository
