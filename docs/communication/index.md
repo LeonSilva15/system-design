@@ -270,6 +270,7 @@ Current pages:
 - [Idempotency](idempotency.md)
 - [Outbox pattern](outbox-pattern.md)
 - [Saga pattern](saga-pattern.md)
+- [Workflow orchestration vs choreography](workflow-orchestration-vs-choreography.md)
 
 Planned pages:
 
@@ -278,7 +279,6 @@ Planned pages:
 - `docs/communication/queues.md`
 - `docs/communication/streams.md`
 - `docs/communication/dead-letter-queues.md`
-- `docs/communication/workflow-orchestration-vs-choreography.md`
 
 These paths become linked pages as their tickets are completed.
 

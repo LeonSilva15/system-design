@@ -339,6 +339,7 @@ Before using a saga, confirm:
 ## Related Pages
 
 - [Communication overview](./)
+- [Workflow orchestration vs choreography](workflow-orchestration-vs-choreography.md)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
 - [Idempotency](idempotency.md)
 - [Retries and backoff](retries-and-backoff.md)
