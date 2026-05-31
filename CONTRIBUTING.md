@@ -29,6 +29,10 @@ stop and ask for review instead of guessing.
 
 Work from one ticket at a time.
 
+The CSV backlog is the canonical ticket source. GitHub issues, project items,
+and pull requests are tracking and review artifacts unless the project changes
+that workflow.
+
 For each ticket:
 
 1. Read the ticket row in `system_design_decision_cookbook_tickets.csv`.
@@ -65,7 +69,7 @@ with the same ticket ID.
 
 Every pull request should include:
 
-- ticket ID and project link;
+- ticket ID and issue or project link when one exists;
 - summary of changes;
 - acceptance criteria checklist;
 - checks run;
@@ -149,7 +153,14 @@ external sources.
 
 ## Checks
 
-Prefer these commands when they exist:
+Prefer these setup and preview commands when they exist:
+
+```bash
+make install
+make docs-serve
+```
+
+Prefer these check commands when they exist:
 
 ```bash
 make docs-build
