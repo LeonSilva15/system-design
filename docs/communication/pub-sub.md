@@ -207,8 +207,9 @@ Event fields:
 | Field | Purpose |
 | --- | --- |
 | `event_id` | dedupe and tracing |
+| `schema_version` | compatibility and event evolution |
 | `reservation_id` | fetch source-of-truth reservation |
-| `member_id` | notify and authorize follow-up reads |
+| `member_id` | identify recipient and support authorization checks for follow-up reads |
 | `equipment_id` | update equipment calendar views |
 | `approved_at` | ordering and audit context |
 | `status_version` | ignore stale updates |
@@ -224,8 +225,8 @@ Subscribers:
 
 Design consequences:
 
-- The approval transaction commits before the event is published or before an
-  outbox record is relayed.
+- The approval transaction persists the authoritative approval and any reliable
+  outbox record together; the event is relayed after commit.
 - The event says approval happened; it does not command each subscriber.
 - Each subscriber stores `event_id` or another idempotency key before side
   effects.
