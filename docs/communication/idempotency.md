@@ -119,19 +119,23 @@ should assume duplicate delivery unless the complete workflow proves otherwise.
 
 Duplicate-safe event handling patterns:
 
-- store processed event IDs before or with the derived write;
+- store processed-event markers atomically with the derived write, or use
+  `pending` and `complete` states when one transaction cannot cover both;
 - make derived writes upserts keyed by source entity and version;
 - compare event version or timestamp before applying an update;
-- dedupe side effects by event ID and recipient;
+- dedupe side effects by a stable event ID when the producer guarantees one ID
+  per business fact, or by source entity, transition/version, recipient, and
+  action when producer retries could emit a second event ID for the same fact;
 - make replay rebuild derived state without repeating irreversible side
   effects;
 - treat event ID, source entity ID, and source version as part of the event
   contract.
 
 For example, a `reservation.approved` event can update a calendar projection by
-upserting `reservation_id`. The email subscriber may also need a send record
-keyed by `event_id + recipient_id` so replaying the event does not send another
-message.
+upserting `reservation_id` and `status_version`. The email subscriber may also
+need a send record keyed by `reservation_id + status_version + recipient_id +
+email_type` so producer retries that create a second event record do not send
+another message.
 
 ### Side Effects
 
@@ -295,17 +299,18 @@ Design:
 
 | Subscriber | Idempotency Rule |
 | --- | --- |
-| Email | Send once per `event_id + recipient_id` |
+| Email | Send once per `permit_id + status_version + recipient_id + email_type` |
 | Calendar projection | Upsert by `permit_id` and ignore stale `status_version` |
-| Audit enrichment | Append once per `event_id + enrichment_type` |
+| Audit enrichment | Append once per `permit_id + status_version + enrichment_type` |
 
 The event can be replayed to repair the calendar without sending another email,
 because the email side effect has its own dedupe record.
 
 ### Payment-Style Attempt
 
-A community market charges stall fees after an organizer confirms a vendor's
-booth. The provider call may time out after the provider received the request.
+A community market authorizes stall fees after an organizer confirms a vendor's
+booth. A later capture may happen when the booth is finalized. The authorization
+provider call may time out after the provider received the request.
 
 Design:
 
