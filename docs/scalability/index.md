@@ -9,6 +9,7 @@ pressure.
 
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
+- [Rate limiting](rate-limiting.md)
 
 ## Planned Pages
 
@@ -21,7 +22,6 @@ pressure.
 - `docs/scalability/sharding-strategies.md`
 - `docs/scalability/hot-key-mitigation.md`
 - `docs/scalability/batching-and-backpressure.md`
-- `docs/scalability/rate-limiting.md`
 - `docs/scalability/performance-testing-playbook.md`
 
 Return to the [documentation index](../).
