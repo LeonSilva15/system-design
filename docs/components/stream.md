@@ -406,8 +406,9 @@ Repair path: replay from event ID or rebuild projection from source records.
 ```
 
 Version 1 may not need a stream if only notifications exist. A durable outbox
-and queue can deliver reminder work. Add the stream when search rebuilds,
-analytics fanout, partner integrations, or replay requirements become real.
+and queue can deliver reminder work. Add the stream when a real replay,
+independent multi-consumer fanout, search rebuild, analytics feed, or partner
+integration requirement appears.
 
 ## Checklist
 
@@ -434,6 +435,7 @@ Before adding a stream, confirm:
 - [Component selection map](index.md)
 - [Queue](queue.md)
 - [Background workers](background-workers.md)
+- [Streams communication pattern](../communication/streams.md)
 - [Throughput requirements](../requirements/throughput.md)
 - [Durability requirements](../requirements/durability.md)
 - [Consistency requirements](../requirements/consistency.md)

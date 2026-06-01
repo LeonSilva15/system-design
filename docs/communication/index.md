@@ -268,6 +268,7 @@ Current pages:
 - [REST vs gRPC](rest-vs-grpc.md)
 - [Polling vs WebSockets vs SSE](polling-vs-websockets-vs-sse.md)
 - [Queues](queues.md)
+- [Streams](streams.md)
 - [Pub/sub](pub-sub.md)
 - [Retries and backoff](retries-and-backoff.md)
 - [Idempotency](idempotency.md)
@@ -277,7 +278,6 @@ Current pages:
 
 Planned pages:
 
-- `docs/communication/streams.md`
 - `docs/communication/dead-letter-queues.md`
 
 These paths become linked pages as their tickets are completed.
