@@ -79,14 +79,21 @@ Avoid walkthroughs that present a final architecture as if it were the only
 correct answer. The reader should see the decisions, alternatives, and
 trade-offs.
 
+## Current Walkthroughs
+
+Completed walkthrough pages:
+
+| Walkthrough | Focus |
+| --- | --- |
+| [Rate limiter](rate-limiter.md) | requirements, algorithms, distributed counters, Redis-style storage, failure behavior, abuse, and metrics |
+
 ## Planned Walkthroughs
 
-The first walkthroughs are planned as ticketed pages:
+Additional walkthroughs are planned as ticketed pages:
 
 | Walkthrough | Planned Path | Focus |
 | --- | --- | --- |
 | URL shortener | `docs/walkthroughs/url-shortener.md` | short-code generation, redirect path, mapping storage, caching, analytics, failure modes, and 10x scale |
-| Rate limiter | `docs/walkthroughs/rate-limiter.md` | requirements, algorithms, distributed counters, storage, failure behavior, abuse, and metrics |
 | Notification system | `docs/walkthroughs/notification-system.md` | email/SMS/push, preferences, queues, retries, templates, idempotency, provider failure, and dead-letter queues |
 | File storage system | `docs/walkthroughs/file-storage-system.md` | upload, metadata, object storage, signed URLs, CDN, permissions, scanning, and lifecycle |
 | Chat system | `docs/walkthroughs/chat-system.md` | conversations, messages, delivery, WebSockets, ordering, offline users, read receipts, and scaling |
