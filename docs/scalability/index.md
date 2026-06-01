@@ -11,6 +11,7 @@ pressure.
 - [Capacity estimation](capacity-estimation.md)
 - [Caching strategies](caching-strategies.md)
 - [Database read scaling](database-read-scaling.md)
+- [Database write scaling](database-write-scaling.md)
 - [Load balancing](load-balancing.md)
 - [Performance testing playbook](performance-testing-playbook.md)
 - [Rate limiting](rate-limiting.md)
@@ -19,7 +20,6 @@ pressure.
 
 ## Planned Pages
 
-- `docs/scalability/database-write-scaling.md`
 - `docs/scalability/sharding-strategies.md`
 - `docs/scalability/hot-key-mitigation.md`
 - `docs/scalability/batching-and-backpressure.md`
