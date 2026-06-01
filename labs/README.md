@@ -22,6 +22,12 @@ Use labs to make system design behavior visible:
 Labs are not production frameworks. Prefer a clear toy implementation over a
 large service that hides the behavior being taught.
 
+## Current Labs
+
+| Lab | Focus |
+| --- | --- |
+| [Token bucket rate limiter](rate-limiter/) | burst capacity, refill rate, retry hints, and limiter behavior tests |
+
 ## Runtime Expectations
 
 Default runtime:
