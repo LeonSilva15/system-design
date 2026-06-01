@@ -78,7 +78,7 @@ architecture.
    [cache](../components/cache.md), and [queue](../components/queue.md).
 6. Study the [URL shortener walkthrough](../walkthroughs/url-shortener.md) and
    [rate limiter walkthrough](../walkthroughs/rate-limiter.md).
-7. Run the [token bucket rate limiter lab](../../labs/rate-limiter/) and compare
+7. Run the [token bucket rate limiter lab](https://github.com/LeonSilva15/system-design/tree/main/labs/rate-limiter/) and compare
    the behavior to the [rate limiting](../scalability/rate-limiting.md) page.
 
 By the end, you should be able to explain the problem, requirements, component
@@ -105,10 +105,10 @@ pressure.
 6. Use the [design review checklist](../method/design-review-checklist.md) after
    each practice answer.
 7. Run small labs that make common interview trade-offs visible:
-   [cache-aside](../../labs/cache-aside-demo/),
-   [queue worker](../../labs/queue-worker-demo/),
-   [retry and idempotency](../../labs/retry-idempotency-demo/), and
-   [hot-key mitigation](../../labs/hot-key-demo/).
+   [cache-aside](https://github.com/LeonSilva15/system-design/tree/main/labs/cache-aside-demo/),
+   [queue worker](https://github.com/LeonSilva15/system-design/tree/main/labs/queue-worker-demo/),
+   [retry and idempotency](https://github.com/LeonSilva15/system-design/tree/main/labs/retry-idempotency-demo/), and
+   [hot-key mitigation](https://github.com/LeonSilva15/system-design/tree/main/labs/hot-key-demo/).
 
 Do not memorize the walkthroughs. Use them to practice saying why a component
 belongs, what could fail, and what you would simplify first.
@@ -132,11 +132,11 @@ their behavior.
    [idempotency](../communication/idempotency.md), and the
    [outbox pattern](../communication/outbox-pattern.md) before adding
    asynchronous work.
-4. Run the [cache-aside](../../labs/cache-aside-demo/),
-   [queue worker](../../labs/queue-worker-demo/),
-   [retry and idempotency](../../labs/retry-idempotency-demo/),
-   [dead-letter queue](../../labs/dead-letter-queue-demo/), and
-   [log compaction](../../labs/log-compaction-demo/) labs.
+4. Run the [cache-aside](https://github.com/LeonSilva15/system-design/tree/main/labs/cache-aside-demo/),
+   [queue worker](https://github.com/LeonSilva15/system-design/tree/main/labs/queue-worker-demo/),
+   [retry and idempotency](https://github.com/LeonSilva15/system-design/tree/main/labs/retry-idempotency-demo/),
+   [dead-letter queue](https://github.com/LeonSilva15/system-design/tree/main/labs/dead-letter-queue-demo/), and
+   [log compaction](https://github.com/LeonSilva15/system-design/tree/main/labs/log-compaction-demo/) labs.
 5. Compare the lab behavior to worked systems such as
    [payment workflow](../walkthroughs/payment-workflow.md),
    [file storage system](../walkthroughs/file-storage-system.md), and
@@ -179,11 +179,11 @@ users, and real operations.
    [secrets management](../security/secrets-management.md), and
    [rate limiting and abuse](../security/rate-limiting-and-abuse.md).
 5. Run labs that expose production failure modes:
-   [replication lag](../../labs/replication-lag-simulator/),
-   [quorum reads and writes](../../labs/quorum-read-write-simulator/),
-   [sharding](../../labs/sharding-simulator/),
-   [hot keys](../../labs/hot-key-demo/), and
-   [dead-letter queues](../../labs/dead-letter-queue-demo/).
+   [replication lag](https://github.com/LeonSilva15/system-design/tree/main/labs/replication-lag-simulator/),
+   [quorum reads and writes](https://github.com/LeonSilva15/system-design/tree/main/labs/quorum-read-write-simulator/),
+   [sharding](https://github.com/LeonSilva15/system-design/tree/main/labs/sharding-simulator/),
+   [hot keys](https://github.com/LeonSilva15/system-design/tree/main/labs/hot-key-demo/), and
+   [dead-letter queues](https://github.com/LeonSilva15/system-design/tree/main/labs/dead-letter-queue-demo/).
 6. Review [metrics platform](../walkthroughs/metrics-platform.md),
    [news feed](../walkthroughs/news-feed.md),
    [search autocomplete](../walkthroughs/search-autocomplete.md), and

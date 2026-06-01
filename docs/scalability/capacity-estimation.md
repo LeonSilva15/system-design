@@ -5,7 +5,7 @@ bandwidth numbers. For scalability design, the point is not to forecast exactly.
 The point is to decide which parts of the system are likely to saturate first
 and which scaling components are not justified yet.
 
-Use the [capacity estimation worksheet](../../templates/capacity-estimation-template.md)
+Use the [capacity estimation worksheet](https://github.com/LeonSilva15/system-design/blob/main/templates/capacity-estimation-template.md)
 when you need a fill-in-the-blank version of this guide.
 
 Use [Scale estimation](../method/scale-estimation.md) for the first-pass method:
@@ -354,7 +354,7 @@ Before using a capacity estimate, confirm:
 - Bandwidth includes uploads, downloads, large responses, fanout, or exports.
 - Peak load includes launches, deadlines, retries, and abuse where relevant.
 - Rough sizing examples lead to concrete design consequences.
-- The [capacity estimation worksheet](../../templates/capacity-estimation-template.md)
+- The [capacity estimation worksheet](https://github.com/LeonSilva15/system-design/blob/main/templates/capacity-estimation-template.md)
   is filled out or linked from the design artifact.
 - The design states what metric or threshold would trigger a revisit.
 
@@ -369,4 +369,4 @@ Before using a capacity estimate, confirm:
 - [Indexes](../data/indexes.md)
 - [Transactions](../data/transactions.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
-- [Capacity estimation worksheet](../../templates/capacity-estimation-template.md)
+- [Capacity estimation worksheet](https://github.com/LeonSilva15/system-design/blob/main/templates/capacity-estimation-template.md)

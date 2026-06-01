@@ -34,7 +34,7 @@ observe a behavior directly.
 
 For example, read [caching strategies](../scalability/caching-strategies.md)
 when deciding whether stale reads are acceptable. Run the
-[cache-aside lab](../../labs/cache-aside-demo/) when you want to observe hits,
+[cache-aside lab](https://github.com/LeonSilva15/system-design/tree/main/labs/cache-aside-demo/) when you want to observe hits,
 misses, TTL expiry, and stale data.
 
 ## First Pages To Read
@@ -68,7 +68,7 @@ Use this path if you are learning the basics.
    page that changes your design.
 4. Read the [component selection map](../components/).
 5. Study the [URL shortener walkthrough](../walkthroughs/url-shortener.md).
-6. Run the [rate limiter lab](../../labs/rate-limiter/) to observe one concrete
+6. Run the [rate limiter lab](https://github.com/LeonSilva15/system-design/tree/main/labs/rate-limiter/) to observe one concrete
    behavior.
 
 Goal: explain a small design with requirements, components, trade-offs, and a
@@ -105,10 +105,10 @@ Use this path if you learn best by running code.
 2. Read [sync vs async](../communication/sync-vs-async.md),
    [retries and backoff](../communication/retries-and-backoff.md), and
    [idempotency](../communication/idempotency.md).
-3. Run the [cache-aside](../../labs/cache-aside-demo/),
-   [queue worker](../../labs/queue-worker-demo/),
-   [retry and idempotency](../../labs/retry-idempotency-demo/), and
-   [dead-letter queue](../../labs/dead-letter-queue-demo/) labs.
+3. Run the [cache-aside](https://github.com/LeonSilva15/system-design/tree/main/labs/cache-aside-demo/),
+   [queue worker](https://github.com/LeonSilva15/system-design/tree/main/labs/queue-worker-demo/),
+   [retry and idempotency](https://github.com/LeonSilva15/system-design/tree/main/labs/retry-idempotency-demo/), and
+   [dead-letter queue](https://github.com/LeonSilva15/system-design/tree/main/labs/dead-letter-queue-demo/) labs.
 4. Compare what you observed to a worked system such as
    [payment workflow](../walkthroughs/payment-workflow.md) or
    [video processing](../walkthroughs/video-processing.md).
@@ -139,9 +139,9 @@ Use this path if you are reviewing a design for real users and operations.
    [authorization](../security/authorization.md),
    [audit logs](../security/audit-logs.md), and
    [rate limiting and abuse](../security/rate-limiting-and-abuse.md).
-5. Run the [replication lag](../../labs/replication-lag-simulator/),
-   [quorum read/write](../../labs/quorum-read-write-simulator/), and
-   [hot-key](../../labs/hot-key-demo/) labs.
+5. Run the [replication lag](https://github.com/LeonSilva15/system-design/tree/main/labs/replication-lag-simulator/),
+   [quorum read/write](https://github.com/LeonSilva15/system-design/tree/main/labs/quorum-read-write-simulator/), and
+   [hot-key](https://github.com/LeonSilva15/system-design/tree/main/labs/hot-key-demo/) labs.
 
 Goal: find what fails, what must be observable, what data is at risk, and what
 can stay simple in version 1.

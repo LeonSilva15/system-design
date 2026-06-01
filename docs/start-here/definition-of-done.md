@@ -10,8 +10,8 @@ clear, original, scoped, and useful for system design reasoning.
 
 - The change satisfies the ticket acceptance criteria.
 - The diff is scoped to the ticket deliverable path and necessary navigation.
-- The content follows [Content guardrails](../../CONTENT_GUARDRAILS.md).
-- The writing follows [Style guide](../../STYLE_GUIDE.md).
+- The content follows [Content guardrails](https://github.com/LeonSilva15/system-design/blob/main/CONTENT_GUARDRAILS.md).
+- The writing follows [Style guide](https://github.com/LeonSilva15/system-design/blob/main/STYLE_GUIDE.md).
 - The work does not copy or closely paraphrase books, courses, articles,
   diagrams, tables, screenshots, or exercises.
 - Related pages, section indexes, or navigation files are updated when they
@@ -154,6 +154,6 @@ Non-blocking feedback should be small, optional, and tied to learning value.
 ## Related Pages
 
 - [Project guardrails](project-guardrails.md)
-- [Content guardrails](../../CONTENT_GUARDRAILS.md)
-- [Style guide](../../STYLE_GUIDE.md)
-- [Contributing](../../CONTRIBUTING.md)
+- [Content guardrails](https://github.com/LeonSilva15/system-design/blob/main/CONTENT_GUARDRAILS.md)
+- [Style guide](https://github.com/LeonSilva15/system-design/blob/main/STYLE_GUIDE.md)
+- [Contributing](https://github.com/LeonSilva15/system-design/blob/main/CONTRIBUTING.md)

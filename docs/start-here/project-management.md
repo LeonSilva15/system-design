@@ -7,7 +7,7 @@ and moved through review. It translates the CSV backlog and GitHub Project into
 a shared vocabulary for contributors.
 
 The canonical backlog remains
-[`system_design_decision_cookbook_tickets.csv`](../../system_design_decision_cookbook_tickets.csv).
+[`system_design_decision_cookbook_tickets.csv`](https://github.com/LeonSilva15/system-design/blob/main/system_design_decision_cookbook_tickets.csv).
 Use this page to interpret labels, milestones, priorities, difficulty, status,
 and good-first-issue signals.
 
@@ -164,7 +164,7 @@ settling disputed technical guidance, or editing many cross-linked pages.
 ## Milestones And Project Phases
 
 Milestones describe roadmap phases from the
-[Roadmap](../../ROADMAP.md). They should match the `recommended_milestone`
+[Roadmap](https://github.com/LeonSilva15/system-design/blob/main/ROADMAP.md). They should match the `recommended_milestone`
 column in the backlog.
 
 | Milestone | Project Phase | Purpose | Exit Signal |
@@ -231,5 +231,5 @@ Before creating or triaging an issue, confirm:
 - [Definition of done](definition-of-done.md)
 - [Project guardrails](project-guardrails.md)
 - [How to use this cookbook](how-to-use-this-cookbook.md)
-- [Roadmap](../../ROADMAP.md)
-- [Contributing](../../CONTRIBUTING.md)
+- [Roadmap](https://github.com/LeonSilva15/system-design/blob/main/ROADMAP.md)
+- [Contributing](https://github.com/LeonSilva15/system-design/blob/main/CONTRIBUTING.md)

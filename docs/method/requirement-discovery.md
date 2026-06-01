@@ -269,6 +269,6 @@ Before leaving requirement discovery, confirm:
 
 - [System design process](system-design-process.md)
 - [Definition of Done](../start-here/definition-of-done.md)
-- [Templates](../../templates/README.md)
-- [Content guardrails](../../CONTENT_GUARDRAILS.md)
-- [Style guide](../../STYLE_GUIDE.md)
+- [Templates](https://github.com/LeonSilva15/system-design/blob/main/templates/README.md)
+- [Content guardrails](https://github.com/LeonSilva15/system-design/blob/main/CONTENT_GUARDRAILS.md)
+- [Style guide](https://github.com/LeonSilva15/system-design/blob/main/STYLE_GUIDE.md)

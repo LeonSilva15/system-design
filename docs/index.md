@@ -90,7 +90,7 @@ operations as new constraints appear.
 | Practice a complete design | [Walkthroughs](walkthroughs/) |
 | Run code and observe behavior | [Labs guide](labs/) |
 | Review someone else's design | [Design review checklist](method/design-review-checklist.md) |
-| Add or update content | [Definition of done](start-here/definition-of-done.md), [content review workflow](start-here/content-review-workflow.md), [diagram style guide](visuals/diagram-style-guide.md), and the templates in [`../templates/`](../templates/) |
+| Add or update content | [Definition of done](start-here/definition-of-done.md), [content review workflow](start-here/content-review-workflow.md), [diagram style guide](visuals/diagram-style-guide.md), and the templates in [`../templates/`](https://github.com/LeonSilva15/system-design/tree/main/templates/) |
 
 ## How To Use The Cookbook
 
