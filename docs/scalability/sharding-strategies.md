@@ -373,6 +373,7 @@ Before choosing a sharding strategy, confirm:
 ## Related Pages
 
 - [Scalability overview](./)
+- [Hot-key mitigation](hot-key-mitigation.md)
 - [Database write scaling](database-write-scaling.md)
 - [Database read scaling](database-read-scaling.md)
 - [Bottleneck analysis](bottleneck-analysis.md)

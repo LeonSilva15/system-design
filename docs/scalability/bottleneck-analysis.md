@@ -479,6 +479,7 @@ Before choosing a scaling fix, measure:
 ## Related Pages
 
 - [Scalability overview](./)
+- [Hot-key mitigation](hot-key-mitigation.md)
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
 - [Rate limiting](rate-limiting.md)
