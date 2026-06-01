@@ -404,6 +404,7 @@ Before choosing a database write-scaling approach, confirm:
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
 - [Caching strategies](caching-strategies.md)
+- [Sharding strategies](sharding-strategies.md)
 - [Partitioning and sharding](../data/partitioning-and-sharding.md)
 - [Read and write patterns](../data/read-write-patterns.md)
 - [Transactions](../data/transactions.md)
