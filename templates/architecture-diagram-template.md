@@ -23,6 +23,13 @@ flowchart LR
     %% Delete optional nodes that do not affect the decision.
     Client[Client or user interface] --> Api[API or service boundary]
 
+    %% Add a subgraph when trust, ownership, region, or tenant boundaries matter.
+    %% Example:
+    %% subgraph Internal[Internal system]
+    %%     Api
+    %%     PrimaryDb
+    %% end
+
     %% Source-of-truth data should be labeled explicitly.
     Api --> PrimaryDb[(Source-of-truth database)]
 
@@ -38,7 +45,8 @@ flowchart LR
     Worker --> Provider[External provider]
 
     %% Show failure paths when they change the design.
-    Provider -->|Timeout or ambiguous result| NeedsReview[Needs review or retry]
+    %% Pick one concrete recovery state when adapting this placeholder.
+    Provider -->|Timeout or ambiguous result| NeedsReview[Needs review]
     Worker --> AuditDb[(Audit or delivery log)]
 ```
 
