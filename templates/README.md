@@ -12,4 +12,5 @@ reasoning behind a design.
 - [Decision record template](decision-record-template.md)
 - [Capacity estimation worksheet](capacity-estimation-template.md)
 - [Walkthrough template](walkthrough-template.md)
+- [Architecture diagram template](architecture-diagram-template.md)
 - [Lab template](lab-template/)
