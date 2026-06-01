@@ -355,11 +355,10 @@ Current pages:
 - [Logs](logs.md)
 - [Observability basics](observability-basics.md)
 - [Metrics](metrics.md)
+- [Tracing](tracing.md)
 
 Planned pages:
 
-- `docs/operations/tracing.md`: distributed traces, spans, propagation, latency
-  breakdowns, and dependency visibility.
 - `docs/operations/alerting.md`: symptom-based alerts, alert fatigue,
   thresholds, paging, and escalation.
 - `docs/operations/slos.md`: SLIs, SLOs, error budgets, and reliability
