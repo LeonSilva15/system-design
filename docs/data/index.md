@@ -148,13 +148,14 @@ Current pages:
 - [Relational vs document vs key-value](relational-vs-document-vs-key-value.md)
 - [Indexes](indexes.md)
 - [Transactions](transactions.md)
+- [Consistency models](consistency-models.md)
 - [Schema evolution](schema-evolution.md)
 - [Operational vs analytical data](operational-vs-analytical-data.md)
 - [Backups and restore](backups-and-restore.md)
 
 Planned pages:
 
-- `docs/data/consistency-models.md`
+- `docs/data/replication.md`
 
 These paths become linked pages as their tickets are completed.
 
