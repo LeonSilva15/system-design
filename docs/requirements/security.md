@@ -90,7 +90,7 @@ flowchart TD
     Risk -->|Yes| Identity{Does caller need identity proof?}
 
     Identity -->|Yes| Auth[Define authentication, session, token, or service identity]
-    Identity -->|No| Public[Keep action public but bounded and validated]
+    Identity -->|No| Public[Allow only low-risk public action with validation and bounds]
     Auth --> Permission
     Public --> Abuse
 
@@ -99,10 +99,14 @@ flowchart TD
     Permission -->|No| Sensitive
 
     Authz --> Sensitive{Is the action privileged, irreversible, or high blast radius?}
-    Sensitive -->|Yes| Privileged[Require scoped role, reason, approval, step-up proof, and audit]
-    Sensitive -->|No| Secrets
+    Sensitive -->|Yes| Privileged[Require scoped role, reason, approval, or step-up proof]
+    Sensitive -->|No| AuditNeed
 
-    Privileged --> Secrets{Are secrets or external credentials involved?}
+    Privileged --> AuditNeed{Would this action need explanation later?}
+    AuditNeed -->|Yes| AuditTrail[Define safe structured audit event and retention]
+    AuditNeed -->|No| Secrets
+
+    AuditTrail --> Secrets{Are secrets or external credentials involved?}
     Secrets -->|Yes| SecretPlan[Inventory, scope, store, inject, rotate, and redact secrets]
     Secrets -->|No| Abuse
 
@@ -339,7 +343,7 @@ Security requirements:
 
 | Workflow | Security Need | Design Impact | Revisit When |
 | --- | --- | --- | --- |
-| Applicant account | Applicant must prove identity before editing or submitting applications | Use authentication, session expiry, and safe recovery flow | Account takeover or reset abuse increases |
+| Applicant account | Applicant must authenticate before editing or submitting applications | Use authentication, session expiry, and safe recovery flow | Account takeover or reset abuse increases |
 | Reviewer scoring | Reviewer can read assigned applications but not all tenant data | Use role plus assignment and organization scope checks | Review queues span multiple organizations |
 | Award approval | Admin approval changes money movement and public status | Require scoped admin role, reason, audit event, and optional step-up proof | Award values or fraud risk increase |
 | Bulk export | Export exposes applicant contact and award details | Restrict to approved roles, require reason, cap size, and audit access | Export volume or customer requirements grow |
