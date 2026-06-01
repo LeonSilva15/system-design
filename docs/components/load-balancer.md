@@ -444,6 +444,7 @@ Before adding a load balancer, confirm:
 - [Component selection map](index.md)
 - [API layer](api-layer.md)
 - [Service layer](service-layer.md)
+- [Stateless services](../scalability/stateless-services.md)
 - [Cache](cache.md)
 - [Queue](queue.md)
 - [Background workers](background-workers.md)

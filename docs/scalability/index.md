@@ -12,11 +12,11 @@ pressure.
 - [Database read scaling](database-read-scaling.md)
 - [Performance testing playbook](performance-testing-playbook.md)
 - [Rate limiting](rate-limiting.md)
+- [Stateless services](stateless-services.md)
 - [Vertical vs horizontal scaling](vertical-vs-horizontal-scaling.md)
 
 ## Planned Pages
 
-- `docs/scalability/stateless-services.md`
 - `docs/scalability/load-balancing.md`
 - `docs/scalability/caching-strategies.md`
 - `docs/scalability/database-write-scaling.md`
