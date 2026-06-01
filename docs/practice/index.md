@@ -7,5 +7,6 @@ self-checklists for system design learning.
 - [Self-review checklist](self-review-checklist.md)
 - [Interview practice prompts](interview-practice-prompts.md)
 - [Flashcards](flashcards.md)
+- [Common mistakes](common-mistakes.md)
 
 Return to the [documentation index](../).
