@@ -10,6 +10,7 @@ pressure.
 - [Bottleneck analysis](bottleneck-analysis.md)
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
+- [Performance testing playbook](performance-testing-playbook.md)
 - [Rate limiting](rate-limiting.md)
 - [Vertical vs horizontal scaling](vertical-vs-horizontal-scaling.md)
 
@@ -22,6 +23,5 @@ pressure.
 - `docs/scalability/sharding-strategies.md`
 - `docs/scalability/hot-key-mitigation.md`
 - `docs/scalability/batching-and-backpressure.md`
-- `docs/scalability/performance-testing-playbook.md`
 
 Return to the [documentation index](../).
