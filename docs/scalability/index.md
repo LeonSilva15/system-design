@@ -15,12 +15,12 @@ pressure.
 - [Load balancing](load-balancing.md)
 - [Performance testing playbook](performance-testing-playbook.md)
 - [Rate limiting](rate-limiting.md)
+- [Sharding strategies](sharding-strategies.md)
 - [Stateless services](stateless-services.md)
 - [Vertical vs horizontal scaling](vertical-vs-horizontal-scaling.md)
 
 ## Planned Pages
 
-- `docs/scalability/sharding-strategies.md`
 - `docs/scalability/hot-key-mitigation.md`
 - `docs/scalability/batching-and-backpressure.md`
 

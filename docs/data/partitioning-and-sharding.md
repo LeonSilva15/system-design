@@ -322,6 +322,7 @@ Before partitioning or sharding, verify:
 
 - [Scalability requirements](../requirements/scalability.md)
 - [Database write scaling](../scalability/database-write-scaling.md)
+- [Sharding strategies](../scalability/sharding-strategies.md)
 - [Read and write patterns](read-write-patterns.md)
 - [Indexes](indexes.md)
 - [Replication](replication.md)
