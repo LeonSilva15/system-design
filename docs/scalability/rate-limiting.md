@@ -478,6 +478,7 @@ Before accepting a rate-limiting design, confirm:
 
 - [Rate limiting and abuse resistance](../security/rate-limiting-and-abuse.md)
 - [Capacity estimation](capacity-estimation.md)
+- [Batching and backpressure](batching-and-backpressure.md)
 - [Database read scaling](database-read-scaling.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)

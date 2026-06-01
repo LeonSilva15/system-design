@@ -8,6 +8,7 @@ pressure.
 ## Current Pages
 
 - [Bottleneck analysis](bottleneck-analysis.md)
+- [Batching and backpressure](batching-and-backpressure.md)
 - [Capacity estimation](capacity-estimation.md)
 - [Caching strategies](caching-strategies.md)
 - [Database read scaling](database-read-scaling.md)
@@ -19,9 +20,5 @@ pressure.
 - [Sharding strategies](sharding-strategies.md)
 - [Stateless services](stateless-services.md)
 - [Vertical vs horizontal scaling](vertical-vs-horizontal-scaling.md)
-
-## Planned Pages
-
-- `docs/scalability/batching-and-backpressure.md`
 
 Return to the [documentation index](../).

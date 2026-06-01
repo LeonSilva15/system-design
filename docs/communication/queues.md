@@ -326,6 +326,7 @@ Before using a queue, verify:
 - [Retries and backoff](retries-and-backoff.md)
 - [Idempotency](idempotency.md)
 - [Outbox pattern](outbox-pattern.md)
+- [Batching and backpressure](../scalability/batching-and-backpressure.md)
 - [Polling vs WebSockets vs SSE](polling-vs-websockets-vs-sse.md)
 - [Throughput requirements](../requirements/throughput.md)
 - [Availability requirements](../requirements/availability.md)
