@@ -81,9 +81,9 @@ flowchart TD
 
     Idempotent --> ReadNeed
     ReadNeed -->|Yes| Fresh[Read from source of truth or session-aware fresh path]
-    ReadNeed -->|No| Stale{Can this read be stale?}
+    ReadNeed -->|No| Stale{Can this read be stale within a named bound?}
 
-    Stale -->|Yes| Eventual[Use eventual consistency with freshness and repair signals]
+    Stale -->|Yes| Eventual[Use eventual consistency with bounded freshness and repair signals]
     Stale -->|No| Fresh
 
     Simple --> Observe[Measure conflicts, staleness, duplicate attempts, and repair]
@@ -185,6 +185,13 @@ the workflow.
 Conflicts are normal when users compete for scarce resources or update the same
 state. The design should say what happens.
 
+Classify the conflict before choosing machinery:
+
+- lost update, where one edit overwrites another;
+- scarce-resource invariant violation, such as double booking or overspend;
+- duplicate command, where a retry repeats the same business action;
+- mergeable edit, where concurrent changes can be combined safely.
+
 Conflict responses can include:
 
 - reject with the current state and ask the user to choose again;
@@ -236,6 +243,11 @@ Retention: <how long retry or replay is supported>
 
 Do not retry non-idempotent commands automatically.
 
+Idempotency does not protect scarce-resource invariants by itself. A duplicate
+reservation request should not create two reservations, but the first
+reservation still needs a transaction, uniqueness rule, conditional write, lock,
+or single-writer path to prevent another member from taking the same slot.
+
 ## Trade-Offs
 
 | Choice | Improves | Costs Or Risks |
@@ -256,6 +268,7 @@ Do not retry non-idempotent commands automatically.
 | Lost update overwrites another change | One user's edit silently replaces another | Use version check, conditional update, transaction, or merge flow | Version conflict count, overwrite repairs |
 | Two commands violate a scarce-resource invariant | Double booking, overspend, duplicate approval, or quota breach | Use uniqueness, transaction, lock, or single-writer boundary | Conflict rate, constraint failures, compensating repairs |
 | Eventual projection stops updating | Search, report, or cache diverges from source truth | Track lag, replay from source, rebuild projection, alert on age | Projection lag, rebuild duration, missing-event count |
+| Late event regresses a derived projection | Old status or count overwrites newer source truth | Apply events with version, sequence, or source timestamp checks | Out-of-order event count, rejected stale update count, projection repair rate |
 | Duplicate retry creates duplicate state | Extra reservation, charge, notification, or audit action | Use idempotency key, attempt entity, or processed-event marker | Duplicate key conflict, replay count, duplicate side-effect count |
 
 ## Common Mistakes
@@ -295,6 +308,11 @@ reservations, source-of-truth reads for confirmation, an eventually updated
 search view, and idempotent reminder jobs. It does not need distributed
 transactions or global serializability unless later requirements cross service
 or region boundaries.
+
+Contrast with a metrics dashboard: late counters and stale aggregates may be
+acceptable if the chart names its freshness window and can rebuild from source
+events. The same relaxed path would be wrong for approving a reservation,
+granting access, or spending balance.
 
 ## Checklist
 
