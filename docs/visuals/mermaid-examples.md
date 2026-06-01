@@ -32,7 +32,7 @@ flowchart LR
     Api --> PrimaryDb[(Permit database)]
     Api --> Queue([Inspection request queue])
     Queue --> Worker[Inspection worker]
-    Worker --> Calendar[City calendar system]
+    Worker --> Calendar[External city calendar system]
     Worker --> AuditDb[(Audit log)]
 ```
 
@@ -62,9 +62,15 @@ sequenceDiagram
         API-->>Client: Return same result
     else New request
         API->>Provider: Send confirmation
-        Provider-->>API: Success or timeout
-        API->>Store: Record outcome
-        API-->>Client: Reservation status
+        alt Provider succeeds
+            Provider-->>API: Confirmation accepted
+            API->>Store: Record sent outcome
+            API-->>Client: Reservation confirmed
+        else Provider times out
+            Provider--xAPI: Outcome unknown
+            API->>Store: Record needs_review
+            API-->>Client: Reservation pending
+        end
     end
 ```
 
@@ -87,6 +93,7 @@ flowchart TD
     Call --> Result{Service response}
     Result -->|Success| Complete[Store export and mark complete]
     Result -->|Timeout| Retry[Retry with backoff]
+    Retry --> Call
     Result -->|Repeated failure| DeadLetterQueue[Move to dead-letter queue]
 ```
 
