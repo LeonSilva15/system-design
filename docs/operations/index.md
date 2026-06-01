@@ -353,6 +353,7 @@ Current pages:
 
 - [Alerting](alerting.md)
 - [Dashboards](dashboards.md)
+- [Incident response](incident-response.md)
 - [Operations overview](./)
 - [Logs](logs.md)
 - [Observability basics](observability-basics.md)
@@ -363,8 +364,6 @@ Current pages:
 
 Planned pages:
 
-- `docs/operations/incident-response.md`: detection, triage, mitigation,
-  communication, postmortems, and follow-up work.
 - `docs/operations/capacity-planning.md`: growth trends, utilization,
   saturation, headroom, and scaling triggers.
 - `docs/operations/cost-analysis.md`: compute, storage, bandwidth, managed
