@@ -274,6 +274,7 @@ Keep, replace, or defer:
 - [System design rubric](system-design-rubric.md)
 - [Self-review checklist](self-review-checklist.md)
 - [Common mistakes](common-mistakes.md)
+- [Simplification checklist](simplification-checklist.md)
 - [Component selection map](../components/)
 - [Scale estimation](../method/scale-estimation.md)
 - [Bottleneck analysis](../scalability/bottleneck-analysis.md)
