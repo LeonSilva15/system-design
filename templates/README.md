@@ -1,14 +1,14 @@
 # Templates
 
 Reusable cookbook templates live here. This directory includes templates for
-design documents, decision records, capacity estimation, walkthroughs, labs,
-decision trees, and diagrams. Later tickets will add more templates for design
-reviews.
+design documents, design critiques, decision records, capacity estimation,
+walkthroughs, labs, decision trees, and diagrams.
 
 Templates should be practical starting points, not rigid forms that hide the
 reasoning behind a design.
 
 - [Design doc template](design-doc-template.md)
+- [Design critique template](design-critique-template.md)
 - [Decision record template](decision-record-template.md)
 - [Capacity estimation worksheet](capacity-estimation-template.md)
 - [Walkthrough template](walkthrough-template.md)
