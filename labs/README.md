@@ -32,6 +32,7 @@ large service that hides the behavior being taught.
 | [Replication lag simulator](replication-lag-simulator/) | leader writes, follower lag, stale reads, read-your-writes violations, and demo scenarios |
 | [Quorum read/write simulator](quorum-read-write-simulator/) | read quorum, write quorum, unavailable replicas, stale reads, and latency trade-offs |
 | [Sharding simulator](sharding-simulator/) | hash sharding, range sharding, resharding, hot partitions, and cross-shard query limits |
+| [Hot-key demo](hot-key-demo/) | skewed traffic, overloaded partition or cache key, and mitigation strategies |
 | [Retry and idempotency demo](retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 ## Runtime Expectations
