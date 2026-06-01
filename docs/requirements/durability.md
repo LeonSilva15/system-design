@@ -285,7 +285,7 @@ Durability requirements:
 
 | Data Or Workflow | Durability Target | Design Impact | Revisit When |
 | --- | --- | --- | --- |
-| Confirmed reservation | No acknowledged reservation silently lost after commit in the primary region | Commit reservation and conflict check before success; keep point-in-time recovery or retained write logs | Write latency, restore gap, or regional promise changes |
+| Confirmed reservation | No acknowledged reservation silently lost after a successful primary-region commit | Commit reservation and conflict check before success; keep point-in-time recovery or durable retained write logs | Write latency, restore gap, or regional promise changes |
 | Reminder intent | Reminder may be delayed but not forgotten | Store reminder job or outbox record durably | Oldest pending reminder exceeds the recovery target |
 | Staff cancellation | Actor, reason, and timestamp must be explainable later | Append audit event with the cancellation write | Audit lookup becomes slow or retention rules change |
 | Search index | Can be rebuilt from reservation and tool records | Treat as derived; rebuild and label stale state | Rebuild takes longer than the stated RTO |
@@ -297,7 +297,7 @@ async, but the intent to send should survive a worker crash. Staff cancellation
 needs audit evidence for repair and accountability. Search and reports are
 recomputable only if the reservation and tool records retain the needed fields.
 Version 1 can use one durable database with synchronous reservation commits,
-point-in-time recovery or retained write logs for acknowledged reservations,
+point-in-time recovery or durable retained write logs for acknowledged reservations,
 append-only audit rows for staff actions, a durable reminder outbox, daily full
 backups for corruption or operator-error recovery, and a documented restore
 drill. This version's zero-loss reservation promise is scoped to committed
@@ -316,6 +316,8 @@ Before leaving durability discovery, confirm:
 - Replication is tied to a named failure domain and lag signal.
 - Backups include the data, files, audit records, and configuration needed to
   restore the workflow.
+- Backup encryption keys, restore credentials, and recovery secrets are
+  protected and recoverable separately from ordinary backups.
 - Restore drills validate data integrity and user-visible behavior.
 - Audit trails capture actor, action, target, time, reason, and correlation
   where useful.
