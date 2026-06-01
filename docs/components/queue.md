@@ -387,6 +387,7 @@ Before adding a queue, confirm:
 - [Components](./)
 - [Component selection map](index.md)
 - [Background workers](background-workers.md)
+- [Queues communication pattern](../communication/queues.md)
 - [Stream](stream.md)
 - [Latency requirements](../requirements/latency.md)
 - [Throughput requirements](../requirements/throughput.md)
