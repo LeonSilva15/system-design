@@ -120,6 +120,10 @@ Recommended defaults:
 | External system | Rectangle with label | `Provider[External email provider]` |
 | Failure or degraded path | Normal node plus explicit edge label | `Provider -->|Timeout| Retry[Retry later]` |
 
+These are defaults, not a complete symbol language. A future diagram legend can
+refine exact symbols while keeping this page focused on readable, original
+Mermaid diagrams.
+
 Do not rely on color alone to communicate meaning. Markdown renderers and
 themes may change contrast, and diagrams should remain useful in plain review.
 
@@ -217,6 +221,9 @@ Preferred syntax:
 Keep diagrams readable in source form. If the Mermaid source is impossible to
 review, the rendered diagram is probably too complex.
 
+Once the docs site build path exists, render or build pages that include new
+Mermaid diagrams before merging so syntax and layout problems are caught early.
+
 ## Things To Avoid
 
 Avoid:
@@ -283,7 +290,8 @@ Why this diagram works:
 
 - it shows the idempotency boundary before the external provider call;
 - it shows duplicate retries returning the stored attempt;
-- it names the ambiguous provider outcome;
+- it names the ambiguous provider outcome and the need for reconciliation or a
+  `needs_review` state after a timeout;
 - it omits unrelated services that do not affect the refund decision.
 
 ## Checklist
