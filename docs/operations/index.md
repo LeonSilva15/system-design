@@ -356,12 +356,11 @@ Current pages:
 - [Logs](logs.md)
 - [Observability basics](observability-basics.md)
 - [Metrics](metrics.md)
+- [SLOs](slos.md)
 - [Tracing](tracing.md)
 
 Planned pages:
 
-- `docs/operations/slos.md`: SLIs, SLOs, error budgets, and reliability
-  trade-offs.
 - `docs/operations/dashboards.md`: dashboard purpose, golden signals,
   component dashboards, and useless dashboards.
 - `docs/operations/runbooks.md`: incident steps, ownership, rollback,
