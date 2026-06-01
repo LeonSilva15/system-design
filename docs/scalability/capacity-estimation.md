@@ -362,6 +362,7 @@ Before using a capacity estimate, confirm:
 
 - [Scalability overview](./)
 - [Database read scaling](database-read-scaling.md)
+- [Database write scaling](database-write-scaling.md)
 - [Scale estimation](../method/scale-estimation.md)
 - [Functional vs non-functional requirements](../method/functional-vs-nonfunctional-requirements.md)
 - [Read and write patterns](../data/read-write-patterns.md)
