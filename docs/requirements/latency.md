@@ -62,6 +62,7 @@ flowchart TD
 
     Target -->|No| Define[Define p50, p95, p99, or timeout target]
     Target -->|Yes| Critical{Does the response need fresh source-of-truth data?}
+    Define --> Critical
 
     Critical -->|Yes| SyncPath[Keep fresh read or write in synchronous path]
     Critical -->|No| Reuse{Is the same result requested often?}
@@ -231,6 +232,12 @@ and a small cache for the published menu. It should not add read replicas or a
 separate search system until measured p95 latency or database load justifies
 that complexity.
 
+Walking this example through the tree: the menu path is user-visible, has a p95
+target, and can tolerate brief staleness, so caching or edge delivery is
+reasonable. The reservation write is user-visible and needs fresh state, so it
+stays synchronous. Reminder delivery is not user-visible at confirmation time,
+so it moves async with monitoring and duplicate-send protection.
+
 ## Checklist
 
 Before leaving latency discovery, confirm:
@@ -252,4 +259,10 @@ Before leaving latency discovery, confirm:
 - [Trade-off vocabulary](../method/tradeoff-vocabulary.md)
 - [System design process](../method/system-design-process.md)
 - [Design review checklist](../method/design-review-checklist.md)
+- [Timeouts](../reliability/timeouts.md)
+- [Circuit breakers](../reliability/circuit-breakers.md)
+- [Sync vs async](../communication/sync-vs-async.md)
+- [Metrics](../operations/metrics.md)
+- [Tracing](../operations/tracing.md)
+- [SLOs](../operations/slos.md)
 - [Component selection map](../components/)
