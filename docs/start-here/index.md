@@ -9,5 +9,6 @@ checklists for using the cookbook safely and effectively.
 - [Definition of done](definition-of-done.md)
 - [Project management](project-management.md)
 - [Content review workflow](content-review-workflow.md)
+- [Contribution quality dashboard](contribution-quality-dashboard.md)
 
 Return to the [documentation index](../).
