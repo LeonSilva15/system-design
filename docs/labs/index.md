@@ -14,6 +14,7 @@ directory.
 | [Cache-aside demo](../../labs/cache-aside-demo/) | cache miss, hit, TTL, stale data, invalidation, and database fallback |
 | [Queue worker demo](../../labs/queue-worker-demo/) | enqueue, worker processing, retry, failure, visibility timeout, and observability |
 | [Replication lag simulator](../../labs/replication-lag-simulator/) | leader writes, follower lag, stale reads, and read-your-writes violations |
+| [Quorum read/write simulator](../../labs/quorum-read-write-simulator/) | read quorum, write quorum, unavailable replicas, stale reads, and latency trade-offs |
 | [Retry and idempotency demo](../../labs/retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 Use each lab's `README.md` for setup, commands, expected output, and

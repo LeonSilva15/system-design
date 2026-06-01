@@ -30,6 +30,7 @@ large service that hides the behavior being taught.
 | [Cache-aside demo](cache-aside-demo/) | cache miss, hit, TTL, stale data, invalidation, database fallback, and failure-mode tests |
 | [Queue worker demo](queue-worker-demo/) | enqueue, worker processing, retries, failure, visibility timeout, and observability tests |
 | [Replication lag simulator](replication-lag-simulator/) | leader writes, follower lag, stale reads, read-your-writes violations, and demo scenarios |
+| [Quorum read/write simulator](quorum-read-write-simulator/) | read quorum, write quorum, unavailable replicas, stale reads, and latency trade-offs |
 | [Retry and idempotency demo](retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 ## Runtime Expectations
