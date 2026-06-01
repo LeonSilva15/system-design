@@ -346,6 +346,7 @@ Before choosing a database read-scaling approach, confirm:
 ## Related Pages
 
 - [Scalability overview](./)
+- [Caching strategies](caching-strategies.md)
 - [Capacity estimation](capacity-estimation.md)
 - [Indexes](../data/indexes.md)
 - [Read and write patterns](../data/read-write-patterns.md)
