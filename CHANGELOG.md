@@ -34,6 +34,9 @@ Use this section until the first tagged release.
 ### Added
 
 - Initial changelog and release notes process.
+- `SDC-E15-T09` added a manual contribution quality dashboard so contributors
+  can review epic coverage, diagram coverage, lab completeness, stale-page
+  signals, and walkthrough completeness before releases.
 
 ### Changed
 
