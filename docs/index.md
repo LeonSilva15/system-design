@@ -14,17 +14,19 @@ If you are new to the cookbook, read these in order:
 
 1. [Project guardrails](start-here/project-guardrails.md) - understand the
    originality, scope, and attribution rules behind the resource.
-2. [Learning paths](start-here/learning-paths.md) - choose a beginner,
+2. [How to use this cookbook](start-here/how-to-use-this-cookbook.md) - learn
+   how docs, labs, walkthroughs, and checklists fit together.
+3. [Learning paths](start-here/learning-paths.md) - choose a beginner,
    interview, builder, or production architecture route.
-3. [System design process](method/system-design-process.md) - learn the repeatable
+4. [System design process](method/system-design-process.md) - learn the repeatable
    path from problem statement to architecture.
-4. [Requirement discovery](method/requirement-discovery.md) - practice turning
+5. [Requirement discovery](method/requirement-discovery.md) - practice turning
    vague prompts into functional and non-functional requirements.
-5. [Requirements map](requirements/) - choose the requirement category most
+6. [Requirements map](requirements/) - choose the requirement category most
    likely to change the design.
-6. [Component selection map](components/) - connect requirements to justified
+7. [Component selection map](components/) - connect requirements to justified
    components.
-7. [Walkthroughs](walkthroughs/) or [labs](labs/) - apply the method to worked
+8. [Walkthroughs](walkthroughs/) or [labs](labs/) - apply the method to worked
    systems and runnable examples.
 
 ## Cookbook Map
@@ -59,7 +61,7 @@ operations as new constraints appear.
 
 | Category | Start With | Use It To Answer |
 | --- | --- | --- |
-| [Start Here](start-here/) | [Project guardrails](start-here/project-guardrails.md), [learning paths](start-here/learning-paths.md), [definition of done](start-here/definition-of-done.md) | What is in scope, which route fits your goal, and what quality means |
+| [Start Here](start-here/) | [Project guardrails](start-here/project-guardrails.md), [how to use this cookbook](start-here/how-to-use-this-cookbook.md), [learning paths](start-here/learning-paths.md), [definition of done](start-here/definition-of-done.md) | What is in scope, how to begin, which route fits your goal, and what quality means |
 | [Method](method/) | [System design process](method/system-design-process.md), [requirement discovery](method/requirement-discovery.md), [scale estimation](method/scale-estimation.md), [design review checklist](method/design-review-checklist.md) | How do I go from prompt to architecture without jumping to tools? |
 | [Requirements](requirements/) | [Latency](requirements/latency.md), [throughput](requirements/throughput.md), [availability](requirements/availability.md), [consistency](requirements/consistency.md), [operability](requirements/operability.md) | Which constraint changes the design? |
 | [Components](components/) | [API layer](components/api-layer.md), [database selection](components/database-selection.md), [cache](components/cache.md), [queue](components/queue.md), [stream](components/stream.md), [background workers](components/background-workers.md) | Which component is justified, and what does it make harder? |
@@ -79,6 +81,7 @@ operations as new constraints appear.
 
 | Goal | Read Next |
 | --- | --- |
+| Start using the cookbook | [How to use this cookbook](start-here/how-to-use-this-cookbook.md) |
 | Choose a guided route | [Learning paths](start-here/learning-paths.md) |
 | Learn the overall method | [System design process](method/system-design-process.md) |
 | Turn a prompt into requirements | [Requirement discovery](method/requirement-discovery.md) |
