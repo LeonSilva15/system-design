@@ -322,6 +322,7 @@ Before using a queue, verify:
 - [Queue component](../components/queue.md)
 - [Background workers](../components/background-workers.md)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
+- [Dead-letter queues](dead-letter-queues.md)
 - [Retries and backoff](retries-and-backoff.md)
 - [Idempotency](idempotency.md)
 - [Outbox pattern](outbox-pattern.md)
