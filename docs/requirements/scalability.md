@@ -37,6 +37,7 @@ Scalability matters when:
 Skip this tree when the question is only current request volume. Start with
 [throughput requirements](throughput.md) and [scale estimation](../method/scale-estimation.md)
 first, then return here when growth over time changes the architecture.
+For storage-specific splits, see [partitioning and sharding](../data/partitioning-and-sharding.md).
 
 ## Quick Decision
 
