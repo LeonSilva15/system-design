@@ -376,6 +376,7 @@ Before leaving privacy discovery, confirm:
 - [Requirements map](./)
 - [Security requirements](security.md)
 - [Security design overview](../security/)
+- [Data privacy](../security/data-privacy.md)
 - [Authorization](../security/authorization.md)
 - [Audit logs](../security/audit-logs.md)
 - [Encryption](../security/encryption.md)

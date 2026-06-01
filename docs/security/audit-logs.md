@@ -359,6 +359,7 @@ Before accepting an audit-log design, confirm:
 - [Security design overview](./)
 - [Authentication](authentication.md)
 - [Authorization](authorization.md)
+- [Data privacy](data-privacy.md)
 - [Access-control models](access-control-models.md)
 - [Secrets management](secrets-management.md)
 - [Encryption](encryption.md)
