@@ -1,0 +1,110 @@
+name: Docs checks
+
+# Local command:
+#   awk '/^          from pathlib import Path$/{p=1} /^          PY$/{p=0} p{sub(/^          /,""); print}' .github/workflows/docs-checks.yml | python3 -
+#
+# The link check is intentionally offline: it validates local relative targets
+# and skips external URLs, anchors, and gitignored local-only files so pull
+# request checks are not blocked by third-party availability or private agent
+# context files.
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown:
+    name: Markdown and local links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Markdown and local links
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import subprocess
+          import sys
+
+          EXCLUDED_PARTS = {".git", ".tmp", "node_modules", ".venv", "__pycache__"}
+          LINK_RE = re.compile(r'!?\[[^\]\n]+\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
+          SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
+
+          repo_root = Path(".").resolve()
+          problems = []
+          markdown_files = [
+              path
+              for path in Path(".").rglob("*.md")
+              if not EXCLUDED_PARTS.intersection(path.parts)
+          ]
+
+          for path in sorted(markdown_files):
+              text = path.read_text(encoding="utf-8")
+
+              if text and not text.endswith("\n"):
+                  problems.append(f"{path}: missing final newline")
+
+              fence_count = 0
+              for line_number, line in enumerate(text.splitlines(), 1):
+                  if line.rstrip("\n\r") != line.rstrip():
+                      problems.append(f"{path}:{line_number}: trailing whitespace")
+                  if "\t" in line:
+                      problems.append(f"{path}:{line_number}: tab character")
+                  if line.startswith("```"):
+                      fence_count += 1
+
+              if fence_count % 2:
+                  problems.append(f"{path}: unbalanced fenced code block")
+
+              for match in LINK_RE.finditer(text):
+                  link_line = text.count("\n", 0, match.start()) + 1
+                  raw_target = match.group(1)
+                  target = raw_target.split("#", 1)[0]
+
+                  if not target or SCHEME_RE.match(target):
+                      continue
+                  if target.startswith("<") or target.startswith("{"):
+                      continue
+
+                  candidate = (path.parent / target).resolve()
+                  try:
+                      relative_candidate = candidate.relative_to(repo_root)
+                  except ValueError:
+                      problems.append(
+                          f"{path}:{link_line}: local link escapes repository {raw_target}"
+                      )
+                      continue
+
+                  target_exists = candidate.exists() or (
+                      target.endswith("/") and (candidate / "index.md").exists()
+                  )
+
+                  if not target_exists:
+                      ignored = subprocess.run(
+                          ["git", "check-ignore", "--quiet", "--", str(relative_candidate)],
+                          check=False,
+                      ).returncode == 0
+                      if ignored:
+                          continue
+
+                      problems.append(
+                          f"{path}:{link_line}: missing local link target {raw_target}"
+                      )
+
+          if problems:
+              print("\n".join(problems))
+              print(f"{len(problems)} problem(s)")
+              sys.exit(1)
+
+          print(f"checked {len(markdown_files)} Markdown files")
+          PY
