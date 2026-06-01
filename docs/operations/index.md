@@ -353,6 +353,7 @@ Current pages:
 
 - [Alerting](alerting.md)
 - [Capacity planning](capacity-planning.md)
+- [Cost analysis](cost-analysis.md)
 - [Component metrics catalog](component-metrics-catalog.md)
 - [Dashboards](dashboards.md)
 - [Incident response](incident-response.md)
@@ -363,13 +364,6 @@ Current pages:
 - [Runbooks](runbooks.md)
 - [SLOs](slos.md)
 - [Tracing](tracing.md)
-
-Planned pages:
-
-- `docs/operations/cost-analysis.md`: compute, storage, bandwidth, managed
-  services, overprovisioning, and cost trade-offs.
-
-These paths become linked pages as their tickets are completed.
 
 ## Related Pages
 

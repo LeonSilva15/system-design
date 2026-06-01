@@ -373,6 +373,7 @@ Before accepting a metrics design, confirm:
 - [Observability basics](observability-basics.md)
 - [Design review checklist](../method/design-review-checklist.md)
 - [Scale estimation](../method/scale-estimation.md)
+- [Cost analysis](cost-analysis.md)
 - [Failure-mode analysis](../reliability/failure-mode-analysis.md)
 - [Timeouts](../reliability/timeouts.md)
 - [Retries](../reliability/retries.md)

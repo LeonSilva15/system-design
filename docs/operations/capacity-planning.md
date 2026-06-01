@@ -354,6 +354,7 @@ Before accepting a capacity plan, confirm:
 ## Related Pages
 
 - [Operations overview](./)
+- [Cost analysis](cost-analysis.md)
 - [Metrics](metrics.md)
 - [Dashboards](dashboards.md)
 - [Alerting](alerting.md)
