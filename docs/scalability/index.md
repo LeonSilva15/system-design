@@ -10,6 +10,7 @@ pressure.
 - [Bottleneck analysis](bottleneck-analysis.md)
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
+- [Load balancing](load-balancing.md)
 - [Performance testing playbook](performance-testing-playbook.md)
 - [Rate limiting](rate-limiting.md)
 - [Stateless services](stateless-services.md)
@@ -17,7 +18,6 @@ pressure.
 
 ## Planned Pages
 
-- `docs/scalability/load-balancing.md`
 - `docs/scalability/caching-strategies.md`
 - `docs/scalability/database-write-scaling.md`
 - `docs/scalability/sharding-strategies.md`
