@@ -445,6 +445,7 @@ Before adding a load balancer, confirm:
 - [API layer](api-layer.md)
 - [Service layer](service-layer.md)
 - [Load balancing playbook](../scalability/load-balancing.md)
+- [Health checks](../reliability/health-checks.md)
 - [Stateless services](../scalability/stateless-services.md)
 - [Cache](cache.md)
 - [Queue](queue.md)

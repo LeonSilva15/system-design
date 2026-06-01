@@ -283,6 +283,7 @@ Before finishing a failure-mode analysis, confirm:
 ## Related Pages
 
 - [Reliability](index.md)
+- [Health checks](health-checks.md)
 - [Design review checklist](../method/design-review-checklist.md)
 - [System design process](../method/system-design-process.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
