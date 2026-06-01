@@ -9,6 +9,7 @@ reasoning behind a design.
 
 - [Design doc template](design-doc-template.md)
 - [Design critique template](design-critique-template.md)
+- [Project reflection template](project-reflection-template.md)
 - [Decision record template](decision-record-template.md)
 - [Capacity estimation worksheet](capacity-estimation-template.md)
 - [Walkthrough template](walkthrough-template.md)

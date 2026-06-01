@@ -230,6 +230,8 @@ For each stage:
 7. Use the [common mistakes catalog](common-mistakes.md) to find vague
    consistency, missing failure modes, cache overuse, or unjustified streams.
 8. Score the result with the [system design rubric](system-design-rubric.md).
+9. Capture what changed in your reasoning with the
+   [project reflection template](../../templates/project-reflection-template.md).
 
 ## Common Mistakes
 
@@ -261,5 +263,6 @@ Before moving to the next stage, confirm:
 - [Self-review checklist](self-review-checklist.md)
 - [Simplification checklist](simplification-checklist.md)
 - [Common mistakes](common-mistakes.md)
+- [Project reflection template](../../templates/project-reflection-template.md)
 - [Labs guide](../labs/)
 - [Walkthroughs](../walkthroughs/)
