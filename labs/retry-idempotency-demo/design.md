@@ -9,7 +9,9 @@ replay.
 
 Without idempotency, retries can create extra reservations and repeat side
 effects. With an idempotency key and side-effect records, the same retry can
-return the original result and skip duplicate sends.
+return the original reservation result and skip duplicate sends. The demo marks
+that repeated attempt as `duplicate` so the behavior is visible; a production
+API might instead return the original success response with a duplicate metric.
 
 ## Requirements
 
@@ -68,6 +70,9 @@ flowchart TD
 - The client reuses the same key for retries of the same intended operation.
 - Duplicate event handling uses both event IDs and side-effect keys.
 - The side effect is represented by a confirmation or receipt email record.
+- Production event consumers need atomic processed-event markers or
+  `pending`/`complete` states around fallible side effects. This in-memory lab
+  omits those recovery states because the toy email send cannot fail.
 
 ## Why This Is Simplified
 

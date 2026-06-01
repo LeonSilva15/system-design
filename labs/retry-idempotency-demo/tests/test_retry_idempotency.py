@@ -128,6 +128,20 @@ class RetryIdempotencyTests(unittest.TestCase):
             )
         )
 
+    def test_demo_prints_key_conflict_scenario(self) -> None:
+        lines = run_demo(["--mode", "safe", "--show-conflict"])
+
+        self.assertIn("scenario=key_conflict", lines)
+        self.assertIn(
+            "attempt=1 status=conflict reservation=res-001 "
+            "duplicate=true email_sent=false",
+            lines,
+        )
+        self.assertIn(
+            "summary mode=conflict reservations=1 emails=1 key_conflicts=1",
+            lines,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
