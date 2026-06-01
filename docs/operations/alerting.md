@@ -141,6 +141,7 @@ Define:
 - metric or event;
 - threshold value;
 - time window or persistence duration;
+- baseline traffic shape, normal-volume guard, or comparison period;
 - severity;
 - route or owner;
 - suppressions or maintenance windows;
@@ -152,6 +153,7 @@ Example:
 Alert: reservation_submission_high_error_rate
 Signal: valid reservation submissions with result=system_error
 Threshold: >2% for 10 minutes and at least 20 failed attempts
+Baseline context: compare to branch-hours traffic, not overnight trickle traffic
 Severity: page during branch operating hours, urgent ticket otherwise
 Owner: reservation on-call
 Context: dashboard, recent deploys, top branches, trace query, runbook
@@ -227,6 +229,15 @@ Define escalation by:
 - decision authority for rollback, feature disablement, provider failover, or
   customer messaging;
 - when to involve security, data, legal, support, or product leadership.
+
+Compact example:
+
+```text
+Primary on-call acknowledges within 10 minutes.
+If no mitigation is active within 20 minutes, escalate to the service owner.
+If data integrity or customer communication is involved, add support lead and
+incident commander immediately.
+```
 
 Useful handoff context:
 
