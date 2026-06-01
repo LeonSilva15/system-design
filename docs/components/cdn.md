@@ -125,6 +125,8 @@ flowchart TD
 Use the tree to decide whether a CDN is justified and which cache, access, and
 origin rules must exist before launch. "Do not cache this publicly" is a valid
 tree result when freshness or privacy is more important than edge speed.
+It does not remove the need to solve origin latency, load, pagination, indexing,
+or data-model issues for personalized paths.
 
 ## Requirements Discovered
 
@@ -262,9 +264,10 @@ Use signed edge access when:
 - permission changes or object lifecycle changes have a defined cutoff.
 
 Already-issued signed URLs usually remain valid until expiry unless the edge or
-origin can reject them through key rotation, object movement, policy changes,
-or token revocation. Use short TTLs for sensitive downloads and keep the
-source-of-truth permission check in the API before issuing the URL.
+origin actually checks a revocation-capable policy such as key rotation, object
+movement, policy changes, or token revocation. Use short TTLs as the main
+control for sensitive downloads and keep the source-of-truth permission check
+in the API before issuing the URL.
 
 ### Protect The Origin
 
@@ -274,6 +277,7 @@ controlled.
 Origin protection can include:
 
 - caching only safe methods and status codes;
+- restricting direct origin access to the CDN or authenticated service paths;
 - request coalescing so one miss does not become many origin requests;
 - shielding or a regional cache layer when many edge locations miss together;
 - limits on large downloads, range requests, and expensive transformations;
@@ -305,9 +309,9 @@ sequenceDiagram
 
     Client->>App: Request private download
     App->>App: Authorize user and object
-    App-->>Client: Short-lived signed URL
-    Client->>CDN: Fetch with signed URL
-    CDN->>Origin: Fetch only if signature and policy allow
+    App-->>Client: Short-lived signed CDN URL or origin URL
+    Client->>CDN: Fetch with signed CDN URL when edge enforces signature
+    CDN->>Origin: Fetch from origin only when edge policy allows
 ```
 
 This shape separates authorization from byte delivery. The application owns
@@ -341,7 +345,7 @@ within the cache and signing rules.
 | Cache key includes unbounded input | Hit rate collapses and cost rises | Normalize query strings and bound dimensions | Low hit rate, high unique URL count |
 | Origin is exposed directly | Attackers bypass CDN protections | Restrict origin access to CDN or signed service paths | Direct-origin request count |
 | CDN outage or route issue | Users cannot fetch static or media content | Fallback domain, graceful degradation, or cached shell strategy | Edge 5xx rate, regional error spike |
-| Hotlinking or scraping spikes bandwidth | Cost grows and origin may be stressed | Signed URLs, referrer policy where useful, rate limits, and abuse alerts | Bandwidth anomaly, hot object traffic |
+| Hotlinking or scraping spikes bandwidth | Cost grows and origin may be stressed | Signed URLs, rate limits, abuse alerts, and referrer checks only as a weak signal | Bandwidth anomaly, hot object traffic |
 
 ## Common Mistakes
 
