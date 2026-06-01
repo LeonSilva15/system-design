@@ -39,7 +39,7 @@ Start here when:
 | Freshness or conflict risk | [consistency.md](consistency.md) | Which reads and writes need stronger guarantees? |
 | Growth over time | [scalability.md](scalability.md) | Which dimension grows: users, data, traffic, or fanout? |
 | Unauthorized access or abuse | [security.md](security.md) | What must be protected, limited, or audited? |
-| Personal data exposure | `privacy.md` | What should be minimized, retained, deleted, or hidden? |
+| Personal data exposure | [privacy.md](privacy.md) | What should be minimized, retained, deleted, or hidden? |
 | Budget pressure | `cost.md` | Which resource dominates cost? |
 | Running and debugging the system | `operability.md` | What must be observable and repairable? |
 | Regulated or audit-heavy workflow | `compliance.md` | What evidence, retention, residency, or deletion rule matters? |
@@ -102,7 +102,7 @@ requirement creates a need, not because it is common in architecture diagrams.
 | Consistency requirements | Current | [docs/requirements/consistency.md](consistency.md) | Stale reads, read-your-writes, conflicts, transactions, eventual consistency, and idempotency |
 | Scalability requirements | Current | [docs/requirements/scalability.md](scalability.md) | User growth, data growth, traffic growth, hot keys, horizontal scaling, and sharding triggers |
 | Security requirements | Current | [docs/requirements/security.md](security.md) | Users, roles, permissions, sensitive actions, secrets, audit logs, and abuse risk |
-| Privacy requirements | Planned | `docs/requirements/privacy.md` | Personal data, access controls, retention, deletion, export, minimization, and logging risks |
+| Privacy requirements | Current | [docs/requirements/privacy.md](privacy.md) | Personal data, access controls, retention, deletion, export, minimization, and logging risks |
 | Cost requirements | Planned | `docs/requirements/cost.md` | Storage, compute, network, managed services, overprovisioning, and cost/performance trade-offs |
 | Operability requirements | Planned | `docs/requirements/operability.md` | Debugging, monitoring, deployments, on-call, runbooks, alerts, and maintenance tasks |
 | Compliance requirements | Planned | `docs/requirements/compliance.md` | Auditability, retention, deletion, data residency, access records, and regulated workflows |
