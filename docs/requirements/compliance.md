@@ -414,6 +414,7 @@ Before leaving compliance discovery, confirm:
 - [Authorization](../security/authorization.md)
 - [Access control models](../security/access-control-models.md)
 - [Backups and restore](../data/backups-and-restore.md)
+- [Data retention](../data/data-retention.md)
 - [Operational vs analytical data](../data/operational-vs-analytical-data.md)
 - [Logs](../operations/logs.md)
 - [Runbooks](../operations/runbooks.md)
