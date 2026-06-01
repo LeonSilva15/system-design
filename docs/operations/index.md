@@ -352,6 +352,7 @@ Before accepting an operations design, confirm:
 Current pages:
 
 - [Alerting](alerting.md)
+- [Dashboards](dashboards.md)
 - [Operations overview](./)
 - [Logs](logs.md)
 - [Observability basics](observability-basics.md)
@@ -361,8 +362,6 @@ Current pages:
 
 Planned pages:
 
-- `docs/operations/dashboards.md`: dashboard purpose, golden signals,
-  component dashboards, and useless dashboards.
 - `docs/operations/runbooks.md`: incident steps, ownership, rollback,
   dependency checks, verification, and templates.
 - `docs/operations/incident-response.md`: detection, triage, mitigation,
