@@ -12,6 +12,7 @@ directory.
 | --- | --- |
 | [Token bucket rate limiter](../../labs/rate-limiter/) | burst capacity, refill rate, retry hints, and limiter behavior |
 | [Cache-aside demo](../../labs/cache-aside-demo/) | cache miss, hit, TTL, stale data, invalidation, and database fallback |
+| [Queue worker demo](../../labs/queue-worker-demo/) | enqueue, worker processing, retry, failure, visibility timeout, and observability |
 | [Retry and idempotency demo](../../labs/retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 Use each lab's `README.md` for setup, commands, expected output, and

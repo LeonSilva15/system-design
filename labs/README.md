@@ -28,6 +28,7 @@ large service that hides the behavior being taught.
 | --- | --- |
 | [Token bucket rate limiter](rate-limiter/) | burst capacity, refill rate, retry hints, and limiter behavior tests |
 | [Cache-aside demo](cache-aside-demo/) | cache miss, hit, TTL, stale data, invalidation, database fallback, and failure-mode tests |
+| [Queue worker demo](queue-worker-demo/) | enqueue, worker processing, retries, failure, visibility timeout, and observability tests |
 | [Retry and idempotency demo](retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 ## Runtime Expectations
