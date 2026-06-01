@@ -352,13 +352,12 @@ Before accepting an operations design, confirm:
 Current pages:
 
 - [Operations overview](./)
+- [Logs](logs.md)
 - [Observability basics](observability-basics.md)
 - [Metrics](metrics.md)
 
 Planned pages:
 
-- `docs/operations/logs.md`: structured logs, correlation IDs, sensitive data,
-  log volume, and debugging usefulness.
 - `docs/operations/tracing.md`: distributed traces, spans, propagation, latency
   breakdowns, and dependency visibility.
 - `docs/operations/alerting.md`: symptom-based alerts, alert fatigue,
