@@ -64,8 +64,11 @@ flowchart TD
     Quality --> Durability[Durability and recovery]
     Quality --> Consistency[Consistency and conflicts]
     Quality --> Scale[Scalability and growth]
-    Quality --> Security[Security, privacy, and abuse]
-    Quality --> Cost[Cost and operability]
+    Quality --> Security[Security and abuse]
+    Quality --> Privacy[Privacy and personal data]
+    Quality --> Cost[Cost pressure]
+    Quality --> Operability[Operability and repair]
+    Quality --> Compliance[Compliance and audit evidence]
 
     Entities --> Components[Component choices]
     Permissions --> Components
@@ -76,7 +79,10 @@ flowchart TD
     Consistency --> Components
     Scale --> Components
     Security --> Components
+    Privacy --> Components
     Cost --> Components
+    Operability --> Components
+    Compliance --> Components
 
     Components --> Tradeoffs[Trade-offs and version 1 simplification]
 ```
@@ -86,33 +92,36 @@ requirement creates a need, not because it is common in architecture diagrams.
 
 ## Requirement Pages
 
-| Requirement page | Planned path | Use it to discover... |
-| --- | --- | --- |
-| Requirements index and map | `docs/requirements/index.md` | How categories connect to design impact |
-| Latency requirements | `docs/requirements/latency.md` | p50, p95, p99, synchronous paths, slow dependencies, caching, CDN, and async work |
-| Throughput requirements | `docs/requirements/throughput.md` | RPS, event rate, peak traffic, bursts, batching, scaling, and bottlenecks |
-| Availability requirements | `docs/requirements/availability.md` | Uptime targets, degraded mode, redundancy, failover, regional failure, and dependency failure |
-| Durability requirements | `docs/requirements/durability.md` | Data loss tolerance, persistence, replication, backups, audit trails, and recomputable data |
-| Consistency requirements | `docs/requirements/consistency.md` | Stale reads, read-your-writes, conflicts, transactions, eventual consistency, and idempotency |
-| Scalability requirements | `docs/requirements/scalability.md` | User growth, data growth, traffic growth, hot keys, horizontal scaling, and sharding triggers |
-| Security requirements | `docs/requirements/security.md` | Users, roles, permissions, sensitive actions, secrets, audit logs, and abuse risk |
-| Privacy requirements | `docs/requirements/privacy.md` | Personal data, access controls, retention, deletion, export, minimization, and logging risks |
-| Cost requirements | `docs/requirements/cost.md` | Storage, compute, network, managed services, overprovisioning, and cost/performance trade-offs |
-| Operability requirements | `docs/requirements/operability.md` | Debugging, monitoring, deployments, on-call, runbooks, alerts, and maintenance tasks |
-| Compliance requirements | `docs/requirements/compliance.md` | Auditability, retention, deletion, data residency, access records, and regulated workflows |
+| Requirement page | Status | Planned path | Use it to discover... |
+| --- | --- | --- | --- |
+| Requirements index and map | Current | `docs/requirements/index.md` | How categories connect to design impact |
+| Latency requirements | Planned | `docs/requirements/latency.md` | p50, p95, p99, synchronous paths, slow dependencies, caching, CDN, and async work |
+| Throughput requirements | Planned | `docs/requirements/throughput.md` | RPS, event rate, peak traffic, bursts, batching, scaling, and bottlenecks |
+| Availability requirements | Planned | `docs/requirements/availability.md` | Uptime targets, degraded mode, redundancy, failover, regional failure, and dependency failure |
+| Durability requirements | Planned | `docs/requirements/durability.md` | Data loss tolerance, persistence, replication, backups, audit trails, and recomputable data |
+| Consistency requirements | Planned | `docs/requirements/consistency.md` | Stale reads, read-your-writes, conflicts, transactions, eventual consistency, and idempotency |
+| Scalability requirements | Planned | `docs/requirements/scalability.md` | User growth, data growth, traffic growth, hot keys, horizontal scaling, and sharding triggers |
+| Security requirements | Planned | `docs/requirements/security.md` | Users, roles, permissions, sensitive actions, secrets, audit logs, and abuse risk |
+| Privacy requirements | Planned | `docs/requirements/privacy.md` | Personal data, access controls, retention, deletion, export, minimization, and logging risks |
+| Cost requirements | Planned | `docs/requirements/cost.md` | Storage, compute, network, managed services, overprovisioning, and cost/performance trade-offs |
+| Operability requirements | Planned | `docs/requirements/operability.md` | Debugging, monitoring, deployments, on-call, runbooks, alerts, and maintenance tasks |
+| Compliance requirements | Planned | `docs/requirements/compliance.md` | Auditability, retention, deletion, data residency, access records, and regulated workflows |
 
 ## How Requirements Map To Components
 
-| Requirement signal | Component or design choice it may justify | Trade-off to explain |
+| Requirement category | Component or design choice it may justify | Trade-off to explain |
 | --- | --- | --- |
-| Reads must feel fast and can be stale briefly | Cache, CDN, read model, or precomputed view | Faster reads can serve stale or invalid data without clear freshness rules |
-| Writes must prevent conflicts | Transaction, conditional write, lock, uniqueness rule, or single writer | Stronger correctness can reduce concurrency or increase latency |
-| Work can finish after the response | Queue, worker, scheduler, retry policy, or outbox | Async work improves request latency but adds duplicate, ordering, and visibility concerns |
-| Traffic arrives in bursts | Rate limit, queue, backpressure, autoscaling, or admission control | Smoothing load can delay work or reject clients during spikes |
-| Data must survive failures | Durable store, replication, backup, restore test, or audit log | More durability increases cost and operational work |
-| Users have roles or sensitive actions | Authorization checks, audit log, permission model, or approval workflow | Stronger controls can slow workflows and require support paths |
-| Operators must debug one user issue | Structured logs, metrics, traces, dashboards, or runbooks | Better visibility requires consistent IDs, retention, and alert discipline |
-| Cost is the limiting constraint | Quotas, retention limits, batching, simpler storage, or manual workflow | Cost control may reduce freshness, capacity, or automation |
+| Latency | Cache, CDN, precomputed view, smaller synchronous path, or async handoff | Faster responses can increase staleness, invalidation work, or background complexity |
+| Throughput | Batching, queueing, backpressure, horizontal scaling, or admission control | More throughput can delay individual work or require more operational coordination |
+| Availability | Redundancy, failover, degraded mode, circuit breaker, or dependency isolation | Higher uptime can increase cost and may serve reduced functionality during failure |
+| Durability | Durable store, replication, backup, restore test, audit log, or recomputation plan | More durable writes can add latency, storage cost, and recovery procedures |
+| Consistency | Transaction, conditional write, uniqueness rule, lock, idempotency key, or single writer | Stronger correctness can reduce concurrency, availability, or implementation simplicity |
+| Scalability | Partitioning, read replicas, workload isolation, sharding trigger, or hot-key mitigation | Scaling mechanisms add complexity before they add value unless a bottleneck is real |
+| Security | Authentication, authorization, rate limit, validation, secret handling, or abuse controls | Stronger controls can add user friction and require support or exception paths |
+| Privacy | Data minimization, access boundary, retention limit, deletion/export workflow, or log redaction | Privacy controls can reduce debugging detail and require lifecycle discipline |
+| Cost | Quotas, retention limits, batching, simpler storage, caching, or manual workflow | Cost control may reduce freshness, capacity, automation, or convenience |
+| Operability | Structured logs, metrics, traces, dashboards, alerts, runbooks, or maintenance workflow | Better operations require consistent identifiers, ownership, and alert hygiene |
+| Compliance | Audit trail, access record, retention policy, deletion evidence, residency boundary, or approval flow | Compliance evidence adds storage, process, and review overhead |
 
 The answer is not always a new component. A requirement may be satisfied by a
 clear limit, a database constraint, a manual review step, or a simpler version 1
@@ -171,12 +180,12 @@ Functional requirements:
 
 Requirement impact:
 
-| Discovered requirement | Design impact | Trade-off |
-| --- | --- | --- |
-| Two members must not reserve the same tool for the same time window | Use a transactional reservation write or uniqueness rule | Stronger write correctness is more important than premature write scaling |
-| Search results can be stale for a few minutes | A cached or indexed read path is acceptable later | Users may see a tool that becomes unavailable before reservation |
-| Reminders can be delayed | Process reminders outside the reservation write path | Requires retry visibility and duplicate-send protection |
-| Staff cancellations must be auditable | Store cancellation actor, reason, and timestamp | Adds data retention and permission requirements |
+| Discovered requirement | Design impact | Trade-off | Revisit when |
+| --- | --- | --- | --- |
+| Two members must not reserve the same tool for the same time window | Use a transactional reservation write or uniqueness rule | Stronger write correctness is more important than premature write scaling | Lock contention or write latency becomes measured |
+| Search results can be stale for a few minutes | A cached or indexed read path is acceptable later | Users may see a tool that becomes unavailable before reservation | Search freshness causes failed reservations or support tickets |
+| Reminders can be delayed | Process reminders outside the reservation write path | Requires retry visibility and duplicate-send protection | Reminder delay misses pickup windows or duplicate sends appear |
+| Staff cancellations must be auditable | Store cancellation actor, reason, and timestamp | Adds data retention and permission requirements | Audit records become hard to search or retention rules change |
 
 Version 1 can use one durable database, a simple reservation write path, and
 structured logs for conflicts and cancellations. It does not need sharding,
