@@ -88,7 +88,7 @@ flowchart TD
     Durable -->|No| SimpleTask[Use in-process task or documented manual step]
     Durable -->|Yes| Trigger{What creates the work?}
 
-    Trigger -->|User or API action| JobTable[Create durable job record or queue message]
+    Trigger -->|User or API action| JobTable[Create durable job record and dispatch path]
     Trigger -->|Recurring time| Schedule[Use scheduled job with lock and missed-run signal]
     Trigger -->|Committed event| EventWorker[Use outbox, queue, or stream consumer]
     Trigger -->|Operator action| Manual[Use reviewable operator task]
@@ -111,8 +111,8 @@ flowchart TD
     SeparatePools --> Visible
     StandardPool --> Visible{Can users and operators see job state?}
 
-    Visible -->|No| AddVisibility[Add status, attempts, last error, age, owner, and repair path]
-    Visible -->|Yes| Operate[Measure liveness, queue age, attempts, duration, failures, saturation, and cost]
+    Visible -->|No| AddVisibility[Define job visibility: status, attempts, last error, age, owner, and repair path]
+    Visible -->|Yes| Operate[Measure chosen path, job health if used, user state, dependency pressure, and revisit signal]
 
     AddVisibility --> Operate
     Repair --> Operate
@@ -384,6 +384,8 @@ The team walks the tree:
 - A nightly scheduled job expires old export files. It uses one schedule-window
   key, records last successful run, and alerts if it misses the freshness
   target.
+- Export files use owner-only access and expire after the retention window so
+  background generation does not create long-lived private downloads.
 
 Interview answer frame:
 
