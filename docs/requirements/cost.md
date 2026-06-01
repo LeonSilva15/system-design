@@ -388,4 +388,5 @@ Before leaving cost discovery, confirm:
 - [Scale estimation](../method/scale-estimation.md)
 - [Capacity estimation](../scalability/capacity-estimation.md)
 - [Capacity planning](../operations/capacity-planning.md)
+- [Cost analysis](../operations/cost-analysis.md)
 - [Metrics](../operations/metrics.md)
