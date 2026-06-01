@@ -34,7 +34,7 @@ Start here when:
 | --- | --- | --- |
 | User-visible delay | [latency.md](latency.md) | What must stay in the synchronous path? |
 | Request, event, or job volume | [throughput.md](throughput.md) | Which path saturates first? |
-| Outage tolerance | `availability.md` | What should degrade instead of fail? |
+| Outage tolerance | [availability.md](availability.md) | What should degrade instead of fail? |
 | Data loss risk | `durability.md` | What must survive process, node, or region failure? |
 | Freshness or conflict risk | `consistency.md` | Which reads and writes need stronger guarantees? |
 | Growth over time | `scalability.md` | Which dimension grows: users, data, traffic, or fanout? |
@@ -97,7 +97,7 @@ requirement creates a need, not because it is common in architecture diagrams.
 | Requirements index and map | Current | `docs/requirements/index.md` | How categories connect to design impact |
 | Latency requirements | Current | [docs/requirements/latency.md](latency.md) | p50, p95, p99, synchronous paths, slow dependencies, caching, CDN, and async work |
 | Throughput requirements | Current | [docs/requirements/throughput.md](throughput.md) | RPS, event rate, peak traffic, bursts, batching, scaling, and bottlenecks |
-| Availability requirements | Planned | `docs/requirements/availability.md` | Uptime targets, degraded mode, redundancy, failover, regional failure, and dependency failure |
+| Availability requirements | Current | [docs/requirements/availability.md](availability.md) | Uptime targets, degraded mode, redundancy, failover, regional failure, and dependency failure |
 | Durability requirements | Planned | `docs/requirements/durability.md` | Data loss tolerance, persistence, replication, backups, audit trails, and recomputable data |
 | Consistency requirements | Planned | `docs/requirements/consistency.md` | Stale reads, read-your-writes, conflicts, transactions, eventual consistency, and idempotency |
 | Scalability requirements | Planned | `docs/requirements/scalability.md` | User growth, data growth, traffic growth, hot keys, horizontal scaling, and sharding triggers |
