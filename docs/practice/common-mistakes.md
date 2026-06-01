@@ -282,3 +282,4 @@ Before accepting a design, ask:
 - [Failure-mode analysis](../reliability/failure-mode-analysis.md)
 - [Self-review checklist](self-review-checklist.md)
 - [Overengineering checklist](overengineering-checklist.md)
+- [Simplification checklist](simplification-checklist.md)
