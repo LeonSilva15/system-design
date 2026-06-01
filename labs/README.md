@@ -27,6 +27,7 @@ large service that hides the behavior being taught.
 | Lab | Focus |
 | --- | --- |
 | [Token bucket rate limiter](rate-limiter/) | burst capacity, refill rate, retry hints, and limiter behavior tests |
+| [Retry and idempotency demo](retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 ## Runtime Expectations
 
