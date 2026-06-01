@@ -144,18 +144,21 @@ span name.
 Propagation carries trace context from one component to the next. Without it,
 the trace breaks into disconnected fragments and the responder loses the path.
 
-Propagate context through:
+Propagate context through carriers such as:
 
 - inbound and outbound HTTP or RPC headers;
 - queue messages and outbox records;
 - worker job metadata;
 - scheduled task execution records;
-- provider callback or webhook metadata when safe;
-- logs emitted by each component.
+- provider callback or webhook metadata when safe.
 
 For asynchronous work, store the trace or correlation context with the message
 or job when it is created. The worker can then start a child span or linked span
-when it processes the work.
+when it processes the work. Record enqueue time or queue-wait span data so
+responders can separate time spent waiting from time spent executing.
+
+Logs should include trace IDs and related correlation IDs as evidence fields,
+but logs do not usually propagate context by themselves.
 
 Example propagation path:
 
@@ -235,8 +238,12 @@ Common policies:
 - keep all traces for low-volume critical workflows;
 - sample high-volume successful reads;
 - keep slow traces above a latency threshold;
+- base sampling on outcome and latency so slow or failed traces are retained
+  even when high-volume successful traffic is sampled;
 - increase sampling temporarily during an incident;
 - reduce retention for verbose debug attributes;
+- restrict trace access when spans can expose tenant, dependency, or workflow
+  details;
 - keep trace IDs in logs longer than full trace details when cost is high.
 
 Sampling should not hide rare high-impact events. If a payment, permission,
@@ -300,7 +307,8 @@ Span breakdown:
 | `database.inventory_check` | 310 ms | success | Inventory query is meaningful but not dominant |
 | `database.reservation_write` | 420 ms | success | Write transaction is the largest request span |
 | `outbox.reminder_enqueue` | 35 ms | success | Async work was created |
-| `worker.reminder_send` | 2.4 s after 6 min queue wait | success | Late reminder is mostly queue wait |
+| `worker.reminder_queue_wait` | 6 min | success | Reminder waited before a worker picked it up |
+| `worker.reminder_send` | 2.4 s | success | Worker processing was short compared with queue wait |
 | `provider.email_send` | 240 ms | success | Provider accepted the reminder quickly |
 
 Interpretation:
@@ -322,6 +330,10 @@ Next decision:
 - inspect queue age and worker saturation for reminder jobs;
 - add a runbook check that starts from trace ID, then follows the job ID and
   provider receipt.
+
+In an interview or design review, explain tracing as a path: name the workflow,
+identify the root span, show which child span or missing span explains latency,
+then connect the next check to metrics and logs.
 
 This trace does not include resident contact details, email body, raw SQL
 values, or provider payloads. It carries enough safe identifiers to debug the
