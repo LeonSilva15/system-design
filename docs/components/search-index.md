@@ -50,7 +50,7 @@ pressure that database filters should not carry.
 | --- | --- | --- |
 | Exact lookup by ID, slug, code, or email | Source database lookup or uniqueness index | Overbuilding a search path for deterministic reads |
 | List by owner, status, category, time, or location | Database index shaped to filters and sort | Adding a search index before fixing query shape |
-| Full-text search across titles or descriptions | Derived search index | Freshness lag, tokenization, and result quality |
+| Full-text search across titles or descriptions | Database-native text search for small version 1; derived search index when relevance or scale grows | Freshness lag, tokenization, and result quality |
 | Ranking by relevance, popularity, or recency | Search index with explicit ranking signals | Hidden ranking rules and hard-to-debug results |
 | Faceted filters over many attributes | Search index or derived read model | Source/index drift and filter-count accuracy |
 | Autocomplete or prefix suggestions | Suggestion index or constrained search endpoint | Privacy leaks and noisy partial matches |
@@ -103,20 +103,20 @@ flowchart TD
     Fuzzy --> Freshness
     Facets --> Freshness
 
-    Freshness -->|No| SourceCheck[Keep source read or final action check authoritative]
-    Freshness -->|Yes| Pipeline{Can index updates and reindexing be replayed?}
+    Freshness -->|No, search result must be fresh| FreshSearch[Use source read or source-backed lookup]
+    Freshness -->|Yes, final actions can recheck source| Pipeline{Can index updates and reindexing be replayed?}
 
-    SourceCheck --> Pipeline
+    FreshSearch --> Measure
     Pipeline -->|No| Stop[Do not add search yet: define rebuild and validation path]
     Pipeline -->|Yes| Privacy{Are searchable and displayed fields safe to copy?}
 
     Privacy -->|No| Minimize[Minimize payload, mask fields, or keep lookup in source]
-    Privacy -->|Yes| Operate[Measure relevance, latency, freshness, failures, and reindex health]
+    Privacy -->|Yes| Measure[Measure chosen path, user results, freshness if derived, and repair]
 
-    DbIndex --> Operate
-    ShapeQuery --> Operate
-    Stop --> Operate
-    Minimize --> Operate
+    DbIndex --> Measure
+    ShapeQuery --> Measure
+    Stop --> Measure
+    Minimize --> Measure
 ```
 
 Use the tree to decide whether a search index is justified and which obligations
@@ -413,8 +413,9 @@ The team walks the tree:
   exact matches rank first.
 - Freshness can lag by up to 2 minutes for search results, but booking a session
   rechecks availability in the source database.
-- Index updates come from durable source changes. Reindexing can rebuild search
-  documents from active public offers and their current availability.
+- Index updates come from durable source changes through an outbox or change
+  feed. Reindexing can rebuild search documents from active public offers and
+  their current availability.
 - Operators watch indexing lag, zero-result rate, stale document age, query
   latency, fallback usage, and reindex progress.
 
@@ -453,12 +454,12 @@ Before adding a search index, confirm:
 - Index updates have durable intent, retries, idempotent document IDs, and
   source versions where useful.
 - Reindexing, backfill, validation, rollback, and degraded behavior are planned.
-- Metrics include query traffic, latency, zero-result rate, stale age, indexing
-  lag, update failures, index size, fallback usage, and reindex progress.
+- Metrics include query traffic, latency, zero-result rate, click position,
+  reformulation rate, stale age, indexing lag, update failures, index size,
+  fallback usage, and reindex progress.
 
 ## Related Pages
 
-- [Components](./)
 - [Component selection map](index.md)
 - [Database selection](database-selection.md)
 - [Cache](cache.md)
