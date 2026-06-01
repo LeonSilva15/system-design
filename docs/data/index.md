@@ -150,13 +150,13 @@ Current pages:
 - [Transactions](transactions.md)
 - [Consistency models](consistency-models.md)
 - [Replication](replication.md)
+- [Partitioning and sharding](partitioning-and-sharding.md)
 - [Schema evolution](schema-evolution.md)
 - [Operational vs analytical data](operational-vs-analytical-data.md)
 - [Backups and restore](backups-and-restore.md)
 
 Planned pages:
 
-- `docs/data/partitioning-and-sharding.md`
 - `docs/data/data-retention.md`
 
 These paths become linked pages as their tickets are completed.
