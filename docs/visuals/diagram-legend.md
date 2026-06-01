@@ -39,6 +39,9 @@ For general diagram principles, see the [diagram style guide](diagram-style-guid
 
 Use labels that explain the component's job in the example. Avoid labels that
 only name a technology unless the technology choice is the point of the page.
+When two symbols share a shape, such as a cache and a database, the label must
+make the role explicit: `Product cache` and `Product database` are clearer than
+two cylinders named `Store`.
 
 ## Label Rules
 
@@ -79,7 +82,7 @@ rendered label can be more descriptive.
 | Worker | `Worker`, `Relay`, `Consumer`, `Indexer` | `Email worker` |
 | Database | `PrimaryDb`, `ReplicaDb`, `AuditDb` | `Primary database` |
 | Cache | `Cache`, `SessionCache`, `ResultCache` | `Result cache` |
-| Queue | `Queue`, `RetryQueue`, `Dlq` | `Retry queue` |
+| Queue | `Queue`, `RetryQueue`, `DeadLetterQueue` | `Retry queue` |
 | Stream | `Stream`, `EventLog`, `Topic` | `Reservation events` |
 | External | `Provider`, `Partner`, `ThirdParty` | `Payment provider` |
 | Failure state | `Timeout`, `Fallback`, `Retry`, `NeedsReview` | `Needs review` |
@@ -188,6 +191,9 @@ Use:
   part of the design;
 - a short explanation after the diagram when the failure path changes the
   trade-off.
+
+Rendered labels should still read like human language. Use `Needs review` in
+the diagram label even if the underlying status value is `needs_review`.
 
 Avoid:
 
