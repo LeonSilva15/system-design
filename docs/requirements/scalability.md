@@ -87,7 +87,7 @@ flowchart TD
 
     Traffic --> Bottleneck{Which path saturates first?}
     Bottleneck -->|Stateless CPU or concurrency| Stateless[Scale horizontally with balancing and health checks]
-    Bottleneck -->|Shared store, lock, queue, or provider| Shared[Protect shared limit before adding instances]
+    Bottleneck -->|Shared store, lock, queue, or provider| Shared[Classify the shared limit before adding instances]
     Bottleneck -->|No measured limit yet| Measure
 
     Data --> DataLimit{Will data size affect query, backup, restore, or retention?}
@@ -98,10 +98,13 @@ flowchart TD
     HotFix -->|Yes| Isolate[Use per-key limits, caching, batching, or key-specific routing]
     HotFix -->|No| ShardCheck[Define partition or sharding trigger]
 
-    Shared --> ShardCheck
+    Shared --> SharedKind{Is the limit partitionable state?}
+    SharedKind -->|Yes| ShardCheck
+    SharedKind -->|No| ProtectShared[Use quotas, backpressure, admission control, or serial boundary]
     DataMove --> ShardCheck
     Stateless --> Observe[Track growth, saturation, cost, errors, and skew]
     Isolate --> Observe
+    ProtectShared --> Observe
     Measure --> Observe
 
     ShardCheck --> Shard{Have simpler fixes and scale-up reached a real ceiling?}
@@ -278,6 +281,10 @@ p95 signup latency below 300 ms at 3x measured launch traffic after index,
 transaction, and connection-pool fixes.
 ```
 
+The key must distribute real traffic, not only match an organization chart. If
+one region receives nearly all writes, region sharding leaves the hot spot in
+place.
+
 Weak sharding trigger:
 
 ```text
@@ -349,6 +356,15 @@ browse queries, stateless API instances with capped connections, and a clear
 waitlist flow. It does not need sharding until measured regional write pressure
 exceeds the single-writer design after simpler fixes.
 
+Interview answer frame:
+
+```text
+The first scaling pressure is not total users; it is launch-hour browse traffic
+and hot-shift signup contention. I would scale stateless browse reads first,
+protect the shared signup invariant, measure per-shift skew, and defer sharding
+until a measured regional write ceiling remains after simpler fixes.
+```
+
 ## Checklist
 
 Before leaving scalability discovery, confirm:
@@ -366,7 +382,7 @@ Before leaving scalability discovery, confirm:
   backpressure where needed.
 - Sharding or partitioning has a concrete trigger, key choice, and operational
   plan if it is not deferred.
-- Version 1 keeps the weakest scaling mechanism that still satisfies the next
+- Version 1 keeps the simplest scaling mechanism that still satisfies the next
   credible growth step.
 
 ## Related Pages
