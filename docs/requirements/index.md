@@ -37,7 +37,7 @@ Start here when:
 | Outage tolerance | [availability.md](availability.md) | What should degrade instead of fail? |
 | Data loss risk | [durability.md](durability.md) | What must survive process, node, or region failure? |
 | Freshness or conflict risk | [consistency.md](consistency.md) | Which reads and writes need stronger guarantees? |
-| Growth over time | `scalability.md` | Which dimension grows: users, data, traffic, or fanout? |
+| Growth over time | [scalability.md](scalability.md) | Which dimension grows: users, data, traffic, or fanout? |
 | Unauthorized access or abuse | `security.md` | What must be protected, limited, or audited? |
 | Personal data exposure | `privacy.md` | What should be minimized, retained, deleted, or hidden? |
 | Budget pressure | `cost.md` | Which resource dominates cost? |
@@ -100,7 +100,7 @@ requirement creates a need, not because it is common in architecture diagrams.
 | Availability requirements | Current | [docs/requirements/availability.md](availability.md) | Uptime targets, degraded mode, redundancy, failover, regional failure, and dependency failure |
 | Durability requirements | Current | [docs/requirements/durability.md](durability.md) | Data loss tolerance, persistence, replication, backups, audit trails, and recomputable data |
 | Consistency requirements | Current | [docs/requirements/consistency.md](consistency.md) | Stale reads, read-your-writes, conflicts, transactions, eventual consistency, and idempotency |
-| Scalability requirements | Planned | `docs/requirements/scalability.md` | User growth, data growth, traffic growth, hot keys, horizontal scaling, and sharding triggers |
+| Scalability requirements | Current | [docs/requirements/scalability.md](scalability.md) | User growth, data growth, traffic growth, hot keys, horizontal scaling, and sharding triggers |
 | Security requirements | Planned | `docs/requirements/security.md` | Users, roles, permissions, sensitive actions, secrets, audit logs, and abuse risk |
 | Privacy requirements | Planned | `docs/requirements/privacy.md` | Personal data, access controls, retention, deletion, export, minimization, and logging risks |
 | Cost requirements | Planned | `docs/requirements/cost.md` | Storage, compute, network, managed services, overprovisioning, and cost/performance trade-offs |
