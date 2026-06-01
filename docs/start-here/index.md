@@ -8,5 +8,6 @@ checklists for using the cookbook safely and effectively.
 - [Learning paths](learning-paths.md)
 - [Definition of done](definition-of-done.md)
 - [Project management](project-management.md)
+- [Content review workflow](content-review-workflow.md)
 
 Return to the [documentation index](../).
