@@ -282,16 +282,10 @@ Current pages:
 - [Encryption](encryption.md)
 - [Audit logs](audit-logs.md)
 - [Data privacy](data-privacy.md)
+- [Data retention and deletion](data-retention-and-deletion.md)
 - [Rate limiting and abuse resistance](rate-limiting-and-abuse.md)
 - [Admin tools](admin-tools.md)
 - [Third-party integrations](third-party-integrations.md)
-
-Planned pages:
-
-- `docs/security/data-retention-and-deletion.md`: retention periods, deletion
-  workflows, backups, and user-visible expectations.
-
-These paths become linked pages as their tickets are completed.
 
 ## Related Pages
 

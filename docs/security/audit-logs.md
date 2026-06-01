@@ -360,6 +360,7 @@ Before accepting an audit-log design, confirm:
 - [Authentication](authentication.md)
 - [Authorization](authorization.md)
 - [Data privacy](data-privacy.md)
+- [Data retention and deletion](data-retention-and-deletion.md)
 - [Access-control models](access-control-models.md)
 - [Secrets management](secrets-management.md)
 - [Encryption](encryption.md)

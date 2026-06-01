@@ -321,6 +321,7 @@ Before finalizing retention, verify:
 
 - [Compliance requirements](../requirements/compliance.md)
 - [Privacy requirements](../requirements/privacy.md)
+- [Data retention and deletion](../security/data-retention-and-deletion.md)
 - [Backups and restore](backups-and-restore.md)
 - [Schema evolution](schema-evolution.md)
 - [Partitioning and sharding](partitioning-and-sharding.md)
