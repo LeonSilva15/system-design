@@ -273,6 +273,7 @@ Before choosing a consistency model, verify:
 
 - [Consistency requirements](../requirements/consistency.md)
 - [Transactions](transactions.md)
+- [Replication](replication.md)
 - [Read and write patterns](read-write-patterns.md)
 - [Schema evolution](schema-evolution.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
