@@ -8,5 +8,6 @@ self-checklists for system design learning.
 - [Interview practice prompts](interview-practice-prompts.md)
 - [Flashcards](flashcards.md)
 - [Common mistakes](common-mistakes.md)
+- [Overengineering checklist](overengineering-checklist.md)
 
 Return to the [documentation index](../).
