@@ -69,9 +69,9 @@ flowchart TD
     Success -->|No| Temporary[Document temporary or best-effort data]
     Success -->|Yes| Loss{Can acknowledged work be lost?}
 
-    Loss -->|No| Durable[Commit authoritative state before success]
+    Loss -->|No for source-of-truth data| Durable[Commit authoritative state before success]
     Loss -->|Some, with repair| RPO[Define loss window and repair path]
-    Loss -->|Yes, rebuildable| Recompute[Classify as derived or recomputable]
+    Loss -->|Only derived output can be lost| Recompute[Classify derived output as recomputable]
 
     Durable --> Async{Does success require later side effects?}
     Async -->|Yes| Intent[Persist durable intent with outbox, job, or audit record]
@@ -83,8 +83,8 @@ flowchart TD
     Source -->|No| Promote[Promote needed fields to durable source data]
     Source -->|Yes| Rebuild[Document rebuild trigger and validation]
 
-    Failure -->|Process or node| Persist[Use durable store and idempotent retry]
-    Failure -->|Zone or replica| Replicate[Use replication with lag monitoring]
+    Failure -->|Process crash| Persist[Use durable source-of-truth store]
+    Failure -->|Node, disk, zone, or replica| Replicate[Use replicated or managed durable storage with lag monitoring]
     Failure -->|Deletion or corruption| Backup[Use backups, audit history, and restore drill]
     Failure -->|Dispute or compliance| Audit[Use append-only audit trail]
 
@@ -198,6 +198,11 @@ Drill cadence: <how often restore is practiced>
 A backup job that completes successfully but has never been restored is not
 proof that user data is recoverable.
 
+Protect backup encryption keys, restore credentials, and recovery secrets
+separately from ordinary production and backup access. A usable backup still
+fails the durability requirement if the team cannot safely decrypt, authorize,
+or validate the restore during an incident.
+
 ### Treat Audit Trails As Durable Product Data
 
 Audit trails are not only for compliance. They help operators explain and
@@ -280,7 +285,7 @@ Durability requirements:
 
 | Data Or Workflow | Durability Target | Design Impact | Revisit When |
 | --- | --- | --- | --- |
-| Confirmed reservation | No acknowledged reservation silently lost | Commit reservation and conflict check before success | Write latency or contention threatens the user target |
+| Confirmed reservation | No acknowledged reservation silently lost after commit in the primary region | Commit reservation and conflict check before success; keep point-in-time recovery or retained write logs | Write latency, restore gap, or regional promise changes |
 | Reminder intent | Reminder may be delayed but not forgotten | Store reminder job or outbox record durably | Oldest pending reminder exceeds the recovery target |
 | Staff cancellation | Actor, reason, and timestamp must be explainable later | Append audit event with the cancellation write | Audit lookup becomes slow or retention rules change |
 | Search index | Can be rebuilt from reservation and tool records | Treat as derived; rebuild and label stale state | Rebuild takes longer than the stated RTO |
@@ -291,10 +296,14 @@ authoritative and must be durable before success. Reminder delivery can be
 async, but the intent to send should survive a worker crash. Staff cancellation
 needs audit evidence for repair and accountability. Search and reports are
 recomputable only if the reservation and tool records retain the needed fields.
-Version 1 can use one durable database, transactional reservation writes,
-append-only audit rows for staff actions, a durable reminder outbox, daily
-backups, and a documented restore drill. It does not need multi-region
-replication until the RPO/RTO or failure domain justifies it.
+Version 1 can use one durable database with synchronous reservation commits,
+point-in-time recovery or retained write logs for acknowledged reservations,
+append-only audit rows for staff actions, a durable reminder outbox, daily full
+backups for corruption or operator-error recovery, and a documented restore
+drill. This version's zero-loss reservation promise is scoped to committed
+writes in the primary region; automatic regional failover and regional
+zero-loss recovery are separate promises that need their own RPO/RTO and
+replication design.
 
 ## Checklist
 
