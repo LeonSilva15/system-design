@@ -172,8 +172,9 @@ Common horizontal limits:
 | Cache miss storm | More instances create more simultaneous misses | Request coalescing, warmup, TTL jitter, or fallback behavior |
 | Network or egress | More instances send more bytes through the same path | Reduce payloads, compress, stream, or move large objects |
 
-Measure the shared limit before and after the change. If total throughput does
-not rise, the system has probably moved or exposed the real bottleneck.
+Measure the shared limit before and after the change under a comparable load
+shape and traffic mix. If total throughput does not rise, the system has
+probably moved or exposed the real bottleneck.
 
 ### Treat Stateful Services As Design Boundaries
 
@@ -233,6 +234,7 @@ cost per successful request
 cost per completed job
 cost per active tenant
 cost per peak hour
+marginal cost per added unit of capacity
 operator time per incident
 ```
 
@@ -251,6 +253,10 @@ A good version 1 scaling plan usually says:
 - which shared limit is protected;
 - what metric triggers the next step;
 - what decision is intentionally deferred.
+
+In an interview, explain the decision as a sequence: name the bottleneck, state
+why a smaller fix or scale-up is enough for now, identify which parts can safely
+scale out, and call out the shared limits that would break first.
 
 Example version 1 guidance:
 
@@ -335,6 +341,8 @@ Revisit triggers:
 - add more stateless web instances if web CPU stays above 70% during launch and
   database connections remain below the cap;
 - improve read scaling if database rows scanned or p95 query latency rises;
+- revisit capacity shape if cost per successful registration rises faster than
+  completed registrations during launch windows;
 - redesign seat allocation only if lock waits, conflicts, or registration write
   latency become the first bad signal.
 
