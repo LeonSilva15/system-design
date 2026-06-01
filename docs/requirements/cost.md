@@ -68,6 +68,8 @@ reliability, security, privacy, or operational outcome.
 - Which resource dominates cost: storage, compute, memory, network, managed
   service units, licenses, or operational effort?
 - How does cost grow per user, tenant, request, object, event, export, or day?
+- Is there an explicit budget envelope, per-unit cost target, or cost per
+  completed workflow that the design must stay within?
 - Which data needs online retention, archive retention, backup retention, and
   deletion?
 - Which capacity is needed for normal traffic, peak traffic, failover, deploys,
@@ -338,6 +340,17 @@ for photos, a small worker queue, clear retention rules, and launch-only
 headroom. It does not need multi-region replication, a large search service, or
 always-on spare capacity until measurements justify the spend.
 
+Back-of-the-envelope sketch:
+
+```text
+photo storage per month =
+  new listings per month * photos per listing * average stored image size
+  * retention months
+```
+
+The exact unit price can change by provider, but this sketch tells the team
+which product limit and retention window control the cost.
+
 ## Checklist
 
 Before leaving cost discovery, confirm:
@@ -360,8 +373,8 @@ Before leaving cost discovery, confirm:
   availability, durability, observability, and support workflows.
 - Dashboards or reports can show unit cost, budget alerts, saturation, and the
   top expensive workflows or tenants.
-- Version 1 chooses the cheapest path that still satisfies the named user and
-  operational requirements.
+- Version 1 chooses the simplest sustainable path that still satisfies the
+  named user and operational requirements.
 
 ## Related Pages
 
