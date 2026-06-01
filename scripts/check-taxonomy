@@ -1,0 +1,374 @@
+#!/usr/bin/env python3
+"""Validate the docs taxonomy with conservative structural checks.
+
+Usage:
+  scripts/check-taxonomy
+  scripts/check-taxonomy docs/components/cache.md
+  scripts/check-taxonomy --limitations
+
+What it checks:
+  - Markdown docs live under known docs sections.
+  - Docs pages use lowercase hyphenated filenames.
+  - Each docs section has an index.md file.
+  - Section indexes link to sibling Markdown pages.
+  - Walkthroughs include the required walkthrough sections.
+  - Requirement and component decision pages include the decision-tree baseline,
+    trade-off coverage, and an original example.
+
+Limitations:
+  - This is a lightweight guardrail, not a full Markdown parser.
+  - It checks inline Markdown links, not reference-style or HTML links.
+  - It validates headings by text, not by semantic content quality.
+  - Trade-off coverage may be a `## Trade-Offs` section or an options table
+    with a `Trade-Off` column while older pages are normalized.
+  - It does not infer page type from prose; rules are based on folder location.
+  - It intentionally avoids forcing catalogs, rubrics, glossaries, and indexes
+    into the standard docs-page template.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from urllib.parse import unquote, urlparse
+
+
+DOCS_DIR = Path("docs")
+KNOWN_SECTIONS = {
+    "communication",
+    "components",
+    "data",
+    "labs",
+    "method",
+    "operations",
+    "practice",
+    "reliability",
+    "requirements",
+    "scalability",
+    "security",
+    "start-here",
+    "visuals",
+    "walkthroughs",
+}
+ALLOWED_TOP_LEVEL_DOCS = {"index.md", "glossary.md"}
+FILENAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\.md$")
+LINK_RE = re.compile(r"!?\[[^\]\n]+\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
+SCHEME_RE = re.compile(r"^[a-zA-Z][a-zA-Z0-9+.-]*:")
+
+WALKTHROUGH_REQUIRED = [
+    "Problem Statement",
+    "Functional Requirements",
+    "Non-Functional Requirements",
+    "Core Entities",
+    "API Sketch",
+    "Read Path",
+    "Write Path",
+    "Data Model",
+    "Component Choices",
+    "Architecture Diagram",
+    "Consistency Decisions",
+    "Scaling Strategy",
+    "Failure Modes",
+    "Security Concerns",
+    "Observability",
+    "Cost Considerations",
+    "Version 1 Simplification",
+    "What Changes At 10x Scale",
+]
+
+DECISION_PAGE_REQUIRED = [
+    "Purpose",
+    "When This Matters",
+    "Quick Decision",
+    "Questions To Ask",
+    "Requirements Discovered",
+    "Options",
+    "Decision Guidance",
+    "Trade-Offs",
+    "Failure Modes",
+    "Common Mistakes",
+    "Original Example",
+    "Checklist",
+    "Related Pages",
+]
+
+LIMITATIONS = """\
+Known limitations:
+- This is a lightweight guardrail, not a full Markdown parser.
+- It checks inline Markdown links, not reference-style or HTML links.
+- It validates that required headings exist, not that the content is complete.
+- Trade-off coverage may be a `## Trade-Offs` section or an options table with
+  a `Trade-Off` column while older pages are normalized.
+- It classifies page type by folder, so unusual pages may need a future rule.
+- It avoids broad template enforcement for indexes, catalogs, rubrics,
+  glossaries, and other intentionally specialized pages.
+"""
+
+
+@dataclass(frozen=True)
+class Problem:
+    path: Path
+    message: str
+
+    def render(self) -> str:
+        return f"{self.path}: {self.message}"
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Check docs folder placement and required page sections.",
+        epilog="Run with --limitations to see what this lightweight validator does not cover.",
+    )
+    parser.add_argument(
+        "paths",
+        nargs="*",
+        type=Path,
+        help="Files or directories to check. Defaults to docs/.",
+    )
+    parser.add_argument(
+        "--limitations",
+        action="store_true",
+        help="Print documented limitations and exit.",
+    )
+    return parser.parse_args()
+
+
+def markdown_files(paths: list[Path]) -> list[Path]:
+    roots = paths or [DOCS_DIR]
+    files: list[Path] = []
+
+    for root in roots:
+        root = normalize_path(root)
+        if root.is_dir():
+            files.extend(sorted(root.rglob("*.md")))
+        elif root.is_file() and root.suffix == ".md":
+            files.append(root)
+        elif root.exists():
+            continue
+        else:
+            files.append(root)
+
+    return sorted(set(files))
+
+
+def normalize_path(path: Path) -> Path:
+    if not path.is_absolute():
+        return path
+
+    repo_root = Path.cwd().resolve()
+    try:
+        return path.resolve().relative_to(repo_root)
+    except ValueError:
+        return path
+
+
+def headings(path: Path) -> tuple[list[str], list[str]]:
+    h1: list[str] = []
+    h2: list[str] = []
+    in_fence = False
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.startswith("```") or line.startswith("~~~"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+
+        if line.startswith("# "):
+            h1.append(line[2:].strip())
+        elif line.startswith("## "):
+            h2.append(line[3:].strip())
+    return h1, h2
+
+
+def check_location(path: Path) -> list[Problem]:
+    problems: list[Problem] = []
+
+    if not path.exists():
+        return [Problem(path, "path does not exist")]
+
+    if DOCS_DIR not in path.parents and path.parent != DOCS_DIR:
+        return [Problem(path, "docs taxonomy checks only apply under docs/")]
+
+    relative = path.relative_to(DOCS_DIR)
+    parts = relative.parts
+
+    if len(parts) == 1:
+        if path.name not in ALLOWED_TOP_LEVEL_DOCS:
+            problems.append(
+                Problem(path, "top-level docs file must be index.md or glossary.md")
+            )
+        return problems
+
+    section = parts[0]
+    if section not in KNOWN_SECTIONS:
+        problems.append(Problem(path, f"unknown docs section '{section}'"))
+
+    if len(parts) != 2:
+        problems.append(Problem(path, "docs pages should be docs/<section>/<page>.md"))
+
+    if not FILENAME_RE.match(path.name):
+        problems.append(Problem(path, "filename should be lowercase hyphenated Markdown"))
+
+    return problems
+
+
+def check_basic_markdown_shape(path: Path) -> list[Problem]:
+    h1, _ = headings(path)
+    problems: list[Problem] = []
+
+    if not h1:
+        problems.append(Problem(path, "missing top-level # heading"))
+    elif len(h1) > 1:
+        problems.append(Problem(path, "has more than one top-level # heading"))
+
+    return problems
+
+
+def check_section_indexes(files: list[Path]) -> list[Problem]:
+    problems: list[Problem] = []
+    checked_sections = {
+        path.parent
+        for path in files
+        if DOCS_DIR in path.parents and path.parent != DOCS_DIR
+    }
+
+    for section_dir in sorted(checked_sections):
+        if section_dir.parent != DOCS_DIR:
+            continue
+
+        index_path = section_dir / "index.md"
+        if not index_path.is_file():
+            problems.append(Problem(section_dir, "section is missing index.md"))
+            continue
+
+        targets = linked_targets(index_path)
+        for sibling in sorted(section_dir.glob("*.md")):
+            if sibling.name == "index.md":
+                continue
+            accepted = {sibling.name, f"./{sibling.name}", str(sibling)}
+            if not accepted.intersection(targets):
+                problems.append(
+                    Problem(index_path, f"missing link to sibling page {sibling.name}")
+                )
+
+    return problems
+
+
+def linked_targets(index_path: Path) -> set[str]:
+    text = index_path.read_text(encoding="utf-8")
+    targets: set[str] = set()
+    for match in LINK_RE.finditer(text):
+        raw_target = match.group(1)
+        target = raw_target.split("#", 1)[0]
+        if not target or SCHEME_RE.match(target):
+            continue
+
+        parsed = urlparse(target)
+        if parsed.scheme or parsed.netloc:
+            continue
+
+        targets.add(unquote(parsed.path or target))
+    return targets
+
+
+def missing_headings(path: Path, required: list[str]) -> list[Problem]:
+    _, h2 = headings(path)
+    present = set(h2)
+    return [
+        Problem(path, f"missing required section '## {name}'")
+        for name in required
+        if name not in present
+    ]
+
+
+def has_tradeoff_coverage(path: Path, h2: list[str]) -> bool:
+    if "Trade-Offs" in h2:
+        return True
+
+    text = path.read_text(encoding="utf-8")
+    return any(
+        line.startswith("|") and "Trade-Off" in line
+        for line in text.splitlines()
+    )
+
+
+def missing_decision_page_requirements(path: Path) -> list[Problem]:
+    _, h2 = headings(path)
+    present = set(h2)
+    problems: list[Problem] = []
+
+    for name in DECISION_PAGE_REQUIRED:
+        if name == "Trade-Offs":
+            if not has_tradeoff_coverage(path, h2):
+                problems.append(
+                    Problem(path, "missing trade-off coverage")
+                )
+            continue
+
+        if name not in present:
+            problems.append(Problem(path, f"missing required section '## {name}'"))
+
+    return problems
+
+
+def check_page_type_sections(path: Path) -> list[Problem]:
+    if path.name == "index.md" or path.parent == DOCS_DIR:
+        return []
+
+    section = path.parent.name
+    if section == "walkthroughs":
+        return missing_headings(path, WALKTHROUGH_REQUIRED)
+
+    if section in {"components", "requirements"}:
+        problems = missing_decision_page_requirements(path)
+        _, h2 = headings(path)
+        has_tree_section = any(
+            "Decision Tree" in heading or heading.endswith(" Tree") for heading in h2
+        )
+        if not has_tree_section:
+            problems.append(Problem(path, "missing a tree section"))
+        return problems
+
+    return []
+
+
+def check_file(path: Path) -> list[Problem]:
+    problems: list[Problem] = []
+    problems.extend(check_location(path))
+    if path.exists():
+        problems.extend(check_basic_markdown_shape(path))
+        problems.extend(check_page_type_sections(path))
+    return problems
+
+
+def main() -> int:
+    args = parse_args()
+    if args.limitations:
+        print(LIMITATIONS)
+        return 0
+
+    files = markdown_files(args.paths)
+    if not files:
+        print("no Markdown docs found")
+        return 0
+
+    problems: list[Problem] = []
+    for path in files:
+        problems.extend(check_file(path))
+    problems.extend(check_section_indexes(files))
+
+    if problems:
+        for problem in problems:
+            print(problem.render())
+        print(f"{len(problems)} problem(s)")
+        return 1
+
+    print(f"taxonomy checks passed for {len(files)} Markdown file(s)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
