@@ -24,4 +24,7 @@ directory.
 Use each lab's `README.md` for setup, commands, expected output, and
 what-to-observe guidance.
 
+Use the [challenge progression](../practice/challenge-progression.md) to decide
+which lab to run before a related walkthrough.
+
 Return to the [documentation index](../).

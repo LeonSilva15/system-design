@@ -146,6 +146,7 @@ Before finishing a practice session, confirm:
 
 - [Self-review checklist](self-review-checklist.md)
 - [System design rubric](system-design-rubric.md)
+- [Challenge progression](challenge-progression.md)
 - [Requirement discovery](../method/requirement-discovery.md)
 - [Design review checklist](../method/design-review-checklist.md)
 - [Requirements map](../requirements/)

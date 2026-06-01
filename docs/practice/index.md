@@ -10,5 +10,6 @@ self-checklists for system design learning.
 - [Common mistakes](common-mistakes.md)
 - [Overengineering checklist](overengineering-checklist.md)
 - [Simplification checklist](simplification-checklist.md)
+- [Challenge progression](challenge-progression.md)
 
 Return to the [documentation index](../).

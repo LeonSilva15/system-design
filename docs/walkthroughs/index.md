@@ -107,5 +107,6 @@ Completed walkthrough pages:
 - [Operations](../operations/)
 - [Reliability](../reliability/)
 - [Security](../security/)
+- [Challenge progression](../practice/challenge-progression.md)
 
 Return to the [documentation index](../).
