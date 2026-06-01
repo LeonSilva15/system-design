@@ -340,6 +340,7 @@ Before leaving API layer design, confirm:
 - [Component selection map](./)
 - [Communication patterns](../communication/)
 - [Synchronous vs asynchronous processing](../communication/sync-vs-async.md)
+- [REST vs gRPC](../communication/rest-vs-grpc.md)
 - [Idempotency](../communication/idempotency.md)
 - [Authentication](../security/authentication.md)
 - [Authorization](../security/authorization.md)
