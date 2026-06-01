@@ -195,11 +195,23 @@ every instance during a shared dependency incident, turning partial failure into
 total outage. Prefer route-specific readiness when one dependency matters only
 for some paths.
 
+Example shape:
+
+```text
+/livez: process is alive.
+/readyz: instance has loaded config and can serve ordinary traffic.
+/readyz/checkout: checkout dependencies are usable enough for checkout traffic.
+```
+
 ### Choose The Simplest Routing Rule
 
 Use simple balancing when instances are equivalent and stateless. Add routing
 rules only when they explain a requirement:
 
+- layer 4 routing when connection-level routing is enough;
+- layer 7 routing when host, path, header, or method rules are needed;
+- edge/API load balancing for public or client-facing traffic;
+- internal service load balancing for service-to-service calls;
 - host routing for separate public domains or APIs;
 - path routing for a small number of clear service boundaries;
 - weighted routing for deploys, migrations, or controlled rollout;
@@ -288,6 +300,10 @@ Regional routing questions:
 For many version 1 systems, regional load balancing can be deferred. A documented
 regional recovery plan may be better than active regional routing if the product
 does not require low-interruption regional failover.
+Use [availability requirements](../requirements/availability.md) and
+[disaster recovery](../reliability/disaster-recovery.md) to decide whether the
+workflow needs regional RTO/RPO, manual restore, active-passive, or active-active
+behavior.
 
 ## Request Routing Shape
 
@@ -415,6 +431,8 @@ Before adding a load balancer, confirm:
   shedding where needed.
 - Regional traffic decisions name data placement, write ownership, routing
   delay, capacity, and manual or automatic recovery behavior.
+- Targets are not directly reachable in ways that bypass auth, routing policy,
+  rate limits, or other edge controls.
 - Deployments define readiness gates, connection draining, rollout, rollback,
   and verification.
 - Metrics include traffic by route and target, health-check state, target
@@ -438,5 +456,7 @@ Before adding a load balancer, confirm:
 - [Rate limiting](../scalability/rate-limiting.md)
 - [Bottleneck analysis](../scalability/bottleneck-analysis.md)
 - [Graceful degradation](../reliability/graceful-degradation.md)
+- [Failover](../reliability/failover.md)
+- [Disaster recovery](../reliability/disaster-recovery.md)
 - [Metrics](../operations/metrics.md)
 - [Component metrics catalog](../operations/component-metrics-catalog.md)
