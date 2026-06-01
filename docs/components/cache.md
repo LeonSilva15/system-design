@@ -365,6 +365,7 @@ Before adding a cache, confirm:
 
 - [Components](./)
 - [Component selection map](index.md)
+- [Caching strategies](../scalability/caching-strategies.md)
 - [Database selection](database-selection.md)
 - [Latency requirements](../requirements/latency.md)
 - [Throughput requirements](../requirements/throughput.md)

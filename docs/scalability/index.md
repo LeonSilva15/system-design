@@ -9,6 +9,7 @@ pressure.
 
 - [Bottleneck analysis](bottleneck-analysis.md)
 - [Capacity estimation](capacity-estimation.md)
+- [Caching strategies](caching-strategies.md)
 - [Database read scaling](database-read-scaling.md)
 - [Load balancing](load-balancing.md)
 - [Performance testing playbook](performance-testing-playbook.md)
@@ -18,7 +19,6 @@ pressure.
 
 ## Planned Pages
 
-- `docs/scalability/caching-strategies.md`
 - `docs/scalability/database-write-scaling.md`
 - `docs/scalability/sharding-strategies.md`
 - `docs/scalability/hot-key-mitigation.md`
