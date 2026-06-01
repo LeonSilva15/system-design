@@ -235,6 +235,7 @@ Before leaving a path, confirm you can answer:
 
 ## Related Pages
 
+- [How to use this cookbook](how-to-use-this-cookbook.md)
 - [Documentation index](../)
 - [Start here](./)
 - [System design process](../method/system-design-process.md)
