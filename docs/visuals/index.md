@@ -7,5 +7,6 @@ diagrams used throughout the cookbook.
 
 - [Diagram style guide](diagram-style-guide.md)
 - [Diagram legend](diagram-legend.md)
+- [Mermaid examples](mermaid-examples.md)
 
 Return to the [documentation index](../).
