@@ -61,7 +61,7 @@ operations as new constraints appear.
 
 | Category | Start With | Use It To Answer |
 | --- | --- | --- |
-| [Start Here](start-here/) | [Project guardrails](start-here/project-guardrails.md), [how to use this cookbook](start-here/how-to-use-this-cookbook.md), [learning paths](start-here/learning-paths.md), [definition of done](start-here/definition-of-done.md), [project management](start-here/project-management.md) | What is in scope, how to begin, which route fits your goal, and what quality means |
+| [Start Here](start-here/) | [Project guardrails](start-here/project-guardrails.md), [how to use this cookbook](start-here/how-to-use-this-cookbook.md), [learning paths](start-here/learning-paths.md), [definition of done](start-here/definition-of-done.md), [project management](start-here/project-management.md), [content review workflow](start-here/content-review-workflow.md) | What is in scope, how to begin, which route fits your goal, and what quality means |
 | [Method](method/) | [System design process](method/system-design-process.md), [requirement discovery](method/requirement-discovery.md), [scale estimation](method/scale-estimation.md), [design review checklist](method/design-review-checklist.md) | How do I go from prompt to architecture without jumping to tools? |
 | [Requirements](requirements/) | [Latency](requirements/latency.md), [throughput](requirements/throughput.md), [availability](requirements/availability.md), [consistency](requirements/consistency.md), [operability](requirements/operability.md) | Which constraint changes the design? |
 | [Components](components/) | [API layer](components/api-layer.md), [database selection](components/database-selection.md), [cache](components/cache.md), [queue](components/queue.md), [stream](components/stream.md), [background workers](components/background-workers.md) | Which component is justified, and what does it make harder? |
@@ -90,7 +90,7 @@ operations as new constraints appear.
 | Practice a complete design | [Walkthroughs](walkthroughs/) |
 | Run code and observe behavior | [Labs guide](labs/) |
 | Review someone else's design | [Design review checklist](method/design-review-checklist.md) |
-| Add or update content | [Definition of done](start-here/definition-of-done.md), [diagram style guide](visuals/diagram-style-guide.md), and the templates in [`../templates/`](../templates/) |
+| Add or update content | [Definition of done](start-here/definition-of-done.md), [content review workflow](start-here/content-review-workflow.md), [diagram style guide](visuals/diagram-style-guide.md), and the templates in [`../templates/`](../templates/) |
 
 ## How To Use The Cookbook
 
