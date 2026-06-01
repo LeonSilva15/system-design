@@ -42,7 +42,7 @@ Start here when:
 | Personal data exposure | [privacy.md](privacy.md) | What should be minimized, retained, deleted, or hidden? |
 | Budget pressure | [cost.md](cost.md) | Which resource dominates cost? |
 | Running and debugging the system | [operability.md](operability.md) | What must be observable and repairable? |
-| Regulated or audit-heavy workflow | `compliance.md` | What evidence, retention, residency, or deletion rule matters? |
+| Regulated or audit-heavy workflow | [compliance.md](compliance.md) | What evidence, retention, residency, or deletion rule matters? |
 
 The focused pages are planned by the backlog and will become links as their
 tickets are delivered. Until then, use the paths above as the section map.
@@ -105,7 +105,7 @@ requirement creates a need, not because it is common in architecture diagrams.
 | Privacy requirements | Current | [docs/requirements/privacy.md](privacy.md) | Personal data, access controls, retention, deletion, export, minimization, and logging risks |
 | Cost requirements | Current | [docs/requirements/cost.md](cost.md) | Storage, compute, network, managed services, overprovisioning, and cost/performance trade-offs |
 | Operability requirements | Current | [docs/requirements/operability.md](operability.md) | Debugging, monitoring, deployments, on-call, runbooks, alerts, and maintenance tasks |
-| Compliance requirements | Planned | `docs/requirements/compliance.md` | Auditability, retention, deletion, data residency, access records, and regulated workflows |
+| Compliance requirements | Current | [docs/requirements/compliance.md](compliance.md) | Auditability, retention, deletion, data residency, access records, and regulated workflows |
 
 ## How Requirements Map To Components
 
