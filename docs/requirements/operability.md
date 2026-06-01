@@ -1,8 +1,8 @@
 # Operability Requirements
 
 Operability requirements describe how the team will notice, debug, deploy,
-repair, and maintain the system after implementation starts. Use this decision
-tree before choosing monitoring, logging, tracing, dashboards, alerting,
+repair, and maintain the system before implementation choices harden. Use this
+decision tree before choosing monitoring, logging, tracing, dashboards, alerting,
 runbooks, deployment controls, on-call ownership, or maintenance tasks.
 
 Operability is not a final polish step. It changes architecture when a workflow
@@ -51,7 +51,7 @@ prototype becomes relied on.
 
 | If the operational pressure is... | Start with... | Watch for... |
 | --- | --- | --- |
-| Debugging one failure | Correlation IDs, structured logs, safe context, and traces | Logs that omit the resource or expose sensitive payloads |
+| Debugging one failure | Correlation IDs, structured logs, safe context, and traces when work crosses boundaries | Logs that omit the resource or expose sensitive payloads |
 | Monitoring workflow health | Metrics, dashboards, SLOs, queue age, and business outcome | Component charts that cannot answer whether users are affected |
 | Safe deployments | Rollback path, migration plan, feature flag, and verification | Changes that cannot be reversed or detected quickly |
 | Human response | Alert threshold, owner, escalation, and runbook | Pages with no timely action or owner |
@@ -90,20 +90,20 @@ flowchart TD
     Impact -->|Yes| Monitor{Can operators tell whether the workflow is healthy?}
 
     Monitor -->|No| MonitoringPlan[Define metrics, dashboard, SLO or expectation, and business outcome]
-    Monitor -->|Yes| Debug
-    MonitoringPlan --> Debug{Can one failed request, job, or resource be explained?}
+    Monitor -->|Yes| Debug{Can one failed request, job, or resource be explained?}
+    MonitoringPlan --> Debug
 
-    Debug -->|No| DebugPlan[Add correlation IDs, structured logs, traces, and safe context]
-    Debug -->|Yes| Deploy
-    DebugPlan --> Deploy{Can risky changes be deployed and rolled back safely?}
+    Debug -->|No| DebugPlan[Add correlation IDs, structured logs, safe context, and traces where boundaries require them]
+    Debug -->|Yes| Deploy{Can risky changes be deployed and rolled back safely?}
+    DebugPlan --> Deploy
 
     Deploy -->|No| DeployPlan[Define deploy checks, migration order, rollback path, and verification]
-    Deploy -->|Yes| Response
-    DeployPlan --> Response{Does timely human response exist when action is needed?}
+    Deploy -->|Yes| Response{Does timely human response exist when action is needed?}
+    DeployPlan --> Response
 
     Response -->|No| ResponsePlan[Set alert route, owner, escalation, and runbook]
-    Response -->|Yes| Maintenance
-    ResponsePlan --> Maintenance{Does the workflow need recurring maintenance?}
+    Response -->|Yes| Maintenance{Does the workflow need recurring maintenance?}
+    ResponsePlan --> Maintenance
 
     Maintenance -->|No| Observe
     Maintenance -->|Yes| MaintenancePlan[Define schedule, owner, automation, evidence, and missed-task signal]
@@ -323,6 +323,8 @@ job that fails silently is only a future incident.
 - Creating dashboards nobody owns or uses during incidents.
 - Deploying schema, feature-flag, or configuration changes without rollback or
   verification.
+- Forgetting maintenance windows, deploy annotations, or alert suppression for
+  expected recurring work.
 - Treating on-call as a staffing detail instead of a design requirement for
   risky workflows.
 - Writing runbooks after the first incident instead of before launch.
@@ -331,7 +333,7 @@ job that fails silently is only a future incident.
 ## Original Example
 
 A public library reservation system lets patrons reserve rooms, staff approve
-special events, and reminder workers send pickup and check-in messages. The
+special events, and reminder workers send arrival and check-in messages. The
 team plans a simple version 1, but the library needs staff to support patrons
 without engineering help for every failed reservation.
 
@@ -371,6 +373,8 @@ Before leaving operability discovery, confirm:
   reconciliation plans.
 - Alerts name risk, signal, threshold, owner, first action, escalation, and
   recovery proof.
+- Known deploys and recurring jobs have maintenance-window, dashboard
+  annotation, or alert-suppression handling where needed.
 - On-call ownership and decision authority are clear for risky workflows.
 - Runbooks exist for paging alerts, risky deploys, known failure modes, and
   manual repair or maintenance tasks.
