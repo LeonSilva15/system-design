@@ -319,6 +319,7 @@ Before scaling a service horizontally, confirm:
 
 - [Scalability overview](./)
 - [Vertical vs horizontal scaling](vertical-vs-horizontal-scaling.md)
+- [Load balancing](load-balancing.md)
 - [Bottleneck analysis](bottleneck-analysis.md)
 - [Capacity estimation](capacity-estimation.md)
 - [Load balancer](../components/load-balancer.md)
