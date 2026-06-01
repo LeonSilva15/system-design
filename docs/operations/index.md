@@ -353,6 +353,7 @@ Current pages:
 
 - [Alerting](alerting.md)
 - [Capacity planning](capacity-planning.md)
+- [Component metrics catalog](component-metrics-catalog.md)
 - [Dashboards](dashboards.md)
 - [Incident response](incident-response.md)
 - [Operations overview](./)
@@ -367,8 +368,6 @@ Planned pages:
 
 - `docs/operations/cost-analysis.md`: compute, storage, bandwidth, managed
   services, overprovisioning, and cost trade-offs.
-- `docs/operations/component-metrics-catalog.md`: metrics for APIs, databases,
-  caches, queues, workers, search, CDN, and object storage.
 
 These paths become linked pages as their tickets are completed.
 
