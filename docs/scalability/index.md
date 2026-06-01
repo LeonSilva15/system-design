@@ -12,6 +12,7 @@ pressure.
 - [Caching strategies](caching-strategies.md)
 - [Database read scaling](database-read-scaling.md)
 - [Database write scaling](database-write-scaling.md)
+- [Hot-key mitigation](hot-key-mitigation.md)
 - [Load balancing](load-balancing.md)
 - [Performance testing playbook](performance-testing-playbook.md)
 - [Rate limiting](rate-limiting.md)
@@ -21,7 +22,6 @@ pressure.
 
 ## Planned Pages
 
-- `docs/scalability/hot-key-mitigation.md`
 - `docs/scalability/batching-and-backpressure.md`
 
 Return to the [documentation index](../).

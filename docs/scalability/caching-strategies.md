@@ -382,6 +382,7 @@ freshness promise.
 
 - [Scalability overview](./)
 - [Cache component](../components/cache.md)
+- [Hot-key mitigation](hot-key-mitigation.md)
 - [Database read scaling](database-read-scaling.md)
 - [Bottleneck analysis](bottleneck-analysis.md)
 - [Capacity estimation](capacity-estimation.md)
