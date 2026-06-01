@@ -352,11 +352,10 @@ Before accepting an operations design, confirm:
 Current pages:
 
 - [Operations overview](./)
+- [Observability basics](observability-basics.md)
 
 Planned pages:
 
-- `docs/operations/observability-basics.md`: symptoms, causes, debugging flow,
-  signals, and common blind spots.
 - `docs/operations/metrics.md`: request rate, errors, latency, saturation,
   queue depth, cache hit rate, and business metrics.
 - `docs/operations/logs.md`: structured logs, correlation IDs, sensitive data,
