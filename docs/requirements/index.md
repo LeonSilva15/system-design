@@ -32,7 +32,7 @@ Start here when:
 
 | If the main pressure is... | Read first | Design question it raises |
 | --- | --- | --- |
-| User-visible delay | `latency.md` | What must stay in the synchronous path? |
+| User-visible delay | [latency.md](latency.md) | What must stay in the synchronous path? |
 | Request, event, or job volume | `throughput.md` | Which path saturates first? |
 | Outage tolerance | `availability.md` | What should degrade instead of fail? |
 | Data loss risk | `durability.md` | What must survive process, node, or region failure? |
@@ -95,7 +95,7 @@ requirement creates a need, not because it is common in architecture diagrams.
 | Requirement page | Status | Planned path | Use it to discover... |
 | --- | --- | --- | --- |
 | Requirements index and map | Current | `docs/requirements/index.md` | How categories connect to design impact |
-| Latency requirements | Planned | `docs/requirements/latency.md` | p50, p95, p99, synchronous paths, slow dependencies, caching, CDN, and async work |
+| Latency requirements | Current | [docs/requirements/latency.md](latency.md) | p50, p95, p99, synchronous paths, slow dependencies, caching, CDN, and async work |
 | Throughput requirements | Planned | `docs/requirements/throughput.md` | RPS, event rate, peak traffic, bursts, batching, scaling, and bottlenecks |
 | Availability requirements | Planned | `docs/requirements/availability.md` | Uptime targets, degraded mode, redundancy, failover, regional failure, and dependency failure |
 | Durability requirements | Planned | `docs/requirements/durability.md` | Data loss tolerance, persistence, replication, backups, audit trails, and recomputable data |
