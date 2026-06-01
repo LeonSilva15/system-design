@@ -374,6 +374,7 @@ Before choosing vertical or horizontal scaling, confirm:
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
 - [Rate limiting](rate-limiting.md)
+- [Stateless services](stateless-services.md)
 - [Metrics](../operations/metrics.md)
 - [Observability basics](../operations/observability-basics.md)
 - [Bulkheads](../reliability/bulkheads.md)
