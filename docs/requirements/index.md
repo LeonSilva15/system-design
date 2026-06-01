@@ -35,7 +35,7 @@ Start here when:
 | User-visible delay | [latency.md](latency.md) | What must stay in the synchronous path? |
 | Request, event, or job volume | [throughput.md](throughput.md) | Which path saturates first? |
 | Outage tolerance | [availability.md](availability.md) | What should degrade instead of fail? |
-| Data loss risk | `durability.md` | What must survive process, node, or region failure? |
+| Data loss risk | [durability.md](durability.md) | What must survive process, node, or region failure? |
 | Freshness or conflict risk | `consistency.md` | Which reads and writes need stronger guarantees? |
 | Growth over time | `scalability.md` | Which dimension grows: users, data, traffic, or fanout? |
 | Unauthorized access or abuse | `security.md` | What must be protected, limited, or audited? |
@@ -98,7 +98,7 @@ requirement creates a need, not because it is common in architecture diagrams.
 | Latency requirements | Current | [docs/requirements/latency.md](latency.md) | p50, p95, p99, synchronous paths, slow dependencies, caching, CDN, and async work |
 | Throughput requirements | Current | [docs/requirements/throughput.md](throughput.md) | RPS, event rate, peak traffic, bursts, batching, scaling, and bottlenecks |
 | Availability requirements | Current | [docs/requirements/availability.md](availability.md) | Uptime targets, degraded mode, redundancy, failover, regional failure, and dependency failure |
-| Durability requirements | Planned | `docs/requirements/durability.md` | Data loss tolerance, persistence, replication, backups, audit trails, and recomputable data |
+| Durability requirements | Current | [docs/requirements/durability.md](durability.md) | Data loss tolerance, persistence, replication, backups, audit trails, and recomputable data |
 | Consistency requirements | Planned | `docs/requirements/consistency.md` | Stale reads, read-your-writes, conflicts, transactions, eventual consistency, and idempotency |
 | Scalability requirements | Planned | `docs/requirements/scalability.md` | User growth, data growth, traffic growth, hot keys, horizontal scaling, and sharding triggers |
 | Security requirements | Planned | `docs/requirements/security.md` | Users, roles, permissions, sensitive actions, secrets, audit logs, and abuse risk |
