@@ -211,7 +211,8 @@ Control volume by design:
   enough to investigate;
 - aggregate routine counts into metrics instead of repeating identical logs;
 - cap payload sizes and array lengths in log fields;
-- avoid high-cardinality free-form labels when logs are indexed;
+- avoid high-cardinality free-form labels when logs are indexed, and keep
+  indexed fields such as route, tenant, dependency, and reason code bounded;
 - define retention by log type and investigation need.
 
 Volume controls should not hide rare high-risk events. A single denied admin
@@ -236,7 +237,7 @@ For each critical workflow, make sure logs support:
 Example useful event:
 
 ```text
-event=reservation.submit.completed
+event=reservation.submit.failed
 result=failed
 reason_code=slot_conflict
 request_id=req_8f31
