@@ -281,3 +281,4 @@ Before accepting a design, ask:
 - [Stream](../components/stream.md)
 - [Failure-mode analysis](../reliability/failure-mode-analysis.md)
 - [Self-review checklist](self-review-checklist.md)
+- [Overengineering checklist](overengineering-checklist.md)
