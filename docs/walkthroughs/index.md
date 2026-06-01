@@ -89,6 +89,7 @@ Completed walkthrough pages:
 | [Payment workflow](payment-workflow.md) | idempotency, external provider calls, state machine, retries, audit logs, reconciliation, and failure handling |
 | [Rate limiter](rate-limiter.md) | requirements, algorithms, distributed counters, Redis-style storage, failure behavior, abuse, and metrics |
 | [URL shortener](url-shortener.md) | short-code generation, redirect path, mapping storage, caching, analytics, failure modes, and 10x scale |
+| [Notification system](notification-system.md) | email/SMS/push, preferences, queues, retries, templates, idempotency, provider failure, and dead-letter queues |
 
 ## Planned Walkthroughs
 
@@ -96,7 +97,6 @@ Additional walkthroughs are planned as ticketed pages:
 
 | Walkthrough | Planned Path | Focus |
 | --- | --- | --- |
-| Notification system | `docs/walkthroughs/notification-system.md` | email/SMS/push, preferences, queues, retries, templates, idempotency, provider failure, and dead-letter queues |
 | File storage system | `docs/walkthroughs/file-storage-system.md` | upload, metadata, object storage, signed URLs, CDN, permissions, scanning, and lifecycle |
 | Chat system | `docs/walkthroughs/chat-system.md` | conversations, messages, delivery, WebSockets, ordering, offline users, read receipts, and scaling |
 | News feed | `docs/walkthroughs/news-feed.md` | fanout, feed generation, ranking, caching, high-fanout users, freshness, and eventual consistency |
