@@ -400,6 +400,7 @@ Before choosing a database write-scaling approach, confirm:
 ## Related Pages
 
 - [Scalability overview](./)
+- [Batching and backpressure](batching-and-backpressure.md)
 - [Hot-key mitigation](hot-key-mitigation.md)
 - [Bottleneck analysis](bottleneck-analysis.md)
 - [Capacity estimation](capacity-estimation.md)
