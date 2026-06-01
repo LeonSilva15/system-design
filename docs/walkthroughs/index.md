@@ -92,6 +92,7 @@ Completed walkthrough pages:
 | [Notification system](notification-system.md) | email/SMS/push, preferences, queues, retries, templates, idempotency, provider failure, and dead-letter queues |
 | [File storage system](file-storage-system.md) | upload, metadata, object storage, signed URLs, CDN, permissions, scanning, and lifecycle |
 | [Chat system](chat-system.md) | conversations, messages, delivery, WebSockets, ordering, offline users, read receipts, and scaling |
+| [News feed](news-feed.md) | fanout, feed generation, ranking, caching, celebrity users, freshness, and eventual consistency |
 
 ## Planned Walkthroughs
 
@@ -99,7 +100,6 @@ Additional walkthroughs are planned as ticketed pages:
 
 | Walkthrough | Planned Path | Focus |
 | --- | --- | --- |
-| News feed | `docs/walkthroughs/news-feed.md` | fanout, feed generation, ranking, caching, high-fanout users, freshness, and eventual consistency |
 | Search autocomplete | `docs/walkthroughs/search-autocomplete.md` | indexing, prefix search, ranking, freshness, caching, typo tolerance, and reindexing |
 | Video processing | `docs/walkthroughs/video-processing.md` | upload, object storage, transcoding, queues, workers, CDN, status tracking, and retries |
 
