@@ -133,6 +133,8 @@ Baseline test shape:
 - run one critical workflow with realistic data;
 - use a traffic level the system should comfortably handle;
 - keep the load shape, test data, environment, and configuration recorded;
+- include warmup, steady-state duration, and cooldown so caches, queues, and
+  resource use are visible;
 - capture p50, p95, p99, throughput, error classes, saturation, queue age, and
   dependency behavior;
 - record cost or resource use when it affects scaling decisions.
@@ -200,9 +202,12 @@ Stress tests should answer:
 - Does the system recover after load returns to normal?
 - Which metric gives the earliest actionable warning?
 
-Stop before the test becomes destructive. A good stress test may stop when
-database connections stay above a cap, queue age crosses a freshness threshold,
-provider quota is near exhaustion, or error rate exceeds the agreed limit.
+Prefer an isolated or production-like environment for risky stress tests. Stop
+before the test becomes destructive. A good stress test may stop when database
+connections stay above a cap, queue age crosses a freshness threshold, provider
+quota is near exhaustion, or error rate exceeds the agreed limit. After the
+test, confirm queues drain, error rates normalize, and saturation returns near
+the baseline range.
 
 ### Bottleneck Discovery
 
@@ -259,6 +264,16 @@ Validation questions:
   bottleneck?
 - Did error rates include validation failures separately from system failures?
 - Did the test run long enough to show queue age, cache churn, or memory growth?
+- Is the run duration and sample size large enough to trust p95 or p99
+  comparisons?
+
+When explaining results aloud, use a compact recap:
+
+```text
+At <load>, <workflow> met or missed <target>.
+The first bad signal was <metric>, pointing to <likely bottleneck>.
+The next smallest change is <fix>, and we will retest with <same load shape>.
+```
 
 Result interpretation examples:
 
