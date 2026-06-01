@@ -133,6 +133,11 @@ acceptable if retries are visible.
 The target should include the workflow, measurement window, allowed degraded
 behavior, and recovery expectation.
 
+Also decide whether degraded responses count as successful. A cached read-only
+catalog may count toward the browse target if it is labeled clearly. An
+ambiguous reservation write should not count as successful until the source of
+truth confirms the state.
+
 ### Design Degraded Mode Before Adding Regions
 
 Degraded mode is often the first useful availability move. It can be cheaper
@@ -186,10 +191,19 @@ For version 1, it is often reasonable to write:
 ```text
 Regional outage: out of scope for automatic failover. Restore service in a new
 region from backup within the documented recovery target.
+RTO: restore the core workflow within 4 hours.
+RPO: accept up to 15 minutes of data loss for non-critical browse metadata; no
+confirmed reservation may be silently lost.
 ```
 
 Choose active multi-region only when the product promise, legal constraint, or
 business impact justifies the complexity.
+
+| Regional Strategy | Use When | Watch For |
+| --- | --- | --- |
+| Manual restore from backup | Regional outage is rare and recovery can take hours | Restore drills, backup freshness, and clear user communication |
+| Active-passive region | Recovery must be faster but only one region serves writes | Promotion safety, data lag, DNS or routing delay, and rollback |
+| Active-active regions | The workflow must survive regional failure with little interruption | Conflict handling, data placement, cost, and much harder operations |
 
 ## Trade-Offs
 
@@ -208,6 +222,7 @@ business impact justifies the complexity.
 | --- | --- | --- | --- |
 | Required database is unavailable | Reads and writes fail even with healthy API instances | Serve read-only cached view only if freshness allows; otherwise fail clearly | Database availability, endpoint success rate, fallback activation count |
 | Optional provider times out | Core workflow slows or fails because optional work blocks it | Timeout quickly, use fallback, queue retry, or skip optional result | Provider timeout count, circuit state, degraded response rate |
+| Dependency failure triggers retry storm | Healthy components overload while repeatedly calling a broken dependency | Use retry budgets, backoff, jitter, circuit breaker, and degraded response | Retry rate, request amplification, circuit-open count |
 | Failover points traffic at stale or unsafe state | Users see incorrect data or duplicate writes | Use tested promotion rules, idempotency, and reconciliation checks | Failover event log, write conflicts, data repair queue |
 | Regional outage removes the whole serving path | Users in all locations cannot complete the workflow | Restore from backup or route to a prepared secondary region per target | Regional health checks, DNS/routing change, recovery duration |
 | Degraded mode is invisible to operators | The system appears healthy while users get reduced behavior | Emit explicit degraded-mode metrics, alerts, and support annotations | Degraded-mode duration, fallback rate, support ticket tags |
@@ -268,3 +283,12 @@ Before leaving availability discovery, confirm:
 - [Requirement discovery](../method/requirement-discovery.md)
 - [Trade-off vocabulary](../method/tradeoff-vocabulary.md)
 - [System design process](../method/system-design-process.md)
+- [Graceful degradation](../reliability/graceful-degradation.md)
+- [Failover](../reliability/failover.md)
+- [Timeouts](../reliability/timeouts.md)
+- [Circuit breakers](../reliability/circuit-breakers.md)
+- [Disaster recovery](../reliability/disaster-recovery.md)
+- [RPO and RTO](../reliability/rpo-rto.md)
+- [SLOs](../operations/slos.md)
+- [Metrics](../operations/metrics.md)
+- [Runbooks](../operations/runbooks.md)
