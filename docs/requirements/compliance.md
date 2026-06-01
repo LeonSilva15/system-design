@@ -108,9 +108,9 @@ flowchart TD
     Residency -->|Yes| ResidencyPlan[Map storage, processing, backups, logs, exports, support, and vendors]
     Residency -->|No| Access
 
-    ResidencyPlan --> Access{Can privileged or sensitive access be reviewed?}
-    Access -->|No| AccessPlan[Record requester, approver, reason, scope, time, and result]
-    Access -->|Yes| Workflow
+    ResidencyPlan --> Access{Does privileged or sensitive access exist?}
+    Access -->|Yes, but not reviewable| AccessPlan[Record requester, approver, reason, scope, time, and result]
+    Access -->|No, or already reviewable| Workflow
 
     AccessPlan --> Workflow{Does the workflow need approval or change control?}
     Workflow -->|Yes| WorkflowPlan[Define validation, approval, separation, release evidence, and rollback]
@@ -151,6 +151,22 @@ the obligation is unknown, the correct design action is review, not invention.
 
 ## Decision Guidance
 
+### Use A Compact Answer Shape
+
+In an interview or design review, summarize compliance requirements without
+pretending to interpret law:
+
+```text
+The obligation owner is <reviewer>. The regulated workflow is <workflow>.
+The system needs evidence for <actions>, retention/deletion rules for <data>,
+residency boundaries for <copies and access paths>, and access records for
+<privileged paths>. The main trade-off is <evidence or control> versus
+<privacy, cost, latency, support speed, or operational complexity>.
+```
+
+This shape keeps the answer practical: owner, evidence, lifecycle, residency,
+access, and trade-off.
+
 ### Name The Obligation And Owner
 
 Start with the source of the requirement:
@@ -178,6 +194,7 @@ Actor: <user, admin, support agent, service, worker, or integration>
 Action: <create, approve, export, delete, access, impersonate, change policy>
 Resource: <object, tenant, account, data class, or workflow>
 Result: <allowed, denied, failed, queued, rolled back>
+Time: <occurred at, decision time, or evidence window>
 Reason: <ticket, policy, user request, workflow reason, or system reason code>
 Evidence: <audit event, access record, approval, change summary, correlation ID>
 Integrity: <append-only path, correction event, restricted writer, or export>
@@ -248,6 +265,7 @@ Access record fields:
 | actor | Who performed the action |
 | target | User, tenant, account, resource, or data class |
 | scope | Fields, records, time window, or command allowed |
+| access window | When access starts, expires, or must be reviewed |
 | reason | Ticket, incident, support case, or workflow reason |
 | result | allowed, denied, expired, revoked, or failed |
 | evidence link | request ID, trace ID, audit event, or approval ID |
@@ -272,6 +290,17 @@ Ask:
 - Which release or configuration changes need approval before they affect the
   workflow?
 - Which manual step is acceptable in version 1, and what evidence records it?
+
+Tiny state-transition example:
+
+```text
+submitted -> under_review -> approved -> exported -> archived
+```
+
+The transition from `under_review` to `approved` might require a caseworker
+role, reason code, eligibility version, timestamp, and audit event. The
+transition from `approved` to `exported` might require export permission,
+recipient scope, file expiry, and an export audit event.
 
 Keep the first version understandable. A small state machine with clear audit
 events is often safer than a broad policy engine nobody can explain.
@@ -344,6 +373,10 @@ logs, backups, exports, and support access, not just the document store. Version
 export expiry, and a reviewer-owned retention table. It does not need a broad
 compliance platform until additional regulated workflows appear.
 
+Those choices map to concrete components: an audit table, a scoped admin view,
+a deletion or anonymization worker, an export-expiry job, and a reviewer-owned
+configuration table for retention assumptions.
+
 ## Checklist
 
 Before leaving compliance discovery, confirm:
@@ -353,7 +386,7 @@ Before leaving compliance discovery, confirm:
 - In-scope data classes, actors, tenants, systems, regions, vendors, support
   paths, and dates are listed.
 - Auditability requirements name actor, action, resource, result, reason,
-  evidence, correlation, retention, and integrity expectations.
+  timestamp, evidence, correlation, retention, and integrity expectations.
 - Retention rules cover primary data, derived data, audit records, backups,
   logs, exports, and archives where relevant.
 - Deletion, anonymization, archive, retained-minimal, hold, and exception paths
@@ -361,7 +394,8 @@ Before leaving compliance discovery, confirm:
 - Data residency covers storage, processing, backups, logs, exports, analytics,
   support access, vendors, queues, caches, and restore staging where relevant.
 - Access records cover privileged reads, support views, exports, break-glass,
-  service access, and worker actions where relevant.
+  service access, worker actions, access windows, expiry, and review timing
+  where relevant.
 - Regulated workflows define states, approvals, validation, change history,
   separation of duties, and rollback or correction paths where needed.
 - Evidence stores avoid secrets, raw payloads, unnecessary personal data, and
