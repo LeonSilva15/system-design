@@ -85,12 +85,19 @@ flowchart TD
     Blob -->|Yes| ObjectStore[Use object storage for blobs]
     ObjectStore --> Metadata[Keep metadata and permissions in an operational database]
 
-    Blob -->|No| Analytics{Is the main workload historical scans or aggregates?}
-    Analytics -->|Yes| Analytical[Use an analytical store or projection]
-    Analytics -->|No| Metrics{Is data mostly timestamped measurements or events?}
+    Blob -->|No| Metrics{Is the dominant data timestamped measurements or metrics?}
 
     Metrics -->|Yes| TimeSeries[Use a time-series store]
-    Metrics -->|No| Relationships{Do writes need relationships, constraints, or transactions?}
+    Metrics -->|No| Analytics{Is the main workload historical scans or aggregates?}
+
+    Analytics -->|Yes| Analytical[Use an analytical store or projection]
+    Analytics -->|No| Traversal{Is the core query multi-hop relationship traversal?}
+
+    Traversal -->|Yes| GraphAuthority{Does traversal own write-time truth?}
+    GraphAuthority -->|Yes| Graph[Use a graph store as source of truth]
+    GraphAuthority -->|No, traversal is derived| RelationalGraph[Use relational source plus graph projection]
+
+    Traversal -->|No| Relationships{Do writes need relationships, constraints, or transactions?}
 
     Relationships -->|Yes| Relational[Use a relational database as source of truth]
     Relationships -->|No| Aggregate{Is one aggregate read and written as a whole?}
@@ -99,10 +106,7 @@ flowchart TD
     Aggregate -->|No| KeyLookup{Is access mostly lookup by known key?}
 
     KeyLookup -->|Yes| KeyValue[Use a key-value store]
-    KeyLookup -->|No| Traversal{Is the core query multi-hop relationship traversal?}
-
-    Traversal -->|Yes| Graph[Use a graph store when traversal is core]
-    Traversal -->|No| RelationalDefault[Default to relational until access patterns prove otherwise]
+    KeyLookup -->|No| RelationalDefault[Default to relational until access patterns prove otherwise]
 
     Metadata --> Truth[Define source of truth, derived stores, backups, and repair path]
     Analytical --> Derived{Can analytics lag behind operational truth?}
@@ -111,10 +115,13 @@ flowchart TD
     Document --> Truth
     KeyValue --> Truth
     Graph --> Truth
+    RelationalGraph --> Truth
     RelationalDefault --> Truth
 
     Derived -->|Yes| Truth
-    Derived -->|No| Relational
+    Derived -->|No, bounded fresh query| Relational
+    Derived -->|No, heavy fresh scan| Reframe[Reframe freshness requirement or isolate workload]
+    Reframe --> Truth
     Retention --> Truth
 ```
 
@@ -234,9 +241,9 @@ complexity, or product depth justifies the specialized store.
 
 ### Choose Time-Series Storage For Measurements Over Time
 
-Choose a time-series store when the system ingests high-volume timestamped data
-such as metrics, sensor readings, availability checks, financial ticks, or
-operational events that are mostly queried by time window.
+Choose a time-series store when the system ingests high-volume timestamped
+measurements such as metrics, sensor readings, availability checks, financial
+ticks, or metric-like operational events that are mostly queried by time window.
 
 Design these rules before committing:
 
@@ -249,6 +256,10 @@ Design these rules before committing:
 
 If the system only stores a few status changes per business entity, an ordinary
 event or audit table may be simpler than a time-series store.
+
+If the event history must be replayed by multiple consumers, retained as an
+ordered log, or used to rebuild derived projections, evaluate a stream before
+treating the data as time-series measurements.
 
 ### Choose Object Storage For Blobs
 
@@ -357,7 +368,7 @@ Decision statement:
 Source of truth: relational database for rooms, residents, reservations,
 approvals, flyer metadata, and report inputs.
 Blob storage: object storage for uploaded flyers.
-Derived stores: none for launch; scheduled report files are derived.
+Derived artifacts: scheduled report files; no dedicated analytical store for launch.
 Freshness rule: reservation reads are fresh; monthly reports may lag by one day.
 Revisit signal: reporting queries affect reservation latency, flyer volume
 requires lifecycle automation, or sensor metrics become a product requirement.
