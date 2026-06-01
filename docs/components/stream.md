@@ -1,9 +1,9 @@
 # Stream
 
-A stream stores an ordered history of events so consumers can process facts
-after they happen. Streams are useful when multiple consumers need the same
-event sequence, when derived views must be rebuilt, or when event-driven
-pipelines need retention and replay.
+A stream stores event history so consumers can process facts after they happen,
+with ordering scoped to a defined key or partition. Streams are useful when
+multiple consumers need the same event sequence, when derived views must be
+rebuilt, or when event-driven pipelines need retention and replay.
 
 A stream is not a faster queue. It adds event contracts, partitioning choices,
 retention cost, replay safety, consumer lag, schema evolution, privacy review,
@@ -100,17 +100,17 @@ flowchart TD
     Rethink --> Replay
     Parallel --> Replay
 
-    Replay -->|No| Guard[Add idempotency, projection rebuild, or manual replay controls]
+    Replay -->|No| Guard[Do not stream yet: control replay side effects]
     Replay -->|Yes| Lag{Can consumers fall behind safely?}
 
-    Guard --> Lag
-    Lag -->|No| SyncOrQueue[Keep critical workflow synchronous or use bounded queue]
+    Guard --> Observe
+    Lag -->|No| Critical[Keep critical source-of-truth decision synchronous]
     Lag -->|Yes| Stream[Use stream with lag targets, backpressure, and runbooks]
 
     Queue --> Observe[Measure delivery, lag, freshness, replay, and repair]
     Simpler --> Observe
     Stop --> Observe
-    SyncOrQueue --> Observe
+    Critical --> Observe
     Stream --> Observe
 ```
 
@@ -184,6 +184,9 @@ Use a stream when the event sequence itself is valuable:
 If one consumer only needs to process work once, a queue is usually simpler.
 Queues optimize task delivery. Streams optimize retained event history and
 independent consumption.
+
+If consumers only need a periodic snapshot, export, or report, batch from the
+source of truth instead of publishing every state change as an event.
 
 ### Define The Event Contract
 
