@@ -368,6 +368,7 @@ Before accepting an authorization design, confirm:
 
 - [Security design overview](./)
 - [Authentication](authentication.md)
+- [Data privacy](data-privacy.md)
 - [Access-control models](access-control-models.md)
 - [Requirement discovery](../method/requirement-discovery.md)
 - [Functional vs non-functional requirements](../method/functional-vs-nonfunctional-requirements.md)

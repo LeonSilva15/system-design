@@ -325,6 +325,7 @@ Before accepting an encryption design, confirm:
 - [Security design overview](./)
 - [Authentication](authentication.md)
 - [Authorization](authorization.md)
+- [Data privacy](data-privacy.md)
 - [Secrets management](secrets-management.md)
 - [Access-control models](access-control-models.md)
 - [Backup and restore recovery](../reliability/backup-and-restore-recovery.md)
