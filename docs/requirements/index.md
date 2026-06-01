@@ -41,7 +41,7 @@ Start here when:
 | Unauthorized access or abuse | [security.md](security.md) | What must be protected, limited, or audited? |
 | Personal data exposure | [privacy.md](privacy.md) | What should be minimized, retained, deleted, or hidden? |
 | Budget pressure | [cost.md](cost.md) | Which resource dominates cost? |
-| Running and debugging the system | `operability.md` | What must be observable and repairable? |
+| Running and debugging the system | [operability.md](operability.md) | What must be observable and repairable? |
 | Regulated or audit-heavy workflow | `compliance.md` | What evidence, retention, residency, or deletion rule matters? |
 
 The focused pages are planned by the backlog and will become links as their
@@ -104,7 +104,7 @@ requirement creates a need, not because it is common in architecture diagrams.
 | Security requirements | Current | [docs/requirements/security.md](security.md) | Users, roles, permissions, sensitive actions, secrets, audit logs, and abuse risk |
 | Privacy requirements | Current | [docs/requirements/privacy.md](privacy.md) | Personal data, access controls, retention, deletion, export, minimization, and logging risks |
 | Cost requirements | Current | [docs/requirements/cost.md](cost.md) | Storage, compute, network, managed services, overprovisioning, and cost/performance trade-offs |
-| Operability requirements | Planned | `docs/requirements/operability.md` | Debugging, monitoring, deployments, on-call, runbooks, alerts, and maintenance tasks |
+| Operability requirements | Current | [docs/requirements/operability.md](operability.md) | Debugging, monitoring, deployments, on-call, runbooks, alerts, and maintenance tasks |
 | Compliance requirements | Planned | `docs/requirements/compliance.md` | Auditability, retention, deletion, data residency, access records, and regulated workflows |
 
 ## How Requirements Map To Components
