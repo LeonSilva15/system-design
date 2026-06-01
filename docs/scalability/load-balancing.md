@@ -363,6 +363,7 @@ Before relying on load balancing, confirm:
 ## Related Pages
 
 - [Load balancer component](../components/load-balancer.md)
+- [Health checks](../reliability/health-checks.md)
 - [Stateless services](stateless-services.md)
 - [Vertical vs horizontal scaling](vertical-vs-horizontal-scaling.md)
 - [Bottleneck analysis](bottleneck-analysis.md)

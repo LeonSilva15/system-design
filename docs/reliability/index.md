@@ -246,6 +246,7 @@ Current related pages:
 - [Graceful degradation](graceful-degradation.md)
 - [Bulkheads](bulkheads.md)
 - [Failover](failover.md)
+- [Health checks](health-checks.md)
 - [RPO and RTO](rpo-rto.md)
 - [Backup and restore recovery](backup-and-restore-recovery.md)
 - [Disaster recovery](disaster-recovery.md)
@@ -257,10 +258,6 @@ Current related pages:
 - [Database read scaling](../scalability/database-read-scaling.md)
 - [Design review checklist](../method/design-review-checklist.md)
 - [Operations](../operations/)
-
-Planned pages in this section:
-
-- `docs/reliability/health-checks.md`
 
 ## Checklist
 
