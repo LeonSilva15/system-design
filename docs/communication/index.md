@@ -265,6 +265,7 @@ Current pages:
 
 - [Communication overview](./)
 - [Synchronous vs asynchronous processing](sync-vs-async.md)
+- [REST vs gRPC](rest-vs-grpc.md)
 - [Pub/sub](pub-sub.md)
 - [Retries and backoff](retries-and-backoff.md)
 - [Idempotency](idempotency.md)
@@ -274,7 +275,6 @@ Current pages:
 
 Planned pages:
 
-- `docs/communication/rest-vs-grpc.md`
 - `docs/communication/polling-vs-websockets-vs-sse.md`
 - `docs/communication/queues.md`
 - `docs/communication/streams.md`
