@@ -351,6 +351,7 @@ Before accepting an operations design, confirm:
 
 Current pages:
 
+- [Alerting](alerting.md)
 - [Operations overview](./)
 - [Logs](logs.md)
 - [Observability basics](observability-basics.md)
@@ -359,8 +360,6 @@ Current pages:
 
 Planned pages:
 
-- `docs/operations/alerting.md`: symptom-based alerts, alert fatigue,
-  thresholds, paging, and escalation.
 - `docs/operations/slos.md`: SLIs, SLOs, error budgets, and reliability
   trade-offs.
 - `docs/operations/dashboards.md`: dashboard purpose, golden signals,
