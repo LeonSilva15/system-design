@@ -2,8 +2,8 @@
 
 Component selection turns requirements into justified building blocks. Use this
 map after requirement discovery, before drawing a final architecture, so each
-database, cache, queue, stream, search index, worker, object store, CDN, and
-load balancer appears because a requirement created pressure for it.
+database, cache, queue, stream, search index, worker, scheduler, object store,
+CDN, and load balancer appears because a requirement created pressure for it.
 
 The goal is not to collect common architecture boxes. The goal is to explain
 which problem each component solves, what it makes harder, and when version 1
@@ -24,8 +24,8 @@ Use this page to:
 Use this map when:
 
 - a design jumps from a prompt directly to components;
-- a reviewer asks why a cache, queue, stream, search index, CDN, or load
-  balancer is present;
+- a reviewer asks why a cache, queue, stream, search index, scheduler, CDN, or
+  load balancer is present;
 - one requirement can be satisfied by several different components;
 - a version 1 design is accumulating infrastructure without clear ownership;
 - a walkthrough needs a compact way to explain component decisions.
@@ -42,6 +42,7 @@ architecture-shaping pressures are known.
 | Repeated reads are slow or expensive and can be stale | Cache | Stale data, invalidation, authorization leakage, and fallback behavior |
 | Work can finish later or absorb bursts | Queue plus workers | Hidden latency, duplicate work, ordering, and dead-letter handling |
 | Events need replay, retention, or multiple independent consumers | Stream | Consumer lag, partitioning, event contracts, and replay cost |
+| Work must start on a recurring schedule or calendar boundary | Scheduler | Missed runs, duplicate runs, locks, catch-up, and monitoring |
 | Users need text search, filters, ranking, or autocomplete | Search index | Freshness, reindexing, relevance, and source-of-truth drift |
 | Files, images, exports, backups, or large blobs are stored | Object storage | Metadata ownership, lifecycle, access, and processing workflow |
 | Static or cacheable content must be close to users | CDN | Cacheability, invalidation, signed URLs, and origin protection |
@@ -103,8 +104,13 @@ flowchart TD
     Async -->|Retained event history, replay, many consumers| Stream[Stream]
     Async -->|No| Sync[Keep synchronous path small]
 
+    Start --> Scheduled{Does time create work?}
+    Scheduled -->|Recurring, delayed, or calendar trigger| Scheduler[Scheduler]
+    Scheduled -->|No| NoScheduled[No scheduled trigger]
+
     Queue --> Workers[Background workers]
     Stream --> Consumers[Stream consumers or event processors]
+    Scheduler --> Workers
     Workers --> Observe
     Consumers --> Observe
 
@@ -117,6 +123,8 @@ flowchart TD
     Search --> Observe
     DirectRead --> Observe
     Sync --> Observe
+    Scheduler --> Observe
+    NoScheduled --> Observe
     LoadBalancer --> Observe
     SingleInstance --> Observe
     Stateless --> Observe
@@ -144,6 +152,7 @@ the first decision pass.
 | Object storage | [Object storage](object-storage.md) | Files, images, videos, exports, backups, or blobs outgrow normal records | What metadata, access, lifecycle, and processing path owns each object? |
 | CDN | [CDN](cdn.md) | Cacheable content should be served near users or protect origin | What is cacheable, how is it invalidated, and how is private content signed? |
 | Background workers | [Background workers](background-workers.md) | CPU-heavy, slow, scheduled, retryable, or provider work should not block users | How are jobs observed, retried, deduped, and repaired? |
+| Scheduler | [Scheduler](scheduler.md) | Work must start at a recurring time, deadline, or calendar boundary | What run evidence, lock, idempotency, missed-run, and catch-up behavior is needed? |
 | Load balancer | [Load balancer](load-balancer.md) | Multiple stateless instances need routing, health checks, or failover | What health check, routing, session, and downstream-protection behavior is needed? |
 
 ## Requirement Signals
@@ -158,6 +167,7 @@ the first decision pass.
 | Burst absorption | Queue | Producers and consumers operate at different speeds | Backlog, retries, ordering, dead letters, and visibility |
 | Event history or fanout | Stream | Multiple consumers need retained events or replay | Event contract, ordering, consumer lag, and retention cost |
 | Slow side effects | Background workers | User response should not wait for final completion | Pending states, retries, idempotency, and job monitoring |
+| Recurring time-based work | Scheduler | Work should start because a time window, deadline, or calendar rule arrived | Missed runs, duplicate runs, locks, idempotency, catch-up, and alerts |
 | Horizontal stateless scale | Load balancer | Requests need routing across healthy instances | Health checks, connection draining, sticky sessions, and downstream overload |
 | Global cacheable delivery | CDN | Users are far from origin or origin needs protection | Cache rules, invalidation, signed URLs, and edge debugging |
 
@@ -249,6 +259,26 @@ Worker design should name:
 
 If none of that is needed and the work is cheap, keep it synchronous.
 
+### Schedule Recurring Work Explicitly
+
+A scheduler creates work because time passed. It should not be treated as proof
+that the work finished.
+
+Before adding one, define:
+
+- which job owns the schedule and runbook;
+- whether the schedule is interval, wall-clock, calendar, or deadline based;
+- which run key makes one scheduled window unique;
+- whether multiple runners need a lock, lease, leader, or claim record;
+- what happens when a run is missed, duplicated, late, partial, or overlapping;
+- which metrics show last success, next expected run, duration, lock
+  contention, catch-up backlog, and stale work.
+
+For version 1, a platform scheduler plus a durable run record can be enough for
+important recurring jobs. Add queues, workers, or workflow orchestration only
+when the work needs buffering, retries, separate capacity, or long-running
+state.
+
 ### Add Routing After Workload Shape Is Known
 
 Load balancers appear when more than one instance should serve traffic, or when
@@ -275,6 +305,8 @@ Before adding a load balancer, define:
 - Creating a search index when database filters and pagination are enough.
 - Storing files in the primary database when object lifecycle and access need a
   different path.
+- Running scheduled work without run records, idempotency, missed-run alerts,
+  lock behavior, and catch-up limits.
 - Adding a CDN for content that is private, uncacheable, or hard to invalidate.
 - Adding a load balancer while ignoring the shared database, provider, or queue
   that remains the real bottleneck.
@@ -294,14 +326,14 @@ Component decisions:
 | Room browsing needs filters and freshness labels, but launch traffic is modest | Direct indexed database reads | The source of truth stays simple while the read path remains explainable | Cache until browse p95 or database read load exceeds the target |
 | Event permits are uploaded as files | Object storage | Large blobs need object lifecycle, metadata, permissions, and virus-scan workflow | CDN until public download latency or origin load requires it |
 | Reminder delivery can happen after reservation confirmation | Queue plus background workers | Slow provider calls and retries should not block the user response | Stream until multiple consumers or replay are needed |
-| Staff need monthly reports | Analytical projection or scheduled export job | Reporting should not overload the reservation write path | Separate analytical store until report volume grows |
+| Staff need monthly reports | Scheduler plus background worker or analytical projection | Reports should run on a visible schedule without overloading the reservation write path | Separate analytical store until report volume grows |
 | Launch traffic may require more API instances | Load balancer | Stateless API instances need routing, health checks, and deploy draining | Regional load balancing until regional traffic requires it |
 
 Version 1 can use one relational database, direct indexed reads, object storage
-for permit files, a small reminder queue with workers, and a simple load
-balancer only if multiple API instances are actually deployed. It does not need
-a stream, search index, CDN, or microservice split until the requirements create
-those pressures.
+for permit files, a small reminder queue with workers, a visible monthly report
+schedule, and a simple load balancer only if multiple API instances are
+actually deployed. It does not need a stream, search index, CDN, workflow
+engine, or microservice split until the requirements create those pressures.
 
 ## Checklist
 
@@ -310,8 +342,9 @@ Before leaving component selection, confirm:
 - Every component maps to a functional or non-functional requirement.
 - Source-of-truth data is identified before derived caches, indexes, streams,
   or analytical projections.
-- Databases, caches, queues, streams, search, workers, object storage, CDN, and
-  load balancers are included only when their requirement signal exists.
+- Databases, caches, queues, streams, search, workers, schedulers, object
+  storage, CDN, and load balancers are included only when their requirement
+  signal exists.
 - Each component has an owner, failure mode, observability signal, and revisit
   trigger.
 - Version 1 defers components that are not needed for the next credible
