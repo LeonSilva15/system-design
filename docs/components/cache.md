@@ -85,7 +85,7 @@ flowchart TD
     Fresh -->|Yes| CanInvalidate{Can updates target the affected cache keys?}
     Fresh -->|No| StaleBound{Can you state an acceptable stale window?}
 
-    CanInvalidate -->|Yes| Invalidate[Use targeted invalidation or write-through]
+    CanInvalidate -->|Yes| Invalidate[Use targeted invalidation or write-through with source check]
     CanInvalidate -->|No| DirectFresh[Prefer source read or redesign freshness promise]
 
     StaleBound -->|No| Direct
@@ -104,7 +104,7 @@ flowchart TD
     Hot -->|No| Fallback{Is fallback safe if cache is missing or stale?}
 
     HotPlan --> Fallback
-    Fallback -->|Yes| Operate[Track hit rate, age, misses, origin load, errors, and stale serves]
+    Fallback -->|Yes| Operate[Measure chosen path, origin load, errors, freshness, and cache metrics]
     Fallback -->|No| FixFallback[Define fail-open, fail-closed, degrade, or source-read behavior]
 
     Direct --> Operate
@@ -331,7 +331,7 @@ The team walks the tree:
   rate limit or serve a clearly aged published copy. Reservation writes fail
   closed or retry against the source rather than accepting stale capacity.
 
-Decision statement:
+Interview answer frame:
 
 ```text
 Read: public class schedule and class detail pages.
