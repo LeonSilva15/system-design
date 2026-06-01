@@ -80,10 +80,10 @@ access control, encryption, deletion, export, redaction, or incident response.
 ```mermaid
 flowchart TD
     Start[Workflow touches user, customer, tenant, or operator data] --> Personal{Is any field personal data?}
-    Personal -->|No| Minimal[Record no personal data and use normal operational controls]
+    Personal -->|No| Minimal[Record no personal data decision and monitor future data additions]
     Personal -->|Yes| Purpose{Is the purpose necessary and explicit?}
 
-    Purpose -->|No| Remove[Do not collect it, or replace with less sensitive data]
+    Purpose -->|No| Remove[Do not collect it until the purpose is explicit]
     Purpose -->|Yes| Classify[Classify sensitivity, owner, source, and data store]
 
     Classify --> Access{Who needs access for the stated purpose?}
@@ -95,16 +95,17 @@ flowchart TD
     Copies -->|Yes| CopyRules[Set rules for logs, queues, analytics, exports, caches, backups, and partners]
     Copies -->|No| Lifecycle
 
-    CopyRules --> Lifecycle{Does data need retention, deletion, or export behavior?}
+    CopyRules --> Lifecycle{Are retention, deletion, export, and exception rules defined?}
     Lifecycle -->|Yes| LifecyclePlan[Define retention, delete, anonymize, export, and exception paths]
-    Lifecycle -->|No| Logs
+    Lifecycle -->|No| DefineLifecycle[Define the missing lifecycle rule before release]
 
+    DefineLifecycle --> LifecyclePlan
     LifecyclePlan --> Logs{Can logs or observability expose this data?}
     Logs -->|Yes| LogRules[Use safe IDs, redaction, hashing, summaries, and field allowlists]
     Logs -->|No| Observe
 
-    Minimal --> Observe[Track privacy fields, access, exports, deletions, and logging violations]
-    Remove --> Observe
+    Remove --> Minimal
+    Observe[Track privacy fields, access, exports, deletions, and logging violations]
     LogRules --> Observe
 ```
 
@@ -305,6 +306,7 @@ exports, and logs full of personal data.
 | Logs include personal data | Observability store becomes exposure path | Use redaction, safe IDs, field allowlists, and log review | Redaction failures, secret/PII scan hits, blocked log fields |
 | Retention is undefined | Data lives forever by default | Set retention periods, archive rules, and cleanup ownership | Age distribution, cleanup job lag, records past retention |
 | Backup restore reintroduces deleted data | Old copy conflicts with deletion expectations | Document backup retention and run post-restore deletion reconciliation | Restore drill checks, deletion replay count, backup age |
+| Partner or downstream copy outlives the source | Deletion or retention expectations are broken outside the primary system | Share minimum fields, define downstream retention, require deletion confirmation or reconciliation, and audit transfers | Partner deletion failures, transfer inventory gaps, stale downstream records |
 
 ## Common Mistakes
 
@@ -332,7 +334,7 @@ Privacy requirements:
 
 | Workflow | Privacy Need | Design Impact | Revisit When |
 | --- | --- | --- | --- |
-| Appointment booking | Resident name, email, and item description are needed to coordinate repair | Store contact data on the appointment, restrict to resident and assigned staff | Support cases require broader access |
+| Appointment booking | Resident name, email, and item description are needed to coordinate repair | Store contact data on the appointment, restrict to resident and assigned staff, and treat free-text descriptions as risky because residents may enter sensitive details | Support cases require broader access |
 | Pickup coordination | Exact address is needed only for confirmed pickup visits | Collect address after pickup confirmation and hide it from general volunteers | Pickup logistics expand to partner teams |
 | Optional item photos | Photos may include personal background details | Make upload optional, store with appointment scope, and avoid analytics copies | Photo review or model training is proposed |
 | Support notes | Notes may include private circumstances | Use structured reason codes plus limited free text visible only to support | Notes become needed in reports |
