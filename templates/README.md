@@ -13,4 +13,5 @@ reasoning behind a design.
 - [Capacity estimation worksheet](capacity-estimation-template.md)
 - [Walkthrough template](walkthrough-template.md)
 - [Architecture diagram template](architecture-diagram-template.md)
+- [Sequence diagram template](sequence-diagram-template.md)
 - [Lab template](lab-template/)
