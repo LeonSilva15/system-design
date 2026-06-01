@@ -136,11 +136,11 @@ Prompts:
 
 ## Failure Modes
 
-| Failure Mode | Impact | Design Response |
-| --- | --- | --- |
-| `[Failure, such as stale read, duplicate request, timeout, overload, or data loss]` | `[User/system impact]` | `[Retry, reject, degrade, repair, alert, or manual review]` |
-| `[Failure]` | `[Impact]` | `[Response]` |
-| `[Failure]` | `[Impact]` | `[Response]` |
+| Failure Mode | Impact | Design Response | Observable Signal |
+| --- | --- | --- | --- |
+| `[Failure, such as stale read, duplicate request, timeout, overload, or data loss]` | `[User/system impact]` | `[Retry, reject, degrade, repair, alert, or manual review]` | `[Metric, log field, alert, support queue, or manual review signal]` |
+| `[Failure]` | `[Impact]` | `[Response]` | `[Signal]` |
+| `[Failure]` | `[Impact]` | `[Response]` | `[Signal]` |
 
 ## Common Mistakes
 
@@ -163,6 +163,16 @@ constraint is [requirement]. The tree points to [option] because [reason].
 The team defers [more complex option] until [measurement or failure signal].
 ```
 
+Filled-in example:
+
+```text
+A team is designing a permit status page. Residents need fast reads, but staff
+updates can take a few seconds to appear. The tree points to a cached read path
+with documented staleness because freshness is not required for this view. The
+team defers read replicas until cache miss rate or database load shows the
+source-of-truth store is the bottleneck.
+```
+
 ## Checklist
 
 Before publishing the page, confirm:
@@ -179,6 +189,9 @@ Before publishing the page, confirm:
 
 ## Related Pages
 
+- `[Topic requirement page, such as ../docs/requirements/latency.md]`
+- `[Topic component page, such as ../docs/components/cache.md]`
+- `[Related walkthrough or method page]`
 - [Diagram style guide](../docs/visuals/diagram-style-guide.md)
 - [Diagram legend](../docs/visuals/diagram-legend.md)
 - [Mermaid examples](../docs/visuals/mermaid-examples.md)
