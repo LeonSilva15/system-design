@@ -343,6 +343,7 @@ Before accepting a privacy design, confirm:
 - [Authorization](authorization.md)
 - [Access-control models](access-control-models.md)
 - [Audit logs](audit-logs.md)
+- [Data retention and deletion](data-retention-and-deletion.md)
 - [Encryption](encryption.md)
 - [Data retention](../data/data-retention.md)
 - [Operational vs analytical data](../data/operational-vs-analytical-data.md)
