@@ -353,11 +353,10 @@ Current pages:
 
 - [Operations overview](./)
 - [Observability basics](observability-basics.md)
+- [Metrics](metrics.md)
 
 Planned pages:
 
-- `docs/operations/metrics.md`: request rate, errors, latency, saturation,
-  queue depth, cache hit rate, and business metrics.
 - `docs/operations/logs.md`: structured logs, correlation IDs, sensitive data,
   log volume, and debugging usefulness.
 - `docs/operations/tracing.md`: distributed traces, spans, propagation, latency
