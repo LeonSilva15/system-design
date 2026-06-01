@@ -49,10 +49,10 @@ sequenceDiagram
             Provider-->>Worker: Success response
             Worker->>Store: Record completed outcome
         else Retryable timeout
-            Provider--xWorker: Outcome unknown or timed out
+            Provider--xWorker: No response before timeout
             Worker->>Queue: Retry with backoff using same operation key
         else Retry exhausted or ambiguous
-            Worker->>Store: Record needs_review state
+            Worker->>Store: Record outcome for review
         end
     end
 ```
