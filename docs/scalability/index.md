@@ -11,10 +11,10 @@ pressure.
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
 - [Rate limiting](rate-limiting.md)
+- [Vertical vs horizontal scaling](vertical-vs-horizontal-scaling.md)
 
 ## Planned Pages
 
-- `docs/scalability/vertical-vs-horizontal-scaling.md`
 - `docs/scalability/stateless-services.md`
 - `docs/scalability/load-balancing.md`
 - `docs/scalability/caching-strategies.md`
