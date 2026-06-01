@@ -17,6 +17,7 @@ directory.
 | [Quorum read/write simulator](../../labs/quorum-read-write-simulator/) | read quorum, write quorum, unavailable replicas, stale reads, and latency trade-offs |
 | [Sharding simulator](../../labs/sharding-simulator/) | hash sharding, range sharding, resharding, hot partitions, and cross-shard query limits |
 | [Hot-key demo](../../labs/hot-key-demo/) | skewed traffic, overloaded partition or cache key, and mitigation strategies |
+| [Log compaction demo](../../labs/log-compaction-demo/) | append-only logs, latest-value compaction, consumer offsets, and retention gaps |
 | [Retry and idempotency demo](../../labs/retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 Use each lab's `README.md` for setup, commands, expected output, and

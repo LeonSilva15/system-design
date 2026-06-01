@@ -33,6 +33,7 @@ large service that hides the behavior being taught.
 | [Quorum read/write simulator](quorum-read-write-simulator/) | read quorum, write quorum, unavailable replicas, stale reads, and latency trade-offs |
 | [Sharding simulator](sharding-simulator/) | hash sharding, range sharding, resharding, hot partitions, and cross-shard query limits |
 | [Hot-key demo](hot-key-demo/) | skewed traffic, overloaded partition or cache key, and mitigation strategies |
+| [Log compaction demo](log-compaction-demo/) | append-only logs, latest-value compaction, consumer offsets, and retention gaps |
 | [Retry and idempotency demo](retry-idempotency-demo/) | duplicate requests, idempotency keys, duplicate events, and guarded side effects |
 
 ## Runtime Expectations
