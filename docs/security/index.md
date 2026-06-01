@@ -296,6 +296,7 @@ These paths become linked pages as their tickets are completed.
 
 ## Related Pages
 
+- [Security requirements](../requirements/security.md)
 - [Requirement discovery](../method/requirement-discovery.md)
 - [Functional vs non-functional requirements](../method/functional-vs-nonfunctional-requirements.md)
 - [Design review checklist](../method/design-review-checklist.md)
