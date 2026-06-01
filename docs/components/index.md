@@ -82,28 +82,25 @@ flowchart TD
     DataShape -->|Large blobs or files| ObjectStore[Object storage]
     DataShape -->|Analytical queries| Analytical[Analytical store or projection]
 
-    Relational --> ReadPressure
-    Document --> ReadPressure
-    KeyValue --> ReadPressure
+    Relational --> ReadNeed
+    Document --> ReadNeed
+    KeyValue --> ReadNeed
     ObjectStore --> Delivery
-    Analytical --> SearchNeed
+    Analytical --> Observe
 
-    ReadPressure{Are reads repeated, expensive, or globally distant?}
-    ReadPressure -->|Stale reads acceptable| Cache[Cache]
-    ReadPressure -->|Static or cacheable edge content| CDN[CDN]
-    ReadPressure -->|Fresh source needed| DirectRead[Direct source read]
-
-    SearchNeed{Do users need search, ranking, filters, or autocomplete?}
-    SearchNeed -->|Yes| Search[Search index]
-    SearchNeed -->|No| DirectRead
+    ReadNeed{What read pressure dominates?}
+    ReadNeed -->|Repeated expensive reads, stale reads acceptable| Cache[Cache]
+    ReadNeed -->|Static or cacheable edge content| CDN[CDN]
+    ReadNeed -->|Search, ranking, filters, autocomplete| Search[Search index]
+    ReadNeed -->|Fresh source needed| DirectRead[Direct source read]
 
     Delivery{Are files large, public, or globally downloaded?}
     Delivery -->|Yes| CDN
     Delivery -->|No| DirectRead
 
-    Start --> Async{Can work finish after the response?}
-    Async -->|Yes| Queue[Queue]
-    Async -->|Needs replay or many consumers| Stream[Stream]
+    Start --> Async{Is work or event delivery outside the request path?}
+    Async -->|Task delivery, retries, burst smoothing| Queue[Queue]
+    Async -->|Retained event history, replay, many consumers| Stream[Stream]
     Async -->|No| Sync[Keep synchronous path small]
 
     Queue --> Workers[Background workers]
@@ -131,23 +128,23 @@ requirement and wrong for another.
 
 ## Component Page Map
 
-Detailed component decision pages are delivered by later tickets. Until those
-pages exist, use the planned paths below as the section map and use this index
-for the first decision pass.
+Detailed component decision pages are linked below. Some linked targets start as
+navigation pages and are expanded by later component tickets; this index remains
+the first decision pass.
 
-| Component | Planned page | Appears when... | First question |
+| Component | Page | Appears when... | First question |
 | --- | --- | --- | --- |
-| API layer | `docs/components/api-layer.md` | External or internal callers need a contract | Which caller, protocol, auth, validation, versioning, and rate limit are needed? |
-| Service layer | `docs/components/service-layer.md` | Business logic needs ownership and boundaries | Can a modular monolith satisfy the boundary before adding services? |
-| Database selection | `docs/components/database-selection.md` | Durable state must be stored and queried | What is the data shape, invariant, access pattern, and consistency need? |
-| Cache | `docs/components/cache.md` | Repeated reads are slow or expensive and can tolerate staleness | What is the freshness rule, invalidation path, and fallback? |
-| Queue | `docs/components/queue.md` | Work can be delayed, retried, or smoothed across bursts | What is the delay tolerance, retry behavior, ordering need, and idempotency key? |
-| Stream | `docs/components/stream.md` | Events need retention, replay, ordering, or many consumers | Who owns the event contract, retention, partitioning, and consumer lag? |
-| Search index | `docs/components/search-index.md` | Users need search, ranking, filters, typo tolerance, or autocomplete | What freshness and reindexing behavior is acceptable? |
-| Object storage | `docs/components/object-storage.md` | Files, images, videos, exports, backups, or blobs outgrow normal records | What metadata, access, lifecycle, and processing path owns each object? |
-| CDN | `docs/components/cdn.md` | Cacheable content should be served near users or protect origin | What is cacheable, how is it invalidated, and how is private content signed? |
-| Background workers | `docs/components/background-workers.md` | CPU-heavy, slow, scheduled, retryable, or provider work should not block users | How are jobs observed, retried, deduped, and repaired? |
-| Load balancer | `docs/components/load-balancer.md` | Multiple stateless instances need routing, health checks, or failover | What health check, routing, session, and downstream-protection behavior is needed? |
+| API layer | [API layer](api-layer.md) | External or internal callers need a contract | Which caller, protocol, auth, validation, versioning, and rate limit are needed? |
+| Service layer | [Service layer](service-layer.md) | Business logic needs ownership and boundaries | Can a modular monolith satisfy the boundary before adding services? |
+| Database selection | [Database selection](database-selection.md) | Durable state must be stored and queried | What is the data shape, invariant, access pattern, and consistency need? |
+| Cache | [Cache](cache.md) | Repeated reads are slow or expensive and can tolerate staleness | What is the freshness rule, invalidation path, and fallback? |
+| Queue | [Queue](queue.md) | Work can be delayed, retried, or smoothed across bursts | What is the delay tolerance, retry behavior, ordering need, and idempotency key? |
+| Stream | [Stream](stream.md) | Events need retention, replay, ordering, or many consumers | Who owns the event contract, retention, partitioning, and consumer lag? |
+| Search index | [Search index](search-index.md) | Users need search, ranking, filters, typo tolerance, or autocomplete | What freshness and reindexing behavior is acceptable? |
+| Object storage | [Object storage](object-storage.md) | Files, images, videos, exports, backups, or blobs outgrow normal records | What metadata, access, lifecycle, and processing path owns each object? |
+| CDN | [CDN](cdn.md) | Cacheable content should be served near users or protect origin | What is cacheable, how is it invalidated, and how is private content signed? |
+| Background workers | [Background workers](background-workers.md) | CPU-heavy, slow, scheduled, retryable, or provider work should not block users | How are jobs observed, retried, deduped, and repaired? |
+| Load balancer | [Load balancer](load-balancer.md) | Multiple stateless instances need routing, health checks, or failover | What health check, routing, session, and downstream-protection behavior is needed? |
 
 ## Requirement Signals
 
@@ -163,6 +160,19 @@ for the first decision pass.
 | Slow side effects | Background workers | User response should not wait for final completion | Pending states, retries, idempotency, and job monitoring |
 | Horizontal stateless scale | Load balancer | Requests need routing across healthy instances | Health checks, connection draining, sticky sessions, and downstream overload |
 | Global cacheable delivery | CDN | Users are far from origin or origin needs protection | Cache rules, invalidation, signed URLs, and edge debugging |
+
+## Explain The Choice
+
+In an interview or design review, state the path plainly:
+
+```text
+Requirement -> component -> trade-off -> version 1 simplification -> revisit signal
+```
+
+For example: "Room browsing has repeated reads, but launch traffic is modest, so
+version 1 uses indexed database reads. Add a cache only when measured browse
+latency or database read load exceeds the target, and document freshness and
+fallback behavior before adding it."
 
 ## Decision Guidance
 
@@ -281,7 +291,7 @@ Component decisions:
 | Requirement | Component | Why It Appears | Deferred Until |
 | --- | --- | --- | --- |
 | Reservations must not double-book a room and time slot | Relational database | A transactional write or uniqueness rule protects the source-of-truth invariant | Sharding until measured write contention requires it |
-| Room search reads can be stale for a minute during busy browsing | Cache | Popular browse results can be cached with freshness labels and source fallback | Cache until browse p95 or database read load justifies it |
+| Room browsing needs filters and freshness labels, but launch traffic is modest | Direct indexed database reads | The source of truth stays simple while the read path remains explainable | Cache until browse p95 or database read load exceeds the target |
 | Event permits are uploaded as files | Object storage | Large blobs need object lifecycle, metadata, permissions, and virus-scan workflow | CDN until public download latency or origin load requires it |
 | Reminder delivery can happen after reservation confirmation | Queue plus background workers | Slow provider calls and retries should not block the user response | Stream until multiple consumers or replay are needed |
 | Staff need monthly reports | Analytical projection or scheduled export job | Reporting should not overload the reservation write path | Separate analytical store until report volume grows |
@@ -314,9 +324,12 @@ Before leaving component selection, confirm:
 - [Requirements map](../requirements/)
 - [Latency requirements](../requirements/latency.md)
 - [Throughput requirements](../requirements/throughput.md)
+- [Availability requirements](../requirements/availability.md)
 - [Durability requirements](../requirements/durability.md)
 - [Consistency requirements](../requirements/consistency.md)
 - [Scalability requirements](../requirements/scalability.md)
+- [Security requirements](../requirements/security.md)
+- [Privacy requirements](../requirements/privacy.md)
 - [Cost requirements](../requirements/cost.md)
 - [Operability requirements](../requirements/operability.md)
 - [Scale estimation](../method/scale-estimation.md)
