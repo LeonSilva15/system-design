@@ -7,13 +7,13 @@ pressure.
 
 ## Current Pages
 
+- [Bottleneck analysis](bottleneck-analysis.md)
 - [Capacity estimation](capacity-estimation.md)
 - [Database read scaling](database-read-scaling.md)
 - [Rate limiting](rate-limiting.md)
 
 ## Planned Pages
 
-- `docs/scalability/bottleneck-analysis.md`
 - `docs/scalability/vertical-vs-horizontal-scaling.md`
 - `docs/scalability/stateless-services.md`
 - `docs/scalability/load-balancing.md`
