@@ -88,10 +88,10 @@ flowchart TD
     Durable -->|No| Simpler[Use in-process task, scheduler, or direct call first]
     Durable -->|Yes| RetrySafe{Can the job run more than once safely?}
 
-    RetrySafe -->|No| Idempotency[Define idempotency, dedupe, or manual review before queueing]
+    RetrySafe -->|No| StopQueue[Do not queue yet: define idempotency, dedupe, or manual repair]
     RetrySafe -->|Yes| Ordering{Does correctness require ordering?}
 
-    Idempotency --> Ordering
+    StopQueue --> Observe
 
     Ordering -->|Per entity or tenant| Partitioned[Use per-key ordering or partitioned queue]
     Ordering -->|Global order| Rethink[Recheck requirement; global ordering is costly]
@@ -106,11 +106,11 @@ flowchart TD
 
     BackpressurePlan --> Failure
     Failure -->|Yes| DLQ[Use dead-letter or quarantine path with repair rules]
-    Failure -->|No| Operate[Track queue age, depth, attempts, retries, dead letters, and worker health]
+    Failure -->|No| Observe[Measure chosen path, user status, backlog if queued, retries, and repair]
 
-    DLQ --> Operate
-    Sync --> Operate
-    Simpler --> Operate
+    DLQ --> Observe
+    Sync --> Observe
+    Simpler --> Observe
 ```
 
 Use the tree to decide whether a queue is justified and what obligations come
@@ -329,8 +329,9 @@ The team walks the tree:
 - Creating the repair request must be synchronous because the resident needs a
   confirmed request ID. The source-of-truth write stays in the API path.
 - Sending confirmation and reminder messages can happen after the response, but
-  accepted messages must survive process failure. Use a durable queue or outbox
-  job after the request commit.
+  accepted messages must survive process failure. Persist an outbox or job
+  record in the same source-of-truth transaction, then let workers drain it; if
+  enqueue happens after commit, add reconciliation for missed jobs.
 - Message jobs use an idempotency key like `request_id + message_type +
   recipient_id` so worker retries do not send duplicate messages.
 - The provider sometimes rate limits. Retry with bounded backoff and jitter,
@@ -391,6 +392,7 @@ Before adding a queue, confirm:
 - [Throughput requirements](../requirements/throughput.md)
 - [Consistency requirements](../requirements/consistency.md)
 - [Availability requirements](../requirements/availability.md)
+- [Outbox pattern](../communication/outbox-pattern.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
 - [Idempotency](../communication/idempotency.md)
 - [Observability basics](../operations/observability-basics.md)
