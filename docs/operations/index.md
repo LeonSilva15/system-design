@@ -352,6 +352,7 @@ Before accepting an operations design, confirm:
 Current pages:
 
 - [Alerting](alerting.md)
+- [Capacity planning](capacity-planning.md)
 - [Dashboards](dashboards.md)
 - [Incident response](incident-response.md)
 - [Operations overview](./)
@@ -364,8 +365,6 @@ Current pages:
 
 Planned pages:
 
-- `docs/operations/capacity-planning.md`: growth trends, utilization,
-  saturation, headroom, and scaling triggers.
 - `docs/operations/cost-analysis.md`: compute, storage, bandwidth, managed
   services, overprovisioning, and cost trade-offs.
 - `docs/operations/component-metrics-catalog.md`: metrics for APIs, databases,
