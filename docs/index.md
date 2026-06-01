@@ -74,7 +74,7 @@ operations as new constraints appear.
 | [Walkthroughs](walkthroughs/) | [URL shortener](walkthroughs/url-shortener.md), [rate limiter](walkthroughs/rate-limiter.md), [notification system](walkthroughs/notification-system.md), [news feed](walkthroughs/news-feed.md), [metrics platform](walkthroughs/metrics-platform.md) | How do complete designs show requirements, choices, trade-offs, and simplification? |
 | [Labs](labs/) | [Labs guide](labs/) and the runnable labs in `../labs/` | How can I observe behavior such as rate limiting, retries, caching, quorum reads, sharding, hot keys, compaction, and DLQs? |
 | [Visuals](visuals/) | [Diagram style guide](visuals/diagram-style-guide.md), [diagram legend](visuals/diagram-legend.md), [Mermaid examples](visuals/mermaid-examples.md), [diagram review checklist](visuals/diagram-review-checklist.md) | How should diagrams clarify decisions instead of decorating pages? |
-| [Practice](practice/) | [Practice index](practice/) | How can I review, critique, and improve system design answers? |
+| [Practice](practice/) | [Practice index](practice/), [system design rubric](practice/system-design-rubric.md) | How can I review, critique, and improve system design answers? |
 | [Glossary](glossary.md) | [Glossary](glossary.md) | What do common system design terms mean in practical language? |
 
 ## Choose Your Next Page
