@@ -171,6 +171,13 @@ make lint
 If a command does not exist yet, do not claim it passed. Run focused checks that
 fit the change and explain what project-level checks are unavailable.
 
+## Docs Site Deployment
+
+The documentation site is built with MkDocs Material and deployed by GitHub
+Actions. In the repository settings, GitHub Pages must use **GitHub Actions** as
+the source. Do not switch Pages to deploy from a branch unless the source of
+truth is updated first.
+
 ## Final Quality Bar
 
 Before merging, the contribution should answer:

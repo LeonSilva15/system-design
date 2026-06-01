@@ -404,4 +404,4 @@ Before choosing or adding a database, confirm:
 - [Operational vs analytical data](../data/operational-vs-analytical-data.md)
 - [Backups and restore](../data/backups-and-restore.md)
 - [Design review checklist](../method/design-review-checklist.md)
-- [Decision record template](../../templates/decision-record-template.md)
+- [Decision record template](https://github.com/LeonSilva15/system-design/blob/main/templates/decision-record-template.md)

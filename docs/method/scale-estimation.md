@@ -300,4 +300,4 @@ Before using a scale estimate to justify architecture, confirm:
 - [Requirement discovery](requirement-discovery.md)
 - [Functional vs non-functional requirements](functional-vs-nonfunctional-requirements.md)
 - [Definition of Done](../start-here/definition-of-done.md)
-- [Style guide](../../STYLE_GUIDE.md)
+- [Style guide](https://github.com/LeonSilva15/system-design/blob/main/STYLE_GUIDE.md)

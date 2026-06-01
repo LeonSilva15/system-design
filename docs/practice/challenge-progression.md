@@ -81,9 +81,9 @@ Practice sequence:
 
 | Order | Challenge | Why It Fits |
 | --- | --- | --- |
-| 1 | [Rate limiter lab](../../labs/rate-limiter/) | Shows burst capacity, refill behavior, and user-visible rejection |
+| 1 | [Rate limiter lab](https://github.com/LeonSilva15/system-design/tree/main/labs/rate-limiter/) | Shows burst capacity, refill behavior, and user-visible rejection |
 | 2 | [Rate limiter walkthrough](../walkthroughs/rate-limiter.md) | Turns limiter behavior into requirements, storage choices, abuse controls, and failure handling |
-| 3 | [Cache-aside demo](../../labs/cache-aside-demo/) | Shows cache miss, hit, stale data, invalidation, and fallback |
+| 3 | [Cache-aside demo](https://github.com/LeonSilva15/system-design/tree/main/labs/cache-aside-demo/) | Shows cache miss, hit, stale data, invalidation, and fallback |
 | 4 | [Search autocomplete walkthrough](../walkthroughs/search-autocomplete.md) | Connects indexing, freshness, ranking, and latency trade-offs |
 
 Cache-aside isolates stale-data and fallback behavior. Search autocomplete then
@@ -108,9 +108,9 @@ Practice sequence:
 
 | Order | Challenge | Why It Fits |
 | --- | --- | --- |
-| 1 | [Queue worker demo](../../labs/queue-worker-demo/) | Shows enqueue, worker processing, retry, visibility timeout, and observability |
-| 2 | [Retry and idempotency demo](../../labs/retry-idempotency-demo/) | Shows duplicate requests, unsafe retries, idempotency keys, and guarded side effects |
-| 3 | [Dead-letter queue demo](../../labs/dead-letter-queue-demo/) | Shows poison messages, retry exhaustion, inspection, replay, and alerting |
+| 1 | [Queue worker demo](https://github.com/LeonSilva15/system-design/tree/main/labs/queue-worker-demo/) | Shows enqueue, worker processing, retry, visibility timeout, and observability |
+| 2 | [Retry and idempotency demo](https://github.com/LeonSilva15/system-design/tree/main/labs/retry-idempotency-demo/) | Shows duplicate requests, unsafe retries, idempotency keys, and guarded side effects |
+| 3 | [Dead-letter queue demo](https://github.com/LeonSilva15/system-design/tree/main/labs/dead-letter-queue-demo/) | Shows poison messages, retry exhaustion, inspection, replay, and alerting |
 | 4 | [Notification system walkthrough](../walkthroughs/notification-system.md) | Combines preferences, queues, providers, retries, templates, and dead-letter behavior |
 | 5 | [Payment workflow walkthrough](../walkthroughs/payment-workflow.md) | Raises correctness stakes with external providers, ambiguous outcomes, reconciliation, and audit logs |
 
@@ -133,11 +133,11 @@ Practice sequence:
 
 | Order | Challenge | Why It Fits |
 | --- | --- | --- |
-| 1 | [Replication lag simulator](../../labs/replication-lag-simulator/) | Shows follower lag, stale reads, and read-your-writes violations |
-| 2 | [Quorum read/write simulator](../../labs/quorum-read-write-simulator/) | Shows quorum choices, unavailable replicas, stale reads, and latency trade-offs |
-| 3 | [Sharding simulator](../../labs/sharding-simulator/) | Shows hash sharding, range sharding, resharding, hot partitions, and cross-shard queries |
-| 4 | [Hot-key demo](../../labs/hot-key-demo/) | Shows skewed load and mitigation strategies |
-| 5 | [Log compaction demo](../../labs/log-compaction-demo/) | Shows append-only history, latest-value compaction, consumer offsets, and retention trade-offs |
+| 1 | [Replication lag simulator](https://github.com/LeonSilva15/system-design/tree/main/labs/replication-lag-simulator/) | Shows follower lag, stale reads, and read-your-writes violations |
+| 2 | [Quorum read/write simulator](https://github.com/LeonSilva15/system-design/tree/main/labs/quorum-read-write-simulator/) | Shows quorum choices, unavailable replicas, stale reads, and latency trade-offs |
+| 3 | [Sharding simulator](https://github.com/LeonSilva15/system-design/tree/main/labs/sharding-simulator/) | Shows hash sharding, range sharding, resharding, hot partitions, and cross-shard queries |
+| 4 | [Hot-key demo](https://github.com/LeonSilva15/system-design/tree/main/labs/hot-key-demo/) | Shows skewed load and mitigation strategies |
+| 5 | [Log compaction demo](https://github.com/LeonSilva15/system-design/tree/main/labs/log-compaction-demo/) | Shows append-only history, latest-value compaction, consumer offsets, and retention trade-offs |
 | 6 | [News feed walkthrough](../walkthroughs/news-feed.md) | Combines fanout, feed generation, ranking, caching, celebrity users, and freshness |
 
 Log compaction matters when consumers need a retained change history but most
@@ -196,7 +196,7 @@ Practice sequence:
 | 2 | [Disaster recovery](../reliability/disaster-recovery.md) | Grounds failover, RPO/RTO, degraded mode, and operational readiness |
 | 3 | [Schema evolution](../data/schema-evolution.md) | Grounds migration, compatibility, rollout, and rollback decisions |
 | 4 | [Cost analysis](../operations/cost-analysis.md) | Forces trade-offs between infrastructure, operational labor, and user value |
-| 5 | [Design critique template](../../templates/design-critique-template.md) | Turns staff-level reasoning into constructive review feedback |
+| 5 | [Design critique template](https://github.com/LeonSilva15/system-design/blob/main/templates/design-critique-template.md) | Turns staff-level reasoning into constructive review feedback |
 
 Promotion check:
 
@@ -231,7 +231,7 @@ For each stage:
    consistency, missing failure modes, cache overuse, or unjustified streams.
 8. Score the result with the [system design rubric](system-design-rubric.md).
 9. Capture what changed in your reasoning with the
-   [project reflection template](../../templates/project-reflection-template.md).
+   [project reflection template](https://github.com/LeonSilva15/system-design/blob/main/templates/project-reflection-template.md).
 
 ## Common Mistakes
 
@@ -263,6 +263,6 @@ Before moving to the next stage, confirm:
 - [Self-review checklist](self-review-checklist.md)
 - [Simplification checklist](simplification-checklist.md)
 - [Common mistakes](common-mistakes.md)
-- [Project reflection template](../../templates/project-reflection-template.md)
+- [Project reflection template](https://github.com/LeonSilva15/system-design/blob/main/templates/project-reflection-template.md)
 - [Labs guide](../labs/)
 - [Walkthroughs](../walkthroughs/)

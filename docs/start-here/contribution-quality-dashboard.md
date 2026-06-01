@@ -205,5 +205,5 @@ Before treating repository coverage as ready, confirm:
 - [Content review workflow](content-review-workflow.md)
 - [Project management](project-management.md)
 - [Learning paths](learning-paths.md)
-- [Changelog](../../CHANGELOG.md)
-- [Roadmap](../../ROADMAP.md)
+- [Changelog](https://github.com/LeonSilva15/system-design/blob/main/CHANGELOG.md)
+- [Roadmap](https://github.com/LeonSilva15/system-design/blob/main/ROADMAP.md)

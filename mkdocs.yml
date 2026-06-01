@@ -1,0 +1,37 @@
+site_name: System Design Decision Cookbook
+site_description: Practical system design decision trees, walkthroughs, labs, and review checklists.
+site_url: https://leonsilva15.github.io/system-design/
+repo_url: https://github.com/LeonSilva15/system-design
+repo_name: LeonSilva15/system-design
+docs_dir: docs
+site_dir: site
+strict: true
+
+# MkDocs generates the navigation from docs/ so every page is included without
+# maintaining a duplicate 140+ page nav tree in this file.
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.share
+    - toc.follow
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format

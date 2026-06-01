@@ -4,9 +4,9 @@ Walkthroughs are end-to-end worked system designs. They show how to move from a
 problem statement to requirements, component choices, data flow, trade-offs,
 failure handling, observability, cost, and a simple version 1.
 
-Use the [walkthrough template](../../templates/walkthrough-template.md) for
+Use the [walkthrough template](https://github.com/LeonSilva15/system-design/blob/main/templates/walkthrough-template.md) for
 new walkthrough pages. Use the
-[design doc template](../../templates/design-doc-template.md) when the work is a
+[design doc template](https://github.com/LeonSilva15/system-design/blob/main/templates/design-doc-template.md) when the work is a
 proposal, exercise, or architecture note that does not need the full narrative
 walkthrough format.
 
