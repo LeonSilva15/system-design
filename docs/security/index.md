@@ -291,6 +291,7 @@ Planned pages:
   and privacy-focused design questions.
 - `docs/security/data-retention-and-deletion.md`: retention periods, deletion
   workflows, backups, and user-visible expectations.
+
 These paths become linked pages as their tickets are completed.
 
 ## Related Pages

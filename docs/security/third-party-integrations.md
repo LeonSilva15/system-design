@@ -161,6 +161,9 @@ compromised integration without disrupting everyone.
 
 Webhooks are inbound writes from another system. Treat them as untrusted until
 the receiver verifies the request and proves the event is safe to apply.
+Separate inbound webhook verification from outbound webhook delivery contracts:
+one protects your receiver from forged or replayed events, while the other
+defines how your system retries, signs, and observes events sent to partners.
 
 Webhook design should cover:
 
@@ -390,6 +393,7 @@ Before accepting a third-party integration design, confirm:
 - [Idempotency](../communication/idempotency.md)
 - [Outbox pattern](../communication/outbox-pattern.md)
 - [Retries and backoff](../communication/retries-and-backoff.md)
+- [Reliability retries](../reliability/retries.md)
 - [Failure-mode analysis](../reliability/failure-mode-analysis.md)
 - [Bulkheads](../reliability/bulkheads.md)
 - [Operations](../operations/)
