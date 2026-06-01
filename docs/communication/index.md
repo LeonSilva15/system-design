@@ -268,6 +268,7 @@ Current pages:
 - [REST vs gRPC](rest-vs-grpc.md)
 - [Polling vs WebSockets vs SSE](polling-vs-websockets-vs-sse.md)
 - [Queues](queues.md)
+- [Dead-letter queues](dead-letter-queues.md)
 - [Streams](streams.md)
 - [Pub/sub](pub-sub.md)
 - [Retries and backoff](retries-and-backoff.md)
@@ -275,12 +276,6 @@ Current pages:
 - [Outbox pattern](outbox-pattern.md)
 - [Saga pattern](saga-pattern.md)
 - [Workflow orchestration vs choreography](workflow-orchestration-vs-choreography.md)
-
-Planned pages:
-
-- `docs/communication/dead-letter-queues.md`
-
-These paths become linked pages as their tickets are completed.
 
 ## Checklist
 
