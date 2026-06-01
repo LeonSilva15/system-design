@@ -85,6 +85,7 @@ Completed walkthrough pages:
 
 | Walkthrough | Focus |
 | --- | --- |
+| [Payment workflow](payment-workflow.md) | idempotency, external provider calls, state machine, retries, audit logs, reconciliation, and failure handling |
 | [Rate limiter](rate-limiter.md) | requirements, algorithms, distributed counters, Redis-style storage, failure behavior, abuse, and metrics |
 
 ## Planned Walkthroughs
@@ -99,7 +100,6 @@ Additional walkthroughs are planned as ticketed pages:
 | Chat system | `docs/walkthroughs/chat-system.md` | conversations, messages, delivery, WebSockets, ordering, offline users, read receipts, and scaling |
 | News feed | `docs/walkthroughs/news-feed.md` | fanout, feed generation, ranking, caching, high-fanout users, freshness, and eventual consistency |
 | Search autocomplete | `docs/walkthroughs/search-autocomplete.md` | indexing, prefix search, ranking, freshness, caching, typo tolerance, and reindexing |
-| Payment workflow | `docs/walkthroughs/payment-workflow.md` | idempotency, external provider calls, state machine, retries, audit logs, reconciliation, and failure handling |
 | Video processing | `docs/walkthroughs/video-processing.md` | upload, object storage, transcoding, queues, workers, CDN, status tracking, and retries |
 | Metrics platform | `docs/walkthroughs/metrics-platform.md` | ingestion, buffering, aggregation, storage, dashboards, retention, high-cardinality data, and alerts |
 
