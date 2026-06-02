@@ -16,8 +16,8 @@ If you are new to the cookbook, read these in order:
    originality, scope, and attribution rules behind the resource.
 2. [How to use this cookbook](start-here/how-to-use-this-cookbook.md) - learn
    how docs, labs, walkthroughs, and checklists fit together.
-3. [Learning paths](start-here/learning-paths.md) - choose a beginner,
-   interview, builder, or production architecture route.
+3. [Learning paths](start-here/learning-paths.md) - choose a reading order by
+   level or a beginner, interview, builder, or production architecture route.
 4. [System design process](method/system-design-process.md) - learn the repeatable
    path from problem statement to architecture.
 5. [Requirement discovery](method/requirement-discovery.md) - practice turning
@@ -82,7 +82,7 @@ operations as new constraints appear.
 | Goal | Read Next |
 | --- | --- |
 | Start using the cookbook | [How to use this cookbook](start-here/how-to-use-this-cookbook.md) |
-| Choose a guided route | [Learning paths](start-here/learning-paths.md) |
+| Choose a reading order by level or goal | [Learning paths](start-here/learning-paths.md) |
 | Learn the overall method | [System design process](method/system-design-process.md) |
 | Turn a prompt into requirements | [Requirement discovery](method/requirement-discovery.md) |
 | Decide whether a component belongs | [Component selection map](components/) |

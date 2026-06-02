@@ -24,6 +24,7 @@ Learning paths help when you need to:
 
 | If Your Goal Is | Start With |
 | --- | --- |
+| Follow the cookbook in levels | [Reading order by level](#reading-order-by-level) |
 | Learn system design from the beginning | [Beginner path](#beginner-path) |
 | Practice interview prompts and trade-off discussion | [Interview path](#interview-path) |
 | Build small systems and observe behavior in code | [Builder path](#builder-path) |
@@ -31,6 +32,9 @@ Learning paths help when you need to:
 
 When in doubt, begin with the beginner path through requirement discovery, then
 jump to the path that matches your current work.
+
+Use the [documentation index](../index.md) as the site map. Use this page when
+you need a concrete route by level or by learning goal.
 
 ## Questions To Ask
 
@@ -57,27 +61,124 @@ Each path optimizes for a different learning outcome:
 - The production architecture path finds operational gaps, but it assumes you
   already know the basic design loop.
 
+## Reading Order By Level
+
+Use this order when you want a structured pass through the cookbook instead of
+choosing one goal-specific path immediately.
+
+| Level | Focus |
+| --- | --- |
+| Level 0 | Orientation |
+| Level 1 | Foundations |
+| Level 2 | Choosing components |
+| Level 3 | Data and communication |
+| Level 4 | Scale and production readiness basics |
+| Level 5 | Apply with walkthroughs |
+| Level 6 | Practice with labs and review |
+
+### Level 0: Orientation
+
+Read:
+
+1. [Project guardrails](project-guardrails.md).
+2. [How to use this cookbook](how-to-use-this-cookbook.md).
+3. Use this page to choose whether to continue by level or switch to a goal
+   path.
+
+Goal: understand how the cookbook is meant to be used.
+
+### Level 1: Foundations
+
+Read:
+
+1. [System design process](../method/system-design-process.md).
+2. [Requirement discovery](../method/requirement-discovery.md).
+3. [Functional vs non-functional requirements](../method/functional-vs-nonfunctional-requirements.md).
+4. [Requirements index](../requirements/index.md).
+
+Goal: learn how to turn a vague prompt into requirements.
+
+### Level 2: Choosing Components
+
+Read:
+
+1. [Components index](../components/index.md).
+2. [API layer](../components/api-layer.md).
+3. [Database selection](../components/database-selection.md).
+4. [Cache](../components/cache.md).
+5. [Queue](../components/queue.md).
+6. [Background workers](../components/background-workers.md).
+
+Goal: justify components from requirements instead of memorizing diagrams.
+
+### Level 3: Data And Communication
+
+Read:
+
+1. [Identifying entities](../data/identifying-entities.md).
+2. [Read/write patterns](../data/read-write-patterns.md).
+3. [Consistency models](../data/consistency-models.md).
+4. [Sync vs async](../communication/sync-vs-async.md).
+5. [Retries and backoff](../communication/retries-and-backoff.md).
+6. [Idempotency](../communication/idempotency.md).
+
+Goal: understand reads, writes, correctness, retries, and asynchronous work.
+
+### Level 4: Scale And Production Readiness Basics
+
+Read:
+
+1. [Capacity estimation](../scalability/capacity-estimation.md).
+2. [Bottleneck analysis](../scalability/bottleneck-analysis.md).
+3. [Caching strategies](../scalability/caching-strategies.md).
+4. [Timeouts](../reliability/timeouts.md).
+5. [Retries](../reliability/retries.md).
+6. [Observability basics](../operations/observability-basics.md).
+7. [Authentication](../security/authentication.md).
+8. [Authorization](../security/authorization.md).
+
+Goal: reason about failure, operations, security, and real-world constraints.
+
+### Level 5: Apply With Walkthroughs
+
+Read:
+
+1. [URL shortener](../walkthroughs/url-shortener.md).
+2. [Rate limiter](../walkthroughs/rate-limiter.md).
+3. [Notification system](../walkthroughs/notification-system.md).
+4. [News feed](../walkthroughs/news-feed.md).
+5. [Metrics platform](../walkthroughs/metrics-platform.md).
+
+Goal: see how requirements, components, trade-offs, failure modes, and version
+1 simplifications fit together in complete designs.
+
+### Level 6: Practice With Labs And Review
+
+Run or use:
+
+1. [Rate limiter lab](https://github.com/LeonSilva15/system-design/tree/main/labs/rate-limiter/).
+2. [Cache-aside lab](https://github.com/LeonSilva15/system-design/tree/main/labs/cache-aside-demo/).
+3. [Queue worker lab](https://github.com/LeonSilva15/system-design/tree/main/labs/queue-worker-demo/).
+4. [Retry and idempotency lab](https://github.com/LeonSilva15/system-design/tree/main/labs/retry-idempotency-demo/).
+5. [Self-review checklist](../practice/self-review-checklist.md).
+6. [Design review checklist](../method/design-review-checklist.md).
+
+Goal: observe behavior in code, then critique the design decisions you would
+make from that behavior.
+
 ## Beginner Path
 
 Use this path if you are learning how to move from a prompt to a justified
 architecture.
 
-1. Read [Project guardrails](project-guardrails.md) so you understand the scope
-   and originality rules behind the resource.
-2. Read [System design process](../method/system-design-process.md) for the
-   end-to-end design loop.
-3. Practice [Requirement discovery](../method/requirement-discovery.md) and
-   [functional vs non-functional requirements](../method/functional-vs-nonfunctional-requirements.md).
-4. Use the [requirements map](../requirements/) to identify constraints such as
-   [latency](../requirements/latency.md),
+1. Complete [Level 0: Orientation](#level-0-orientation).
+2. Complete [Level 1: Foundations](#level-1-foundations).
+3. Read focused requirement pages for [latency](../requirements/latency.md),
    [throughput](../requirements/throughput.md), and
    [availability](../requirements/availability.md).
-5. Use the [component selection map](../components/) to connect requirements to
-   components such as the [API layer](../components/api-layer.md),
-   [database](../components/database-selection.md),
-   [cache](../components/cache.md), and [queue](../components/queue.md).
-6. Study the [URL shortener walkthrough](../walkthroughs/url-shortener.md) and
-   [rate limiter walkthrough](../walkthroughs/rate-limiter.md).
+4. Complete [Level 2: Choosing Components](#level-2-choosing-components).
+5. Study the [URL shortener walkthrough](../walkthroughs/url-shortener.md).
+6. Study the [rate limiter walkthrough](../walkthroughs/rate-limiter.md).
 7. Run the [token bucket rate limiter lab](https://github.com/LeonSilva15/system-design/tree/main/labs/rate-limiter/) and compare
    the behavior to the [rate limiting](../scalability/rate-limiting.md) page.
 
